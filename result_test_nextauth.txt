@@ -1,0 +1,134 @@
+vithushansatkunanathan@Host-003 holbertonschool-moneyMirror % ./test_nextauth.sh
+
+=== 1. NEXTAUTH LOGIN OK ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=e0ebea7b3aaf606285751430208af792995f74c2c716dbe9e286f197137d810f%7Cb7c411d51fef21968fab519b3e1c634591c8cf94cdd46941dc9f02925eaa9629
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 118
+> 
+* upload completely sent off: 118 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000
+* Added cookie next-auth.session-token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..TQs6VtWcOorLvEqq.oKnmkmaAecLPh_FE8tl-TYBz6BCmicm_7bsglhnrteJhVqqsIpD5O2CRyd_QyXNuGSHG0LmDo3FSJTfQSxqTJQj96Ihcrp2QKATVuUqWy1uukdTy-XhQY9QCozBRNC2U7W4kBC-9oQP2l1FVFOI136PkuA0MCqY12C6slM41kh6tqBrtBs_EALIVWrxrB8X7KV18qOAKcwkabI543-iHigEY.rakhxoQhU5TcUZZu6973iA" for domain localhost, path /, expire 1761844848
+< set-cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..TQs6VtWcOorLvEqq.oKnmkmaAecLPh_FE8tl-TYBz6BCmicm_7bsglhnrteJhVqqsIpD5O2CRyd_QyXNuGSHG0LmDo3FSJTfQSxqTJQj96Ihcrp2QKATVuUqWy1uukdTy-XhQY9QCozBRNC2U7W4kBC-9oQP2l1FVFOI136PkuA0MCqY12C6slM41kh6tqBrtBs_EALIVWrxrB8X7KV18qOAKcwkabI543-iHigEY.rakhxoQhU5TcUZZu6973iA; Path=/; Expires=Thu, 30 Oct 2025 17:20:48 GMT; HttpOnly; SameSite=Lax
+< Date: Tue, 30 Sep 2025 17:20:48 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 2. NEXTAUTH LOGIN WRONG PASSWORD ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=be0e5e5fd40e704a4134c2cddb77470c2c4a8b92d063c729dbc736fb8e449b44%7Cc3274e3709eeabea495fc5fabe329a988310c041b295db017e0ab9fad1f5997a
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 118
+> 
+* upload completely sent off: 118 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/error?error=CredentialsSignin&provider=credentials
+< Date: Tue, 30 Sep 2025 17:20:48 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 3. NEXTAUTH LOGIN UNKNOWN EMAIL ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=aa53abb89186772787f4acfed69a32503696913da0f176fe6ac27c7f736d0362%7Ccb4d9fc7c0a54fe4b199aab8d9613e575f2aaf63af0ccbe9c2ef588c51998d4f
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 121
+> 
+* upload completely sent off: 121 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/error?error=CredentialsSignin&provider=credentials
+< Date: Tue, 30 Sep 2025 17:20:48 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 4. NEXTAUTH LOGIN WITHOUT CSRF TOKEN ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=aa53abb89186772787f4acfed69a32503696913da0f176fe6ac27c7f736d0362%7Ccb4d9fc7c0a54fe4b199aab8d9613e575f2aaf63af0ccbe9c2ef588c51998d4f
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 43
+> 
+* upload completely sent off: 43 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/signin?csrf=true
+< Date: Tue, 30 Sep 2025 17:20:48 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 5. NEXTAUTH LOGIN WITHOUT COOKIES ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 118
+> 
+* upload completely sent off: 118 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/signin?csrf=true
+< set-cookie: next-auth.csrf-token=c4661c706e00726b63f2ac1814ac5d426c4d6527660e68a5664b85fbffb1e03d%7C21870905a7d2c35ddde66e1a78d7e2f2ad4c2bccd016d692b74a1efbc8f01ba7; Path=/; HttpOnly; SameSite=Lax
+< set-cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; Path=/; HttpOnly; SameSite=Lax
+< Date: Tue, 30 Sep 2025 17:20:48 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+vithushansatkunanathan@Host-003 holbertonschool-moneyMirror % 

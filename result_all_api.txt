@@ -1,0 +1,333 @@
+vithushansatkunanathan@Host-003 holbertonschool-moneyMirror % ./test_all_api.sh
+=== 1. NEXTAUTH LOGIN OK ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=9d386a2d0335afd3b5c97be4c36cccea07396bce0883ee6d60977917f76a292d%7C0a686880144784060832e4fcfc0943795d533adeedfd142ea02caf6e55f5b36a
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 118
+> 
+* upload completely sent off: 118 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000
+* Added cookie next-auth.session-token="eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..hq4OW4IbB065ZGxp.KXtiZh2FxW4peIM0QNtEg0aEqG78Nsx93ULzKn3wtNmYSOKV0RNcrJPA6ayBzYwFVlNr9F7QF-pyFxliUJmAkQyjbpu7CImPsXp8BZRymjR-ARIqXcUDFWOw1VgtaTYzFbfoIG6WGoCbzlh7wXp-yx9Q_ZhdnxbuNJS3LQtHp3anHe92NKa2hn8xUAaxEDm8w9ZbUA3wS-es2LyqXbRzlL7Y.Y9zLY0bug59UhSdDgIG71Q" for domain localhost, path /, expire 1761844110
+< set-cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..hq4OW4IbB065ZGxp.KXtiZh2FxW4peIM0QNtEg0aEqG78Nsx93ULzKn3wtNmYSOKV0RNcrJPA6ayBzYwFVlNr9F7QF-pyFxliUJmAkQyjbpu7CImPsXp8BZRymjR-ARIqXcUDFWOw1VgtaTYzFbfoIG6WGoCbzlh7wXp-yx9Q_ZhdnxbuNJS3LQtHp3anHe92NKa2hn8xUAaxEDm8w9ZbUA3wS-es2LyqXbRzlL7Y.Y9zLY0bug59UhSdDgIG71Q; Path=/; Expires=Thu, 30 Oct 2025 17:08:30 GMT; HttpOnly; SameSite=Lax
+< Date: Tue, 30 Sep 2025 17:08:30 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 2. NEXTAUTH LOGIN WRONG PASSWORD ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=a56585982bc0ae34116fd8287184af1873ce66d2806121640f9dba3526392759%7Ce7e8d7ecce2e7b10dde0544dfa498a92ee974b8d102946e0dad3dcb597000f68
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 118
+> 
+* upload completely sent off: 118 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/error?error=CredentialsSignin&provider=credentials
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 3. NEXTAUTH LOGIN UNKNOWN EMAIL ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=d17ec862d810c76adbe386738b23aaf63f56b3ac41057984eb68d5ad172967e0%7C80904440cac33e2e0538a8f8be6ce22b6c2d02028787c5f6374b33b2cfafa08b
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 121
+> 
+* upload completely sent off: 121 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/error?error=CredentialsSignin&provider=credentials
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 4. NEXTAUTH LOGIN WITHOUT CSRF TOKEN ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=d17ec862d810c76adbe386738b23aaf63f56b3ac41057984eb68d5ad172967e0%7C80904440cac33e2e0538a8f8be6ce22b6c2d02028787c5f6374b33b2cfafa08b
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 43
+> 
+* upload completely sent off: 43 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/signin?csrf=true
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 5. NEXTAUTH LOGIN WITHOUT COOKIES ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/callback/credentials HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 118
+> 
+* upload completely sent off: 118 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000/api/auth/signin?csrf=true
+< set-cookie: next-auth.csrf-token=1e86b8cbbec380f4bdce784995e4b6ccbbd4e40682294c4522e426f2b238f221%7C9b4f9e1d153f809092fea1c0d5502507454f0bad3023f47f46ec3958511bfd3e; Path=/; HttpOnly; SameSite=Lax
+< set-cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; Path=/; HttpOnly; SameSite=Lax
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 6. NEXTAUTH SESSION ===
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> GET /api/auth/session HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=d17ec862d810c76adbe386738b23aaf63f56b3ac41057984eb68d5ad172967e0%7C80904440cac33e2e0538a8f8be6ce22b6c2d02028787c5f6374b33b2cfafa08b
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{}
+=== 7. NEXTAUTH LOGOUT ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/signout HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A3000; next-auth.csrf-token=d17ec862d810c76adbe386738b23aaf63f56b3ac41057984eb68d5ad172967e0%7C80904440cac33e2e0538a8f8be6ce22b6c2d02028787c5f6374b33b2cfafa08b
+> Content-Type: application/x-www-form-urlencoded
+> Content-Length: 74
+> 
+* upload completely sent off: 74 bytes
+< HTTP/1.1 302 Found
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< location: http://localhost:3000
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+
+=== 8. API REGISTER OK ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/register HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 79
+> 
+* upload completely sent off: 79 bytes
+< HTTP/1.1 400 Bad Request
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{"error":"This email is already used"}
+=== 9. API REGISTER EMAIL ALREADY TAKEN ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/register HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 79
+> 
+* upload completely sent off: 79 bytes
+< HTTP/1.1 400 Bad Request
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{"error":"This email is already used"}
+=== 10. API LOGIN OK ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 59
+> 
+* upload completely sent off: 59 bytes
+< HTTP/1.1 200 OK
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{"success":true,"message":"Login successful","user":{"id":"cmg6sbm660000mc1d59q9ginj","name":"Test API","email":"testapi@example.com"}}
+=== 11. API LOGIN WRONG PASSWORD ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 59
+> 
+* upload completely sent off: 59 bytes
+< HTTP/1.1 401 Unauthorized
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{"error":"Invalid email or password "}
+=== 12. API LOGIN UNKNOWN EMAIL ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 59
+> 
+* upload completely sent off: 59 bytes
+< HTTP/1.1 401 Unauthorized
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:31 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{"error":"Invalid email or password"}
+=== 13. API LOGIN MISSING FIELDS ===
+Note: Unnecessary use of -X or --request, POST is already inferred.
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+* Connected to localhost (::1) port 3000
+> POST /api/auth/login HTTP/1.1
+> Host: localhost:3000
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 29
+> 
+* upload completely sent off: 29 bytes
+< HTTP/1.1 400 Bad Request
+< vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+< content-type: application/json
+< Date: Tue, 30 Sep 2025 17:08:32 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host localhost left intact
+{"error":"Email and password are required"}%  
