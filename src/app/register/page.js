@@ -11,12 +11,20 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   // form submission
-  const handleSubmit = (e) => { //function called when the form is submitted
+  const handleSubmit = async (e) => { //function called when the form is submitted
     e.preventDefault(); //prevents the page from reloading
-    console.log('Form submitted:', { username, email, password, confirmPassword});
-    alert(`Hello ${username} welcome to your world!`);
-  };
+    try {
+      if (password !== confirmPassword) {
+        throw new Error('The password is wrong'); // throw sends the error to the catch
+    }
 
+    console.log('Form submitted:', { username, email, password, confirmPassword});
+    alert(`Hello ${username} welcome to your account !`);
+  } catch (error) {
+    console.error('Error:', error.message); // capture and display the error
+    alert(`Error: ${error.message}`);
+  }
+}
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8"> {/* className = styles Tailwind (class)*/}
       <h1 className="text-3xl font-bold mb-6">Register - MoneyMirror</h1>
@@ -29,7 +37,7 @@ export default function Register() {
         <input type="text"
         placeholder="Username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange= {(e) => setUsername(e.target.value)}
         className="border rounded p-2"
         required/>
 
