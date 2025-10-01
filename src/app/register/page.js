@@ -9,7 +9,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   
-  // UI feedback states - professional user experience
+  // For UI feedback states
   const [message, setMessage] = useState('');         // Message text to display
   const [messageType, setMessageType] = useState(''); // 'success' or 'error' for styling
   const [isLoading, setIsLoading] = useState(false);  // Loading state for button/form
@@ -21,7 +21,6 @@ export default function Register() {
     setMessage('');      // Clear previous messages
     
     try {
-      // Client-side validation - password confirmation
       if (password !== confirmPassword) {
         throw new Error('The password is wrong');
     }
@@ -40,7 +39,6 @@ export default function Register() {
     });
 
     if (response.ok) {
-      // SUCCESS: Registration completed
       setMessage('Registration successful, Welcome to MoneyMirror !');
       setMessageType('success'); // Green styling
       setIsLoading(false);
@@ -65,8 +63,7 @@ export default function Register() {
     <main className="flex min-h-screen flex-col items-center justify-center p-8"> {/* className = styles Tailwind (class)*/}
       <h1 className="text-3xl font-bold mb-6">Register - MoneyMirror</h1>
 
-    {/* CONDITIONAL RENDERING: Show message only when it exists */}
-    {/* Dynamic CSS classes*/}
+    {/* Dynamic CSS classes - CONDITIONAL RENDERING: Show message only when it exists */}
     {message && (
       <div className={(() => {
         let messageClasses;
@@ -85,7 +82,6 @@ export default function Register() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-sm">
       
         {/* CONTROLLED INPUTS: value from state, onChange updates state */}
-        {/* Username field */}
         <input type="text"
         placeholder="Username"
         value={username}
@@ -93,7 +89,6 @@ export default function Register() {
         className="border rounded p-2"
         required/>
 
-        {/* Email field */}
         <input type="email"
         placeholder="Email"
         value={email}
@@ -102,7 +97,6 @@ export default function Register() {
         required
         />
     
-        {/*Password field*/}
         <input type="password"
         placeholder="Password"
         value={password}
@@ -110,7 +104,7 @@ export default function Register() {
         className="border rounded p-2"
         required/>
       
-      {/* Password confirmation field */}
+
       {/* type="password" masks input with dots for security */}
       <input type="password"
       placeholder="Confirm password"
