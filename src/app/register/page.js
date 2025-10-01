@@ -2,6 +2,8 @@
 
 
 import { useState } from "react"
+import { POST } from "../api/transactions/route";
+import { set } from "date-fns";
  
 export default function Register() {
   // form status
@@ -18,8 +20,27 @@ export default function Register() {
         throw new Error('The password is wrong'); // throw sends the error to the catch
     }
 
-    console.log('Form submitted:', { username, email, password, confirmPassword});
-    alert(`Hello ${username} welcome to your account !`);
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: username,
+        email,
+        password,
+      }),
+    });
+
+    if (response.ok) {
+      alert('Registration successful, Welcome to MoneyMirror !');
+      //reset the form
+      setUsername('');
+      setEmail('');
+      setPassword('');
+    } else {
+      throw new Error('Registration failed');
+    }
   } catch (error) {
     console.error('Error:', error.message); // capture and display the error
     alert(`Error: ${error.message}`);
