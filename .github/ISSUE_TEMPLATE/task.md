@@ -1,4 +1,5 @@
 ---
+
 name: 📋 Task/Documentation
 about: Development task or documentation improvement
 title: '[TASK] '
@@ -48,4 +49,8 @@ List the files that will be modified or created:
 
 - Documentation: [links]
 - APIs: [references]
+<<<<<<< HEAD
 - Examples: [example links]
+=======
+- Examples: [links to examples]
+>>>>>>> feature/login

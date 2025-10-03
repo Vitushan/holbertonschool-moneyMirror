@@ -1,4 +1,5 @@
 ---
+
 name: ✨ Feature Request
 about: Suggest a new feature for MoneyMirror
 title: '[FEATURE] '
