@@ -1,7 +1,3 @@
-docker-compose up -d
-git push origin feature/login
-git clone <https://github.com/Vitushan/holbertonschool-moneyMirror.git>
-docker-compose up -d
 
 # MoneyMirror – Full Project Documentation
 
@@ -27,11 +23,24 @@ MoneyMirror is a personal finance management application. It provides authentica
 
 ## Stack & Features
 
-## MoneyMirror – Feature: Login
+- Next.js 14
+- React 18
+- Tailwind CSS
+- Prisma ORM
+- MySQL
+- NextAuth.js (authentication)
+- bcryptjs (password hashing)
+- Zod (validation)
+- Docker support
+- Jest & Cypress (testing)
 
-This branch implements and tests the authentication system (login/register) for MoneyMirror.
+## Environment Setup
 
-👉 For full project documentation, see the main [README on the development branch](https://github.com/Vitushan/holbertonschool-moneyMirror/blob/development/README.md).
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/Vitushan/holbertonschool-moneyMirror.git
+cd holbertonschool-moneyMirror
 npm install
 ```
 
@@ -86,9 +95,9 @@ SELECT * FROM User;
 - `/login` : **Login** – Form for email/password, error messages, session management. If already logged in, shows user info and dashboard link.
 - `/register` : **Register** – Form for name/email/password/confirm, error handling, success message, resets form on success.
 - **Redirections** :
-  - If logged in, `/login` propose d’aller au dashboard (à adapter si dashboard existe).
-  - Après inscription réussie, message de bienvenue.
-  - Déconnexion via NextAuth (session JWT).
+  - If logged in, `/login` suggests going to the dashboard (adapt if dashboard exists).
+  - After successful registration, welcome message.
+  - Logout via NextAuth (JWT session).
 
 ## API Reference
 
@@ -121,15 +130,15 @@ SELECT * FROM User;
 
 400 (missing fields):
 ```json
-{ "error": "all fields is required" }
+{ "error": "All fields are required" }
 ```
 400 (invalid email):
 ```json
-{ "error": "Your mail address is wrong." }
+{ "error": "Invalid email address." }
 ```
 400 (password too short):
 ```json
-{ "error": "The password must be contain minimum 6 characters" }
+{ "error": "The password must contain at least 6 characters" }
 ```
 400 (email already used):
 ```json
@@ -182,7 +191,6 @@ Managed by NextAuth.js (Credentials Provider). Handles session, login, logout, J
 
 #### NextAuth Session Example
 
-Après connexion, la session NextAuth ressemble à :
 ```json
 {
   "user": {
@@ -194,25 +202,6 @@ Après connexion, la session NextAuth ressemble à :
 }
 ```
 
-## Database & User Flow Schema
-
-**Schéma de la table User (Prisma/MySQL)**
-
-```
-┌────────────┬─────────┬────────────┬────────────┬────────────┬────────────┐
-│ id (PK)    │ name    │ email (UQ) │ password   │ createdAt  │ updatedAt  │
-└────────────┴─────────┴────────────┴────────────┴────────────┴────────────┘
-```
-
-**Flow utilisateur**
-
-```
-Inscription → POST /api/auth/register → [Validation, Hash, Création User] → Succès/Erreur
-Connexion → POST /api/auth/login → [Validation, Check, JWT Session] → Succès/Erreur
-Session → NextAuth.js (JWT) → Accès protégé
-Déconnexion → NextAuth signOut → Session détruite
-```
-
 ## Security
 
 - Passwords are hashed with bcryptjs before storage.
@@ -222,11 +211,11 @@ Déconnexion → NextAuth signOut → Session détruite
 
 ## Testing
 
-- `test_nextauth.sh` : Teste la connexion/déconnexion NextAuth (login/logout/session).
-- `test_all_api.sh` : Teste les endpoints API custom (register/login).
-- Résultats dans `result_test_nextauth.txt` et `result_all_api.txt`.
+- `test_nextauth.sh`: Tests NextAuth login/logout/session.
+- `test_all_api.sh`: Tests custom API endpoints (register/login).
+- Results in `result_test_nextauth.txt` and `result_all_api.txt`.
 
-**Exemple d’exécution :**
+**Example execution:**
 
 ```bash
 ./test_nextauth.sh
@@ -239,159 +228,38 @@ cat result_all_api.txt
 
 ### Vercel
 
-1. Connecte le repo à Vercel (https://vercel.com/import/git)
-2. Ajoute les variables d’environnement dans le dashboard Vercel (voir `.env.example`)
-3. Déploie !
+1. Connect the repo to Vercel (https://vercel.com/import/git)
+2. Add environment variables in the Vercel dashboard (see `.env.example`)
+3. Deploy!
 
 ### Docker
 
-1. Crée un fichier `Dockerfile` (voir doc Next.js ou exemple ci-dessous)
-2. Build et run :
+1. Create a `Dockerfile` (see Next.js docs or example below)
+2. Build and run:
 ```bash
 docker build -t moneymirror .
 docker run -p 3000:3000 --env-file .env.local moneymirror
 ```
 
-### Conseils sécurité production
-- Change `NEXTAUTH_SECRET` et ne le commit jamais !
-- Utilise une base MySQL sécurisée (pas de root, mot de passe fort)
-- Active HTTPS (Vercel le fait par défaut)
-- Mets à jour les dépendances régulièrement
+### Production Security Tips
+- Change `NEXTAUTH_SECRET` and never commit it!
+- Use a secure MySQL database (no root, strong password)
+- Enable HTTPS (Vercel does this by default)
+- Keep dependencies up to date
 
 ## Troubleshooting & Debug
 
-- Vérifiez les réponses API pour les messages d’erreur et les codes HTTP.
-- Utilisez Prisma Studio pour inspecter la base de données.
-- Consultez les logs du terminal pour les erreurs backend.
+- Check API responses for error messages and HTTP codes.
+- Use Prisma Studio to inspect the database.
+- Check terminal logs for backend errors.
 
 ## Limitations & FAQ
 
-- Pas de gestion de reset password (à implémenter si besoin)
-- Pas d’authentification OAuth (Google, GitHub...) par défaut, mais NextAuth le permet facilement
-- Pas de dashboard utilisateur avancé (transactions, graphiques) dans cette version
-- Les tests sont basiques (shell scripts), pour du CI/CD, ajouter des tests Jest/Cypress plus poussés
+- No password reset management (to be implemented if needed)
+- No OAuth authentication (Google, GitHub...) by default, but NextAuth supports it easily
+- No advanced user dashboard (transactions, charts) in this version
+- Tests are basic (shell scripts); for CI/CD, add more advanced Jest/Cypress tests
 
 ---
 
-Pour toute question ou contribution, ouvre une issue ou un pull request sur le repo GitHub.
-
-MoneyMirror is a personal finance management application. It provides authentication (login/register), transaction tracking, and database integration using Next.js, React, Tailwind CSS, Prisma ORM, MySQL, and NextAuth.js.
-
-## Quick Setup
-
-```bash
-# Install dependencies
-npm install
-
-# Configure environment variables
-cp .env.example .env.local
-# Edit .env.local with your DB credentials
-
-# Start development server
-npm run dev
-```
-
-## Authentication API Usage & Test Examples
-
-### Register a new user (success)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"name": "John", "email": "john@example.com", "password": "Password123!"}'
-# Expected: 201 Created, user registered
-```
-
-### Register with missing field (error)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email": "john@example.com", "password": "Password123!"}'
-# Expected: 400 Bad Request, error: missing name
-```
-
-### Register with existing email (error)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"name": "John", "email": "john@example.com", "password": "Password123!"}'
-# Expected: 409 Conflict, error: email already taken
-```
-
-### Login (success)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "john@example.com", "password": "Password123!"}'
-# Expected: 200 OK, returns user/session
-```
-
-### Login with wrong password (error)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "john@example.com", "password": "WrongPass!"}'
-# Expected: 401 Unauthorized, error: invalid credentials
-```
-
-### Login with unknown email (error)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "notfound@example.com", "password": "Password123!"}'
-# Expected: 404 Not Found, error: user not found
-```
-
-### Login with missing fields (error)
-
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "", "password": ""}'
-# Expected: 400 Bad Request, error: missing fields
-```
-
-## NextAuth & API Test Scripts
-
-- `test_nextauth.sh` – Tests NextAuth login/logout/session
-- `test_all_api.sh` – Tests custom API endpoints (register/login)
-
-Run:
-
-```bash
-./test_nextauth.sh
-./test_all_api.sh
-# Check result_test_nextauth.txt and result_all_api.txt for outputs
-```
-
-## Database Testing
-
-To check users in the database:
-
-```bash
-npx prisma studio
-# Or in MySQL CLI:
-USE moneymirror;
-SELECT * FROM User;
-```
-
-## Example: Check transactions (if seeded)
-
-```sql
-SELECT * FROM Transaction;
-```
-
-## Error Handling & Debugging
-
-- Check API responses for error messages and status codes
-- Use Prisma Studio to inspect DB state
-- Check logs in the terminal for backend errors
-
-## Notes
-
-- This README covers the entire project. For feature-specific documentation, see the corresponding branch README files.
+For any questions or contributions, open an issue or pull request on the GitHub repo.

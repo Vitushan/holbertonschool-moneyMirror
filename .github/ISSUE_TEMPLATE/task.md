@@ -1,56 +1,59 @@
+title: '[TASK] '
 ---
-
 name: 📋 Task/Documentation
 about: Development task or documentation improvement
-title: '[TASK] '
-labels: ['task', 'documentation']
-assignees: ['Vitushan']
 
+labels: ['task', 'documentation']
+assignees: ['Vithushan']
 ---
 
-## 📝 Task Description
+# 📋 Task/Documentation
 
-Clearly describe the task to be accomplished.
+## Task Description
 
-## 🎯 Objectives
+Implement CRUD operations for transactions (income/expense) and integrate data visualization (charts) in the dashboard.
 
-- [ ] Objective 1
-- [ ] Objective 2
-- [ ] Objective 3
+## Objectives
 
-## 📋 Detailed Steps
+- [ ] Allow users to add, edit, and delete transactions
+- [ ] Display transactions in a list with search/filter
+- [ ] Integrate line, pie, and bar charts for financial data
 
-1. **Step 1**: Description
-2. **Step 2**: Description
-3. **Step 3**: Description
+## Detailed Steps
 
-## ✅ Completion Criteria
+1. **Design database schema**: Update Prisma models for transactions
+2. **Create API routes**: Implement Next.js API endpoints for CRUD
+3. **Build UI components**: Forms, lists, and chart components (React)
+4. **Add search/filter logic**: Enable filtering by date/category/type
+5. **Integrate chart libraries**: Use Recharts/Chart.js for visualization
+6. **Test all features**: Add unit/integration tests
+7. **Update documentation**: Document API and UI usage
 
-- [ ] Criterion 1 completed
-- [ ] Criterion 2 validated
-- [ ] Tests added/updated
-- [ ] Documentation updated
+## Completion Criteria
 
-## 🔗 Files Involved
+- [ ] All CRUD operations work as expected
+- [ ] Charts update in real time
+- [ ] Tests pass (Jest/Cypress)
+- [ ] Documentation is up to date
 
-List the files that will be modified or created:
-- `src/components/...`
-- `docs/...`
-- `tests/...`
+## Files Involved
 
-## ⏱️ Estimation
+- `src/app/api/transactions/*`
+- `src/components/TransactionForm.js`
+- `src/components/TransactionList.js`
+- `src/components/Charts/`
+- `prisma/schema.prisma`
+- `README.md`
+- `tests/`
 
-- [ ] 1-2 hours
-- [ ] Half day
+## Estimation
+
 - [ ] Full day
 - [ ] Several days
 
-## 📚 Required Resources
+## Required Resources
 
-- Documentation: [links]
-- APIs: [references]
-<<<<<<< HEAD
-- Examples: [example links]
-=======
+- Documentation: [README.md, roadmap]
+- APIs: `/api/transactions`, NextAuth.js
+- Examples: [Recharts/Chart.js docs, Prisma docs]
 - Examples: [links to examples]
->>>>>>> feature/login
