@@ -187,6 +187,104 @@ npm run ui:add dialog
 npm run format
 ```
 
+## Environment Configuration Example
+
+Create a `.env` or `.env.local` file at the root of your project with the following content:
+
+```env
+DATABASE_URL="mysql://root:@localhost:3306/moneymirror"
+NEXTAUTH_SECRET="your_secret_here"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+## API Usage Examples
+
+### Register a new user
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+	-H "Content-Type: application/json" \
+	-d '{"name": "John", "email": "john@example.com", "password": "Password123!"}'
+```
+
+### Login
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+	-H "Content-Type: application/json" \
+	-d '{"email": "john@example.com", "password": "Password123!"}'
+```
+
+---
+
+## Manual API & DB Testing
+
+
+### Register (Success)
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+	-H "Content-Type: application/json" \
+	-d '{"name": "Alice", "email": "alice@example.com", "password": "Test123!"}'
+```
+
+### Register (Missing Field/Error)
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/register \
+	-H "Content-Type: application/json" \
+	-d '{"email": "alice@example.com", "password": "Test123!"}'
+# Should return an error (missing name)
+```
+
+### Login (Success)
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+	-H "Content-Type: application/json" \
+	-d '{"email": "alice@example.com", "password": "Test123!"}'
+```
+
+### Login (Wrong Password)
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+	-H "Content-Type: application/json" \
+	-d '{"email": "alice@example.com", "password": "WrongPass!"}'
+# Should return an error (invalid credentials)
+```
+
+### Login (Non-existent User)
+
+
+```bash
+curl -X POST http://localhost:3000/api/auth/login \
+	-H "Content-Type: application/json" \
+	-d '{"email": "notfound@example.com", "password": "Test123!"}'
+# Should return an error (user not found)
+```
+
+### Check Users in MySQL (Prisma Studio)
+
+```bash
+npx prisma studio
+# Open http://localhost:5555 and check the User table
+```
+
+### Check Users in MySQL (SQL CLI)
+
+```sql
+-- In MySQL CLI:
+USE moneymirror;
+SELECT * FROM User;
+```
+
 ## Deployment
 
 The application is configured for deployment on:
