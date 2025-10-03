@@ -16,7 +16,7 @@ export default function LoginPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  // Si déjà connecté, afficher interface connectée
+  // If already logged in, show connected interface
   if (session) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -27,9 +27,9 @@ export default function LoginPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Déjà connecté !</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Already logged in!</h2>
             <p className="mt-2 text-gray-600">
-              Bienvenue <strong>{session.user?.name || session.user?.email}</strong>
+              Welcome <strong>{session.user?.name || session.user?.email}</strong>
             </p>
           </div>
           
@@ -38,13 +38,13 @@ export default function LoginPage() {
               onClick={() => router.push('/dashboard')}
               className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
             >
-              Aller au tableau de bord
+              Go to dashboard
             </button>
             <button
               onClick={() => signOut({ callbackUrl: '/' })}
               className="w-full bg-gray-200 text-gray-800 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors"
             >
-              Se déconnecter
+              Log out
             </button>
           </div>
         </div>
@@ -74,19 +74,19 @@ export default function LoginPage() {
       })
 
       if (result?.error) {
-        setMessage('Email ou mot de passe incorrect')
+        setMessage('Incorrect email or password')
         setMessageType('error')
       } else if (result?.ok) {
-        setMessage('Connexion réussie ! Redirection en cours...')
+        setMessage('Login successful! Redirecting...')
         setMessageType('success')
         setTimeout(() => {
           router.push('/dashboard')
         }, 1500)
       }
     } catch (error) {
-      console.error('Erreur lors de la connexion:', error)
-      setMessage('Une erreur est survenue. Veuillez réessayer.')
-      setMessageType('error')
+  console.error('Error during login:', error)
+  setMessage('An error occurred. Please try again.')
+  setMessageType('error')
     } finally {
       setIsLoading(false)
     }
@@ -104,16 +104,16 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Connexion</h2>
+          <h2 className="text-3xl font-bold text-gray-900">Login</h2>
           <p className="mt-2 text-gray-600">
-            Connectez-vous à votre compte MoneyMirror
+            Log in to your MoneyMirror account
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Adresse email
+              Email address
             </label>
             <input
               type="email"
@@ -123,13 +123,13 @@ export default function LoginPage() {
               onChange={handleInputChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-              placeholder="votre@email.com"
+              placeholder="your@email.com"
             />
           </div>
 
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Mot de passe
+              Password
             </label>
             <input
               type="password"
@@ -139,7 +139,7 @@ export default function LoginPage() {
               onChange={handleInputChange}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-              placeholder="Votre mot de passe"
+              placeholder="Your password"
             />
           </div>
 
@@ -158,10 +158,10 @@ export default function LoginPage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Connexion en cours...
+                Logging in...
               </span>
             ) : (
-              'Se connecter'
+              'Log in'
             )}
           </button>
 
@@ -174,12 +174,12 @@ export default function LoginPage() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-600">
-            Pas encore de compte ?{' '}
+            Don't have an account?{' '}
             <a
               href="/register"
               className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
             >
-              Créer un compte
+              Create an account
             </a>
           </p>
         </div>
