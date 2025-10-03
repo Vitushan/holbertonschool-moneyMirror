@@ -18,5 +18,21 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  transactions Transaction[]
+
   @@map("users")
+}
+
+model Transaction {
+  id String @id @default(cuid())
+  userId String 
+  amount Float
+  type String //"income" or "expense""
+  category String
+  date DateTime @default(now())
+  note String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("transactions")
 }
