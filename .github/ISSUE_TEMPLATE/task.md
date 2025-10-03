@@ -1,51 +1,51 @@
 ---
 name: 📋 Task/Documentation
-about: Tâche de développement ou amélioration de documentation
+about: Development task or documentation improvement
 title: '[TASK] '
 labels: ['task', 'documentation']
 assignees: ['Vitushan']
 
 ---
 
-## 📝 Description de la Tâche
+## 📝 Task Description
 
-Décrivez clairement la tâche à accomplir.
+Clearly describe the task to be accomplished.
 
-## 🎯 Objectifs
+## 🎯 Objectives
 
-- [ ] Objectif 1
-- [ ] Objectif 2
-- [ ] Objectif 3
+- [ ] Objective 1
+- [ ] Objective 2
+- [ ] Objective 3
 
-## 📋 Étapes Détaillées
+## 📋 Detailed Steps
 
-1. **Étape 1**: Description
-2. **Étape 2**: Description  
-3. **Étape 3**: Description
+1. **Step 1**: Description
+2. **Step 2**: Description
+3. **Step 3**: Description
 
-## ✅ Critères de Complétion
+## ✅ Completion Criteria
 
-- [ ] Critère 1 terminé
-- [ ] Critère 2 validé
-- [ ] Tests ajoutés/mis à jour
-- [ ] Documentation mise à jour
+- [ ] Criterion 1 completed
+- [ ] Criterion 2 validated
+- [ ] Tests added/updated
+- [ ] Documentation updated
 
-## 🔗 Fichiers Concernés
+## 🔗 Files Involved
 
-Liste des fichiers qui seront modifiés ou créés :
+List the files that will be modified or created:
 - `src/components/...`
 - `docs/...`
 - `tests/...`
 
 ## ⏱️ Estimation
 
-- [ ] 1-2 heures
-- [ ] Demi-journée
-- [ ] Journée complète
-- [ ] Plusieurs jours
+- [ ] 1-2 hours
+- [ ] Half day
+- [ ] Full day
+- [ ] Several days
 
-## 📚 Ressources Nécessaires
+## 📚 Required Resources
 
-- Documentation : [liens]
-- APIs : [références]
-- Exemples : [liens vers exemples]
+- Documentation: [links]
+- APIs: [references]
+- Examples: [example links]

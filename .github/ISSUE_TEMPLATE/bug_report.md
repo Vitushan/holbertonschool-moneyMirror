@@ -1,43 +1,52 @@
 ---
 name: 🐛 Bug Report
-about: Signaler un problème ou un comportement inattendu
+about: Report a problem or unexpected behavior
 title: '[BUG] '
 labels: ['bug', 'needs-triage']
 assignees: ['Vitushan']
 
 ---
 
-## 🐛 Description du Bug
-Décrivez clairement et de manière concise le problème rencontré.
+## 🐛 Bug Description
 
-## 🔄 Étapes pour Reproduire
-1. Aller à '...'
-2. Cliquer sur '...'  
-3. Faire défiler jusqu'à '...'
-4. Voir l'erreur
+Clearly and concisely describe the problem encountered.
 
-## ✅ Comportement Attendu
-Décrivez ce qui devrait se passer normalement.
+## 🔄 Steps to Reproduce
 
-## ❌ Comportement Actuel
-Décrivez ce qui se passe réellement.
+1. Go to '...'
+2. Click on '...'
+3. Scroll down to '...'
+4. See the error
 
-## 📱 Environnement
+## ✅ Expected Behavior
+
+Describe what should happen normally.
+
+## ❌ Actual Behavior
+
+Describe what actually happens.
+
+## 📱 Environment
+
 - **OS**: [e.g. macOS, Windows, Linux]
-- **Navigateur**: [e.g. Chrome, Firefox, Safari]
+- **Browser**: [e.g. Chrome, Firefox, Safari]
 - **Version**: [e.g. 118.0]
-- **Résolution d'écran**: [e.g. 1920x1080]
+- **Screen resolution**: [e.g. 1920x1080]
 
-## 📷 Screenshots/Vidéos
-Si applicable, ajoutez des captures d'écran ou vidéos pour expliquer le problème.
+## 📷 Screenshots/Videos
 
-## 🔗 Logs d'erreur
+If applicable, add screenshots or videos to explain the problem.
+
+## 🔗 Error Logs
+
+```text
+Paste here any error messages from the console
 ```
-Collez ici les messages d'erreur de la console
-```
 
-## ✨ Solutions Possibles
-Si vous avez des idées de solutions, décrivez-les ici.
+## ✨ Possible Solutions
 
-## 📋 Contexte Additionnel
-Ajoutez toute autre information pertinente sur le problème.
+If you have any ideas for solutions, describe them here.
+
+## 📋 Additional Context
+
+Add any other relevant information about the problem.

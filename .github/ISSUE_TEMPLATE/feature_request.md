@@ -1,55 +1,55 @@
 ---
 name: ✨ Feature Request
-about: Suggérer une nouvelle fonctionnalité pour MoneyMirror
+about: Suggest a new feature for MoneyMirror
 title: '[FEATURE] '
 labels: ['enhancement', 'needs-review']
 assignees: ['Vitushan']
 
 ---
 
-## 💡 Résumé de la Fonctionnalité
+## 💡 Feature Summary
 
-Décrivez brièvement la fonctionnalité que vous souhaitez ajouter.
+Briefly describe the feature you would like to add.
 
-## 🎯 Problème Résolu
+## 🎯 Problem Solved
 
-Quel problème cette fonctionnalité résoudrait-elle ? Pourquoi est-elle nécessaire ?
+What problem would this feature solve? Why is it needed?
 
-## 💻 Solution Proposée
+## 💻 Proposed Solution
 
-Décrivez en détail comment cette fonctionnalité devrait fonctionner.
+Describe in detail how this feature should work.
 
-## 🔄 Alternatives Considérées
+## 🔄 Alternatives Considered
 
-Quelles autres approches avez-vous envisagées ? Pourquoi cette solution est-elle la meilleure ?
+What other approaches have you considered? Why is this solution the best?
 
-## 📋 Critères d'Acceptation
+## 📋 Acceptance Criteria
 
-- [ ] Critère 1
-- [ ] Critère 2  
-- [ ] Critère 3
+- [ ] Criterion 1
+- [ ] Criterion 2
+- [ ] Criterion 3
 
 ## 🎨 Mockups/Wireframes
 
-Si applicable, ajoutez des images ou des liens vers des mockups.
+If applicable, add images or links to mockups.
 
-## 🏷️ Labels Suggérés
+## 🏷️ Suggested Labels
 
-- [ ] Must Have (priorité élevée)
-- [ ] Should Have (priorité moyenne)  
-- [ ] Could Have (priorité faible)
-- [ ] Won't Have (hors scope)
+- [ ] Must Have (high priority)
+- [ ] Should Have (medium priority)
+- [ ] Could Have (low priority)
+- [ ] Won't Have (out of scope)
 
-## 📈 Impact Utilisateur
+## 📈 User Impact
 
-Comment cette fonctionnalité améliorerait-elle l'expérience utilisateur ?
+How would this feature improve the user experience?
 
-## ⚡ Effort de Développement
+## ⚡ Development Effort
 
-- [ ] Petite (< 1 jour)
-- [ ] Moyenne (1-3 jours)
-- [ ] Grande (> 3 jours)
+- [ ] Small (< 1 day)
+- [ ] Medium (1-3 days)
+- [ ] Large (> 3 days)
 
-## 🔗 Ressources Liées
+## 🔗 Related Resources
 
-Liens vers des issues, PRs, ou documentations relatives.
+Links to related issues, PRs, or documentation.
