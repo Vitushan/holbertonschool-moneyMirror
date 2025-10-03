@@ -43,11 +43,12 @@ git push origin feature/login
 
 ---
 
-## Description détaillée
+
+## Detailed Description
 
 MoneyMirror is a modern web application designed to simplify personal finance management. It allows users to track, organize, and analyze their income and expenses through an intuitive and secure interface. The app provides clear visualizations of spending habits and motivational financial tips to encourage better money management.
 
-This project was developed as part of a portfolio for the Holberton School, covering idea development, project charter, technical documentation, and MVP implementation stages.
+This project was developed as part of a portfolio for Holberton School, covering idea development, project charter, technical documentation, and MVP implementation stages.
 
 ## Main Features
 
