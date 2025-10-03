@@ -27,20 +27,11 @@ MoneyMirror is a personal finance management application. It provides authentica
 
 ## Stack & Features
 
-- **Frontend**: Next.js 14, React 18, Tailwind CSS
-- **Backend**: Next.js API routes, NextAuth.js (Credentials Provider)
-- **ORM**: Prisma
-- **Database**: MySQL
-- **Security**: bcryptjs (password hashing), JWT session
-- **Testing**: Jest, Cypress, custom shell scripts
+## MoneyMirror – Feature: Login
 
-## Environment Setup
+This branch implements and tests the authentication system (login/register) for MoneyMirror.
 
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/Vitushan/holbertonschool-moneyMirror.git
-cd holbertonschool-moneyMirror
+👉 For full project documentation, see the main [README on the development branch](https://github.com/Vitushan/holbertonschool-moneyMirror/blob/development/README.md).
 npm install
 ```
 
