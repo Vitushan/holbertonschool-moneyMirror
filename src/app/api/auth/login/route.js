@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server'
 import { prisma } from '../../../../lib/prisma' //import prisma for speak with MySQL
 import bcrypt from 'bcryptjs' //import bcrypt for compare passwords
 
@@ -11,7 +12,7 @@ export async function POST(request) {
 
         // Basic validation
         if (!email || !password) {
-            return Response.json(
+            return NextResponse.json(
                 {error: 'Email and password are required'},
                 { status: 400 }
             )
@@ -24,7 +25,7 @@ export async function POST(request) {
 
         //Check if user exists
         if (!user) {
-            return Response.json(
+            return NextResponse.json(
                 { error: 'Invalid email or password' },
                 { status: 401 }
             )
@@ -36,14 +37,14 @@ export async function POST(request) {
         const isPasswordValid = await bcrypt.compare(password, user.password)
     
         if (!isPasswordValid) {
-            return Response.json(
+            return NextResponse.json(
                 { error: 'Invalid email or password '},
                 { status: 401}
             )
         }
 
         //If login successful: return user info without password
-        return Response.json({
+        return NextResponse.json({
             success: true,
             message: 'Login successful',
             user: {
@@ -55,7 +56,7 @@ export async function POST(request) {
 
     } catch (error) {
         console.error('Error in login:', error)
-        return Response.json(
+        return NextResponse.json(
             { error: 'Server error: ' + error.message },
             { status: 500 }
         )

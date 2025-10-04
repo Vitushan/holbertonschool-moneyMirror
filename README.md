@@ -242,6 +242,7 @@ docker run -p 3000:3000 --env-file .env.local moneymirror
 ```
 
 ### Production Security Tips
+
 - Change `NEXTAUTH_SECRET` and never commit it!
 - Use a secure MySQL database (no root, strong password)
 - Enable HTTPS (Vercel does this by default)
