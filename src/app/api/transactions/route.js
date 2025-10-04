@@ -5,47 +5,53 @@ import { NextResponse } from 'next/server'
 
 export async function POST(request) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession(authOptions) // retrieves session information (the logged in user)
     if (!session || !session.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 })
     }
 
-    const { amount, type, category, date, note } = await request.json()
+    const { amount, type, category, date, note } = await request.json() //retrieves the body of the request sent by the client (in JSON)
     if (
       typeof amount !== 'number' ||
+      amount <= 0 ||
       !['income', 'expense'].includes(type) ||
-      !category?.trim()
+      !category
     ) {
-      return NextResponse.json({ error: 'Invalid data' }, { status: 400 })
+      return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 })
     }
 
-    // Validation de la date
+  // Date validation
     let transactionDate = new Date()
     if (date) {
       const parsedDate = new Date(date)
       if (isNaN(parsedDate.getTime())) {
-        return NextResponse.json({ error: 'Date format invalide' }, { status: 400 })
+        return NextResponse.json({ error: 'Please enter a valid date."' }, { status: 400 })
       }
-      // On n'autorise pas les dates dans le futur
+      // Future dates are not allowed
       const now = new Date()
       if (parsedDate > now) {
-        return NextResponse.json({ error: 'La date ne peut pas être dans le futur' }, { status: 400 })
+        return NextResponse.json({ error: 'Sorry, you can’t travel to the future.' }, { status: 400 })
       }
       transactionDate = parsedDate
     }
 
-    const transaction = await prisma.transaction.create({
+    const transaction = await prisma.transaction.create({ //creating the transaction with Prisma
       data: {
         userId: session.user.id,
-        amount,
-        type,
-        category,
+        amount: amount,
+        type: type,
+        category: category,
         date: transactionDate,
-        note,
+        note: note,
       },
     })
-    return NextResponse.json({ success: true, transaction }, { status: 201 })
+    return NextResponse.json({
+      success: true,
+      message: 'Congrats, transaction created!',
+      transaction,
+    }, { status: 201 })
   } catch (error) {
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    console.error('Transaction POST error:', error)
+    return NextResponse.json({ error: 'Oops! Internal server error' }, { status: 500 })
   }
 }
