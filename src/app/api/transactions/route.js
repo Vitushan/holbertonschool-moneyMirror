@@ -20,7 +20,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 })
     }
 
-  // Date validation
+   // Date validation
     let transactionDate = new Date()
     if (date) {
       const parsedDate = new Date(date)
@@ -54,4 +54,8 @@ export async function POST(request) {
     console.error('Transaction POST error:', error)
     return NextResponse.json({ error: 'Oops! Internal server error' }, { status: 500 })
   }
+}
+
+export async function GET(request) {
+  
 }
