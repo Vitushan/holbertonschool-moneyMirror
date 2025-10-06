@@ -60,14 +60,14 @@ export async function PUT(request, { params }) {
   
     let transactionDate = transaction.date
     if (date) {
-      const parsedDate = new Date(date)
-      if (isNaN(parsedDate.getTime())) {
+      const parsedDate = new Date(date) //parseDate: date convert to JavaScript Date object
+      if (isNaN(parsedDate.getTime())) { //checks that the date is valid (otherwise it is NaN).
         return NextResponse.json({ error: 'Please enter a valid date.'}, { status: 400 })
       }
-      if (parsedDate > new Date()) {
+      if (parsedDate > new Date()) { //parsed = convert in a format that can be manipulated
         return NextResponse.json({ error: 'Sorry, you can’t travel to the future.' }, {status: 400})
       }
-      transactionDate = parsedDate
+      transactionDate = parsedDate //convert data into a manipulable type
     }
   
     const updatedTransaction = await prisma.transaction.update({
