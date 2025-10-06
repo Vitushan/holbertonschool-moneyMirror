@@ -10,14 +10,14 @@ export async function POST(request) {
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 })
     }
-
+    
     const { amount, type, category, date, note } = await request.json() //retrieves the body of the request sent by the client (in JSON)
     if (
       typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
     ) {
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 })
     }
-
+    
    // Date validation
     let transactionDate = new Date()
     if (date) {
