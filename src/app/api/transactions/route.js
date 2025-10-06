@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]/route'
 import { NextResponse } from 'next/server'
 
+
 export async function POST(request) {
   try {
     const session = await getServerSession(authOptions) // retrieves session information (the logged in user)
@@ -12,10 +13,7 @@ export async function POST(request) {
 
     const { amount, type, category, date, note } = await request.json() //retrieves the body of the request sent by the client (in JSON)
     if (
-      typeof amount !== 'number' ||
-      amount <= 0 ||
-      !['income', 'expense'].includes(type) ||
-      !category
+      typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
     ) {
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 })
     }
@@ -57,5 +55,21 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session || !session.user) {
+      return NextResponse.json({ error: "User don't exist" }, { status: 401 });
+    }
+
+    // prisma.transaction allows you to access all transactions in the MySQL database
+    const transactions = await prisma.transaction.findMany({ //findMany is a Prisma method used to retrieve multiple records (multiple rows) from a given table.
+      where: { userId: session.user.id},
+      orderBy: { date: 'desc' },
+    });
+    return NextResponse.json({ success: true, transactions }, { status: 200 });
+
+  } catch (error) {
+    console.error("Don't get user", error)
+    return NextResponse.json({ error: "Oops! User don't exist!" });
+  }
 }
