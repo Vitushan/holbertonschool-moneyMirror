@@ -3,7 +3,8 @@ import { getServerSession } from "next-auth" //Imports the NextAuth function whi
 import { authOptions } from "../auth/[...nextauth]/route" // Imports the NextAuth configuration (providers, callbacks, etc.). getServerSession(authOptions) needs these options to validate the session
 import { NextResponse } from "next/server" //Next.js utility to construct and return HTTP responses from a route handler (App Router) used to return JSON with a status.
 
-//this is a findone for my crud
+
+//this is a findOne for my crud (to read a specific transaction)
 // this route is used to read a single specific transaction from its unique ID.
 export async function GET(request, { params }) { //{ params } = Next.js injects the dynamic parameters of the URL here (e.g. for /api/transactions/[id], params.id contains the ID).
   try {
@@ -31,5 +32,58 @@ export async function GET(request, { params }) { //{ params } = Next.js injects 
   } catch (error) {
     console.error("Error fetching transaction", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+export async function PUT(request, { params }) {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Please sign in to continue.' }, { status:401 })
+    }
+  
+    const { id } = params
+    if (!id || typeof id !== 'string' || id.trim().length === 0) {
+      return NextResponse.json({ error: 'Invalid Transaction Id' }, { status: 400 })
+    }
+    const { amount, type, category, date, note } = await request.json()
+    if (typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category) {
+      return NextResponse.json({ error: 'Please fill all required fields.' }, {status: 400});
+    }
+  
+    const transaction = await prisma.transaction.findFirst({
+      where: { id, userId: session.user.id }
+    })
+    if (!transaction) {
+      return NextResponse.json({ error: 'Transaction not found '}, { status: 404 })
+    }
+  
+    let transactionDate = transaction.date
+    if (date) {
+      const parsedDate = new Date(date)
+      if (isNaN(parsedDate.getTime())) {
+        return NextResponse.json({ error: 'Please enter a valid date.'}, { status: 400 })
+      }
+      if (parsedDate > new Date()) {
+        return NextResponse.json({ error: 'Sorry, you can’t travel to the future.' }, {status: 400})
+      }
+      transactionDate = parsedDate
+    }
+  
+    const updatedTransaction = await prisma.transaction.update({
+      where: { id: transaction.id },
+      data: {
+        amount,
+        type,
+        category,
+        date: transactionDate,
+        note,
+      },
+    });
+  
+    return NextResponse.json({ success: true, message:'Transaction updated successfully!', transaction: updatedTransaction }, { status: 200 });
+  } catch (error) {
+    console.error('Error updating transaction', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
