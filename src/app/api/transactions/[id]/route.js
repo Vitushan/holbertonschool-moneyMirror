@@ -6,7 +6,7 @@ import { NextResponse } from "next/server" //Next.js utility to construct and re
 
 //this is a findOne for my crud (to read a specific transaction)
 // this route is used to read a single specific transaction from its unique ID.
-export async function GET(request, { params }) { //{ params } = Next.js injects the dynamic parameters of the URL here (e.g. for /api/transactions/[id], params.id contains the ID).
+export async function GET(request, { params }) { //{ params } = Next.js injects the dynamic parameters of the URL here (example for /api/transactions/[id], params.id contains the ID).
   try {
     const session = await getServerSession(authOptions) //Retrieves the user session (if the user is logged in)
     if (!session || !session.user) {
@@ -85,5 +85,33 @@ export async function PUT(request, { params }) {
   } catch (error) {
     console.error('Error updating transaction', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }  
+}
+
+export async function DELETE(request, { params}) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Please sign in to continue '}, { status: 401 });
+    }
+
+    const { id } = params; // destructure the params object and create an id variable with the value of params.id
+
+    //checks that the id is a valid string
+    if (!id || typeof id !== 'string' || id.trim().length === 0) {
+      return NextResponse.json({ error: 'Invalid transaction ID' }, { status: 400});
+    }
+
+    //searches for the corresponding transaction belonging to the logged in user (findFirst: we check both that the ID corresponds to the transaction, and that it belongs to this user.)
+    const transaction = await prisma.transaction.findFirst({ where: { id, userId: session.user.id,}}); //we use findFirst to search for the specific transaction belonging to the logged in user (someone else cannot delete another user's transaction.) to prevent a user from deleting someone else's transaction
+    if (!transaction) {
+      return NextResponse.json({ error: 'Transaction not found' }, { status: 400 });
+    }
+  
+    await prisma.transaction.delete({ where: { id: transaction.id }}); //if the transaction exists, we delete it with Prisma (prisma uses delete() and we pass the primary key (id))
+    return NextResponse.json({ success: true, message: 'Transaction deleted successfully' }, { status: 200}); //if everything went well, we send a success message to the front end
+  } catch (error) {
+    console.error('Error deleting transaction', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500});
   }
 }
