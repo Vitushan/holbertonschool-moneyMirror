@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"; //initializes the authentication manager (config/handler that Next.js will call for auth routes)
 import CredentialsProvider from "next-auth/providers/credentials"; //email/password authentication (This provider calls the authorize function to validate credentials.)
-import { prisma } from "../../../../lib/prisma";
+import { prisma } from "../../../lib/prisma";
 import bcrypt from "bcryptjs";
 
 const handler = NextAuth({

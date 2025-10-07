@@ -1,4 +1,4 @@
-import { prisma } from '../../../../lib/prisma' //import prisma for speak with MySQL
+import { prisma } from '../../../lib/prisma' //import prisma for speak with MySQL
 import bcrypt from 'bcryptjs' //import bcrypt for compare passwords
 
 export async function POST(request) {
