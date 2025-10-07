@@ -1,4 +1,4 @@
-import { prisma } from "../../../../lib/prisma" //Import the Prisma Client instance configured for the MySQL DB
+import { prisma } from "../../../lib/prisma" //Import the Prisma Client instance configuré pour la DB
 import { getServerSession } from "next-auth" //Imports the NextAuth function which allows you to retrieve the session on the server side (check if the user is logged in)
 import { authOptions } from "../auth/[...nextauth]/route" // Imports the NextAuth configuration (providers, callbacks, etc.). getServerSession(authOptions) needs these options to validate the session
 import { NextResponse } from "next/server" //Next.js utility to construct and return HTTP responses from a route handler (App Router) used to return JSON with a status.
