@@ -2,6 +2,7 @@ import { prisma } from '../../../lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]/route'
 import { NextResponse } from 'next/server'
+import { Currency } from 'lucide-react'
 
 
 export async function POST(request) {
@@ -11,9 +12,9 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 })
     }
 
-    const { amount, type, category, date, note } = await request.json() //retrieves the body of the request sent by the client (in JSON)
+    const { amount, type, category, date, note, description, currency } = await request.json() //retrieves the body of the request sent by the client (in JSON)
     if (
-      typeof amount !== 'snumber' || amount <= 0 || !['income', 'expense'].includes(type) || !category
+      typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
     ) {
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 })
     }
@@ -41,6 +42,8 @@ export async function POST(request) {
         category: category,
         date: transactionDate,
         note: note,
+        description: description,
+        currency: currency,
       },
     })
     return NextResponse.json({

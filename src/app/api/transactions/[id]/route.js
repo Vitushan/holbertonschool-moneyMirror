@@ -46,7 +46,7 @@ export async function PUT(request, { params }) {
     if (!id || typeof id !== 'string' || id.trim().length === 0) {
       return NextResponse.json({ error: 'Invalid Transaction Id' }, { status: 400 })
     }
-    const { amount, type, category, date, note } = await request.json()
+    const { amount, type, category, date, note, description, currency } = await request.json()
     if (typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category) {
       return NextResponse.json({ error: 'Please fill all required fields.' }, {status: 400});
     }
@@ -73,11 +73,13 @@ export async function PUT(request, { params }) {
     const updatedTransaction = await prisma.transaction.update({
       where: { id: transaction.id },
       data: {
-        amount,
-        type,
-        category,
+        amount: amount,
+        type: type,
+        category: category,
         date: transactionDate,
-        note,
+        note: note,
+        description: description,
+        currency: currency,
       },
     });
   

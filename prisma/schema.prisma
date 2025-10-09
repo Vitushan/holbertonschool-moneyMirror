@@ -31,6 +31,8 @@ model Transaction {
   category String
   date DateTime @default(now())
   note String?
+  currency String
+  description String?
 
   user User @relation(fields: [userId], references: [id])
 
