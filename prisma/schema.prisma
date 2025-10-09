@@ -20,3 +20,18 @@ model User {
 
   @@map("users")
 }
+
+model Transaction {
+  id String @id @default(cuid())
+  userId String
+  amount Float
+  type String
+  category String
+  date DateTime @default(now())
+  note String?
+  currency String
+  description String?
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("transactions")
+}
