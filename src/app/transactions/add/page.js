@@ -10,7 +10,7 @@ export default function AddTransactionPage() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    async function handleSubmit(e) {
+    async function handleSubmit(e) { // Handle add transaction form submission
         e.preventDefault();
         setMessage("");
         setError("");
@@ -29,7 +29,7 @@ export default function AddTransactionPage() {
         };
 
         try {
-            const res = await fetch("/api/transactions", {
+            const res = await fetch("/api/transactions", { //// Send POST request to API to add the transaction (res = response)
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
