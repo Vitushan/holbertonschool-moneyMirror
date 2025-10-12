@@ -1,6 +1,6 @@
 // Add Transaction form (API connected)
 
-
+"use client"
 import { Currency } from "lucide-react";
 import { useState } from "react"
 
@@ -19,7 +19,7 @@ export default function AddTransactionPage() {
 
         const form = e.target;
         const data = {
-            amount: form.amount.value,
+            amount: Number(form.amount.value), // conversion to number required for API
             type: form.type.value,
             category: form.category.value,
             description: form.description.value,
@@ -33,10 +33,11 @@ export default function AddTransactionPage() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
+                credentials: "include",
         });
         if (!res.ok) {
             const err = await res.json();
-            setError(err.message || "Add Error")
+            setError(err.error || err.message || "Add Error")
         } else {
             setMessage("Transaction successfully added!");
             form.reset();
@@ -55,36 +56,36 @@ export default function AddTransactionPage() {
             </h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Amount:</label>
-                    <input type="number" name="amount" required />
+                    <label htmlFor="amount">Amount:</label>
+                    <input id="amount" type="number" name="amount" required />
                 </div>
                 <div>
-                    <label>Type:</label>
-                    <select name="type" required>
-                        <option value="">--Select--</option>
+                    <label htmlFor="type">Type:</label>
+                    <select id="type" name="type" required>
+                        <option value="">Select</option>
                         <option value="income">Income</option>
                         <option value="expense">Expense</option>
                     </select>
                 </div>
                 <div>
-                        <label>Category:</label>
-                        <input type="text" name="category" required />
+                    <label htmlFor="category">Category:</label>
+                    <input id="category" type="text" name="category" required />
                 </div>
                 <div>
-                        <label>Description:</label>
-                        <input type="text" name="description" />
+                    <label htmlFor="description">Description:</label>
+                    <input id="description" type="text" name="description" />
                 </div>
                 <div>
-                        <label>Note:</label>
-                        <input type="text" name="note" />
+                    <label htmlFor="note">Note:</label>
+                    <input id="note" type="text" name="note" />
                 </div>
                 <div>
-                        <label>Currency:</label>
-                        <input type="text" name="currency" defaultValue="EUR" required />
+                    <label htmlFor="currency">Currency:</label>
+                    <input id="currency" type="text" name="currency" defaultValue="EUR" required />
                 </div>
                 <div>
-                        <label>Date:</label>
-                        <input type="date" name="date" required />
+                    <label htmlFor="date">Date:</label>
+                    <input id="date" type="date" name="date" required />
                 </div>
                 <button type="submit" disabled={loading}>
                     {loading ? "Adding in progress...": "Add"}
