@@ -8,27 +8,43 @@ import { NextResponse } from "next/server" //Next.js utility to construct and re
 // this route is used to read a single specific transaction from its unique ID.
 export async function GET(request, { params }) { //{ params } = Next.js injects the dynamic parameters of the URL here (example for /api/transactions/[id], params.id contains the ID).
   try {
-    const session = await getServerSession(authOptions) //Retrieves the user session (if the user is logged in)
-    if (!session || !session.user) {
+    let userId = null;
+    // 1. Vérifier Authorization: Bearer <token>
+    const authHeader = request.headers.get('authorization');
+    let jwtLib;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      jwtLib = (await import('jsonwebtoken')).default;
+      const token = authHeader.split(' ')[1];
+      try {
+        const decoded = jwtLib.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
+        userId = decoded.id;
+      } catch (err) {
+        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+      }
+    } else {
+      // 2. Sinon, fallback sur la session NextAuth
+      const session = await getServerSession(authOptions);
+      if (session && session.user && session.user.id) {
+        userId = session.user.id;
+      }
+    }
+    if (!userId) {
       return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
     }
-    const { id } = params // get the ID from the URL
+    const { id } = params;
     if (!id || typeof id !== "string" || id.trim().length === 0) {
       return NextResponse.json({ error: "Invalid transaction ID" }, {status: 400 })
     }
-    //findFirst allows you to add multiple conditions (id + userId).
-    const transaction = await prisma.transaction.findFirst({ // Searches for the matching transaction belonging to the user (Prisma Query)
+    const transaction = await prisma.transaction.findFirst({
       where: {
-        id: id, //search for the requested ID
-        userId: session.user.id, // we check that the transaction belongs to the connected user (security/ownership).
+        id: id,
+        userId: userId,
       },
     });
-
     if (!transaction) {
       return NextResponse.json({ error: "Transaction not found" }, { status: 404});
     }
     return NextResponse.json({ success: true, transaction }, { status: 200});
-
   } catch (error) {
     console.error("Error fetching transaction", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
