@@ -29,7 +29,7 @@ export default function AddTransactionPage() {
         };
 
         try {
-            const res = await fetch("/api/transactions", { //// Send POST request to API to add the transaction (res = response)
+            const res = await fetch("/api/transactions", { // Send POST request to API to add the transaction (res = response)
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
