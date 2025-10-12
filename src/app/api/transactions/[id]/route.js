@@ -6,10 +6,10 @@ import { NextResponse } from "next/server" //Next.js utility to construct and re
 
 //this is a findOne for my crud (to read a specific transaction)
 // this route is used to read a single specific transaction from its unique ID.
-export async function GET(request, { params }) { //{ params } = Next.js injects the dynamic parameters of the URL here (example for /api/transactions/[id], params.id contains the ID).
+export async function GET(request, { params }) { // { params } = Next.js injects the dynamic parameters of the URL here (example: /api/transactions/[id], params.id contains the ID)
   try {
     let userId = null;
-    // 1. Vérifier Authorization: Bearer <token>
+    // Verify Authorization: Bearer <token>
     const authHeader = request.headers.get('authorization');
     let jwtLib;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -22,7 +22,7 @@ export async function GET(request, { params }) { //{ params } = Next.js injects 
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // 2. Sinon, fallback sur la session NextAuth
+      // Otherwise, fallback to the NextAuth session
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -54,7 +54,7 @@ export async function GET(request, { params }) { //{ params } = Next.js injects 
 export async function PUT(request, { params }) {
   try {
     let userId = null;
-    // 1. Vérifier Authorization: Bearer <token>
+    // Verify Authorization: Bearer <token>
     const authHeader = request.headers.get('authorization');
     let jwtLib;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -67,7 +67,7 @@ export async function PUT(request, { params }) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // 2. Sinon, fallback sur la session NextAuth
+      // Otherwise, fallback to the NextAuth session
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -129,7 +129,7 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params}) {
   try {
     let userId = null;
-    // 1. Vérifier Authorization: Bearer <token>
+    // Verify Authorization: Bearer <token>
     const authHeader = request.headers.get('authorization');
     let jwtLib;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -142,7 +142,7 @@ export async function DELETE(request, { params}) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // 2. Sinon, fallback sur la session NextAuth
+      // Otherwise, fallback to the NextAuth session
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;

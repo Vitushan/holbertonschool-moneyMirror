@@ -10,29 +10,26 @@ import jwt from 'jsonwebtoken'
 export async function POST(request) {
   try {
     let userId = null;
-    //verify bearer token auth
+    // Verify bearer token authentication
     const authHeader = request.headers.get('authorization');
-    // ...
+
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.split(' ')[1];
       try {
         const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
-        // ...
       } catch (err) {
         console.error('[DEBUG] JWT verification failed:', err);
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
       // Otherwise, fallback to the NextAuth session
-      // ...
       let session = null;
       try {
         session = await getServerSession(authOptions);
-        // ...
       } catch (err) {
-        console.error('[DEBUG] Erreur getServerSession:', err);
-        return NextResponse.json({ error: 'Erreur lors de la récupération de la session', details: String(err) }, { status: 500 });
+        console.error('[DEBUG] Session retrieval error:', err);
+        return NextResponse.json({ error: 'Error retrieving session', details: String(err) }, { status: 500 });
       }
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -40,17 +37,16 @@ export async function POST(request) {
     }
 
     if (!userId) {
-      console.warn('[DEBUG] Aucun userId trouvé, accès refusé.');
+      console.warn('[DEBUG] No userId found, access denied.');
       return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 });
     }
 
     const body = await request.json();
-    // ...
     const { amount, type, category, date, note, description, currency } = body;
     if (
       typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
     ) {
-      console.warn('[DEBUG] Champs invalides:', { amount, type, category });
+      console.warn('[DEBUG] Invalid fields:', { amount, type, category });
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 });
     }
 
@@ -59,14 +55,14 @@ export async function POST(request) {
     if (date) {
       const parsedDate = new Date(date);
       if (isNaN(parsedDate.getTime())) {
-        console.warn('[DEBUG] Date invalide:', date);
+        console.warn('[DEBUG] Invalid date:', date);
         return NextResponse.json({ error: 'Please enter a valid date."' }, { status: 400 });
       }
       // Future dates are not allowed
       const now = new Date();
       if (parsedDate > now) {
-        console.warn('[DEBUG] Date future non autorisée:', parsedDate);
-        return NextResponse.json({ error: 'Sorry, you can’t travel to the future.' }, { status: 400 });
+        console.warn('[DEBUG] Future date not allowed:', parsedDate);
+        return NextResponse.json({ error: "Sorry, you can't travel to the future." }, { status: 400 });
       }
       transactionDate = parsedDate;
     }
@@ -84,7 +80,7 @@ export async function POST(request) {
         currency: currency,
       },
     });
-    // ...
+
     return NextResponse.json({
       success: true,
       message: 'Congrats, transaction created!',
@@ -99,7 +95,7 @@ export async function POST(request) {
 export async function GET(request) {
   try {
     let userId = null;
-    // 1. verify Authorization: Bearer token
+    // Verify Authorization: Bearer token
     const authHeader = request.headers.get('authorization');
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.split(' ')[1];
@@ -110,18 +106,18 @@ export async function GET(request) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      //otherwise, fallback to the NextAuth session
-  const session = await getServerSession(request, authOptions);
+      // Otherwise, fallback to the NextAuth session
+      const session = await getServerSession(request, authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;
       }
     }
 
     if (!userId) {
-      return NextResponse.json({ error: "User don't exist" }, { status: 401 });
+      return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
     }
 
-    // prisma.transaction allows you to access all transactions in the MySQL database
+    // Fetch all transactions from the database for the authenticated user
     const transactions = await prisma.transaction.findMany({
       where: { userId },
       orderBy: { date: 'desc' },
@@ -129,7 +125,7 @@ export async function GET(request) {
     return NextResponse.json({ success: true, transactions }, { status: 200 });
 
   } catch (error) {
-    console.error("Don't get user", error)
-    return NextResponse.json({ error: "Oops! User don't exist!" });
+    console.error("Error fetching transactions:", error)
+    return NextResponse.json({ error: "Oops! Internal server error" }, { status: 500 });
   }
 }

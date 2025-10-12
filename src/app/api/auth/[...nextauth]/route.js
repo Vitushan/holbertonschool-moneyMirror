@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 import bcrypt from "bcryptjs";
 
 
-// Options NextAuth réutilisables
+// Reusable NextAuth options
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -15,7 +15,6 @@ export const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // ...identique...
         if (!credentials?.email || !credentials?.password) {
           if (typeof wantsJson !== 'undefined' && wantsJson) throw new Error("Missing credentials");
           return null;
@@ -52,7 +51,7 @@ export const authOptions = {
   },
 };
 
-// Handler custom qui wrappe NextAuth avec gestion JSON
+// Custom handler that wraps NextAuth with JSON error handling
 const customHandler = async (req, ctx) => {
   const wantsJson = req.headers.get("accept")?.includes("application/json");
   const nextAuthHandler = NextAuth({
