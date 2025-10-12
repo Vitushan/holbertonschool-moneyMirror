@@ -32,24 +32,26 @@ export default function Register() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: username,  // Send username as 'name' field
+        name: username,
         email,
         password,
       }),
     });
 
+    const data = await response.json(); // Ajout pour lire la réponse JSON
+
     if (response.ok) {
       setMessage('Registration successful, Welcome to MoneyMirror !');
-      setMessageType('success'); // Green styling
+      setMessageType('success');
       setIsLoading(false);
-      
-      // Reset form fields after successful registration
+      // Reset form fields après succès
       setUsername('');
       setEmail('');
       setPassword('');
+      setConfirmPassword('');
     } else {
-      // API returned error status
-      throw new Error('Registration failed');
+      // Afficher l'erreur retournée par l'API
+      throw new Error(data.error || 'Registration failed');
     }
   } catch (error) {
     // ERROR HANDLING: Both network errors and validation errors

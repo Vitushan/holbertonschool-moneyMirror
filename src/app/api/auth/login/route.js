@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '../../../../lib/prisma' //import prisma for speak with MySQL
+import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs' //import bcrypt for compare passwords
+import jwt from 'jsonwebtoken'
 
 export async function POST(request) {
     try {
@@ -43,10 +44,19 @@ export async function POST(request) {
             )
         }
 
-        //If login successful: return user info without password
+
+        // ✨ AJOUT : Créer un token JWT
+        const token = jwt.sign(
+            { id: user.id, email: user.email },
+            process.env.NEXTAUTH_SECRET || 'fallback-secret',
+            { expiresIn: '7d' }
+        )
+
+        // Retourner avec le token
         return NextResponse.json({
             success: true,
             message: 'Login successful',
+            token, // ← Ajout du token
             user: {
                 id: user.id,
                 name: user.name,

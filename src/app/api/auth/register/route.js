@@ -1,4 +1,4 @@
-import { prisma } from '../../../../lib/prisma'
+import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 
 
@@ -11,7 +11,7 @@ export async function POST(request) {
     //basic validation
     if (!name || !email || !password) {
       return Response.json(
-        { error: 'all fields is required' },
+        { error: 'All fields are required' },
         { status: 400 }
       )
     }
