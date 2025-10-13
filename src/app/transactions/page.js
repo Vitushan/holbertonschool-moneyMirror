@@ -5,9 +5,9 @@ import { useEffect, useState } from "react" //manage state and side effects (fet
 
 
 export default function TransactionsPage() { // display transactions lists
-    const [transactions, setTransactions] = useState([]) // will contain the list of transactions retrieved from the API
-    const [loading, setLoading] = useState(true) // manage the display of the loader
-    const [error, setError] = useState('') // manage the display of the loader
+    const [transactions, setTransactions] = useState([]); // will contain the list of transactions retrieved from the API
+    const [loading, setLoading] = useState(true); // manage the display of the loader
+    const [error, setError] = useState(''); // manage the display of the loader
 
     useEffect(() => {
         async function fetchTransactions() { // noted loading start
@@ -29,13 +29,15 @@ export default function TransactionsPage() { // display transactions lists
 
    // conditional rendering
    if (loading) {
-    return <div className="">Loading...</div>;
+    return (<div className="">Loading...</div>);
    }
    if (error) {
-    return <div className="">{ error }</div>;
+    return (<div className="">{ error }</div>);
 
    }
-   return {
+   return (
+    <div className=""></div>
+   );
 
-   };
+
 }
