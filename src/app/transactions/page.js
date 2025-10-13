@@ -29,15 +29,21 @@ export default function TransactionsPage() { // display transactions lists
 
    // conditional rendering
    if (loading) {
-    return (<div className="">Loading...</div>);
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+            <div className="text-lg text-blue-600 font-medium">Loading...</div>
+        </div>);
    }
    if (error) {
-    return (<div className="">{ error }</div>);
-
-   }
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg w-full max-w-md">
+                <p className="text-red-700 font-medium text-center">{ error}</p>
+                </div>
+            </div>
+    );
+}
    return (
     <div className=""></div>
    );
-
-
 }

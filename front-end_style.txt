@@ -1,0 +1,32 @@
+pour savoir quoi mettre dans les className avec Tailwind, tu peux :
+
+T’inspirer des autres pages de ton projet
+Regarde les classes utilisées sur tes pages d’ajout, login, register, etc.
+Exemple :
+
+bg-gradient-to-br from-blue-50 to-indigo-100 pour le fond
+
+rounded-lg, shadow, p-4 pour les cartes
+
+text-blue-600, text-red-700 pour les messages
+
+Utiliser la documentation Tailwind
+
+Va sur https://tailwindcss.com/docs/utility-first
+
+Tu y trouveras toutes les classes pour :
+
+Couleurs (bg-, text-, border-)
+
+Espacement (p-, m-, gap-)
+
+Taille (w-, h-, max-w-)
+
+Alignement (flex, items-center, justify-center)
+
+Effets (shadow, rounded, hover:)
+
+Réutiliser des patterns
+
+Si tu as déjà un style qui te plaît sur une autre page, copie-colle 
+les mêmes classes pour garder l’harmonie.
