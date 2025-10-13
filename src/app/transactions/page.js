@@ -32,7 +32,7 @@ export default function TransactionsPage() { // display transactions lists
     return <div className="">Loading...</div>;
    }
    if (error) {
-    return <div className="">{ error }</div>
+    return <div className="">{ error }</div>;
 
    }
    return {
