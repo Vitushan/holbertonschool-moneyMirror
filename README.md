@@ -23,7 +23,7 @@ MoneyMirror is a personal finance management application. It provides authentica
 
 ## Stack & Features
 
-- Next.js 14
+- Next.js 15.5.4
 - React 18
 - Tailwind CSS
 - Prisma ORM
@@ -126,21 +126,28 @@ SELECT * FROM User;
 }
 ```
 
-**Error Examples**
+## Error Examples**
 
 400 (missing fields):
+
 ```json
 { "error": "All fields are required" }
 ```
+
 400 (invalid email):
+
 ```json
 { "error": "Invalid email address." }
 ```
+
 400 (password too short):
+
 ```json
 { "error": "The password must contain at least 6 characters" }
 ```
+
 400 (email already used):
+
 ```json
 { "error": "This email is already used" }
 ```
@@ -170,17 +177,22 @@ SELECT * FROM User;
 }
 ```
 
-**Error Examples**
+## error Examples**
 
 400 (missing fields):
+
 ```json
 { "error": "Email and password are required" }
 ```
+
 401 (invalid credentials):
+
 ```json
 { "error": "Invalid email or password" }
 ```
+
 500 (server error):
+
 ```json
 { "error": "Server error: ..." }
 ```
@@ -228,14 +240,16 @@ cat result_all_api.txt
 
 ### Vercel
 
-1. Connect the repo to Vercel (https://vercel.com/import/git)
+1. Connect the repo to Vercel (https:www.//vercel.com/import/git)
 2. Add environment variables in the Vercel dashboard (see `.env.example`)
 3. Deploy!
 
 ### Docker
 
 1. Create a `Dockerfile` (see Next.js docs or example below)
+
 2. Build and run:
+
 ```bash
 docker build -t moneymirror .
 docker run -p 3000:3000 --env-file .env.local moneymirror
@@ -253,6 +267,77 @@ docker run -p 3000:3000 --env-file .env.local moneymirror
 - Check API responses for error messages and HTTP codes.
 - Use Prisma Studio to inspect the database.
 - Check terminal logs for backend errors.
+
+## Transactions (CRUD)
+
+### API Endpoints
+
+#### POST `/api/transactions`
+
+Creates a new transaction for the authenticated user.
+
+**Payload:**
+
+```json
+{
+  "amount": 25.5,
+  "type": "income",
+  "category": "salary",
+  "description": "Monthly bonus",
+  "note": "Bonus",
+  "currency": "EUR",
+  "date": "2025-10-13"
+}
+```
+
+**Success response:**
+
+```json
+{
+  "success": true,
+  "message": "Congrats, transaction created!",
+  "transaction": { ... }
+}
+```
+
+#### GET `/api/transactions`
+
+Fetches all transactions for the authenticated user.
+
+**Success response:**
+
+```json
+{
+  "success": true,
+  "transactions": [ ... ]
+}
+```
+
+#### DELETE `/api/transactions/[id]`
+
+Deletes a transaction by its ID (authentication required).
+
+**Success response:**
+
+```json
+{ "success": true, "message": "Transaction deleted" }
+```
+
+---
+
+### Pages & UI
+
+- `/transactions/add`: Transaction creation form (amount, type, category, description, note, currency, date).
+- `/transactions`: List of the user's transactions, sorted by descending date.
+
+---
+
+### Validation & Security
+
+- All fields are validated on both frontend and backend (positive amount, valid type, no future date, etc.).
+- Access to transactions is protected by NextAuth (JWT/session).
+
+---
 
 ## Limitations & FAQ
 
