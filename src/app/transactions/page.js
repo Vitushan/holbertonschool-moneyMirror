@@ -29,6 +29,6 @@ export default function TransactionsPage() { // display transactions lists
 
    // conditional rendering
    if (loading) {
-    return 
+    return <div className=""></div>
    }
 }
