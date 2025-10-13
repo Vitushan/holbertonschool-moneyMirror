@@ -69,7 +69,7 @@ export default function AddTransactionPage() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="md:col-span-2">
                                 <label htmlFor="amount" className="label flex items-center gap-2 mb-2">
-                                    <Euro size={16} className="text-blue-500" />
+                                    <Coins size={16} className="text-blue-500" />
                                     Amount *
                                 </label>
                                 <input
@@ -132,8 +132,8 @@ export default function AddTransactionPage() {
                             <label htmlFor="type" className="label mb-2 block">
                                 Type *
                             </label>
-                            <select id="type" name="type" className="input-field" required>
-                                <option value=""> ⚖️ Select type ⚖️ </option>
+                            <select id="type" name="type" className="input-field" required defaultValue="">
+                                <option value="" disabled> ⚖️ Select type ⚖️ </option>
                                 <option value="income">💰 Income</option>
                                 <option value="expense">💸 Expense</option>
                             </select>
