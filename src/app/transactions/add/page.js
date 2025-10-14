@@ -2,7 +2,7 @@
 
 "use client"
 import { Euro, Calendar, Tag, FileText, Coins } from "lucide-react";
-import { useState } from "react"
+import { useState } from "react" // manage form state, loading, error and success messages
 
 
 export default function AddTransactionPage() {
