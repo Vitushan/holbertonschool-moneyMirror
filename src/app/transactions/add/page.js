@@ -131,9 +131,9 @@ export default function AddTransactionPage() {
                 name="amount" 
                 value={form.amount} 
                 onChange={(e) => {
-                  const value = e.target.value;
-                  // Allow only positive numbers (no limit on size or decimals)
-                  if (/^\d*(\.\d*)?$/.test(value)) {
+                  const value = e.target.value.trim();
+                  // Validate using parseFloat to ensure proper number format
+                  if (!isNaN(value) && parseFloat(value) > 0) {
                     handleChange(e);
                   }
                 }} 
@@ -282,8 +282,8 @@ export default function AddTransactionPage() {
             {/* Submit button */}
             <button 
               type="submit" 
-              disabled={loading} 
-              className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition font-semibold text-lg shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading || !form.amount || !form.type || !form.category || !form.date} 
+              className={`w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition font-semibold text-lg shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed ${loading ? 'cursor-wait' : ''}`}
             >
               {loading ? "Adding Transaction..." : "Add Transaction"}
             </button>
