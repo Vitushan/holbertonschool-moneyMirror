@@ -28,5 +28,17 @@ Effets (shadow, rounded, hover:)
 
 Réutiliser des patterns
 
-Si tu as déjà un style qui te plaît sur une autre page, copie-colle 
+Si il ya déjà un style qui plaît sur une autre page, on peut copier colle copie-colle 
 les mêmes classes pour garder l’harmonie.
+
+Ressource tailwindCSS : Taildwind CSS
+
+https://tailwindcss.com/docs/table-layout
+https://tailwindcss.com/docs/border-radius
+https://tailwindcss.com/docs/padding
+https://tailwindcss.com/docs/background-color
+https://tailwindcss.com/docs/color
+https://tailwindcss.com/docs/font-weight
+https://tailwindcss.com/docs/text-align
+https://tailwindcss.com/docs/hover-focus-and-other-states
+https://tailwindcss.com/docs/background-color#hover
