@@ -100,9 +100,9 @@ export default function AddTransactionPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-2xl">
-  {/* Header with icon */}
+        {/* Header with icon */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-500 rounded-full mb-4 shadow-lg">
             <span className="text-4xl text-white font-bold">$</span>
@@ -111,7 +111,7 @@ export default function AddTransactionPage() {
           <p className="text-gray-600">Track your income and expenses</p>
         </div>
 
-  {/* Form card */}
+        {/* Form card */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Amount field at the top */}

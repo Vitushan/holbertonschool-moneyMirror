@@ -25,16 +25,29 @@ export default function TransactionsPage() {
     fetchTransactions();
   }, []);
 
+  const handleDelete = async (id) => {
+    if (!confirm("Are you sure you want to delete this transaction?")) return;
+    try {
+      const res = await fetch(`/api/transactions/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete transaction");
+      setTransactions((prev) => prev.filter((transaction) => transaction.id !== id));
+    } catch (err) {
+      alert(err.message || "Unknown error");
+    }
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
         <div className="text-lg text-blue-600 font-medium">Loading...</div>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg w-full max-w-md">
           <p className="text-red-700 font-medium text-center">{error}</p>
         </div>
@@ -42,7 +55,7 @@ export default function TransactionsPage() {
     );
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-6xl bg-white shadow rounded-lg overflow-x-auto">
         <h1 className="text-3xl font-bold text-gray-800 p-6 text-center border-b border-gray-200">
           Lists Transaction
@@ -68,7 +81,12 @@ export default function TransactionsPage() {
                 <td className="px-6 py-4 text-sm">{transaction.note}</td>
                 <td className="px-6 py-4 text-sm text-center">
                   <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                  <button className="text-red-600 hover:text-red-900">Delete</button>
+                  <button
+                    className="text-red-600 hover:text-red-900"
+                    onClick={() => handleDelete(transaction.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
