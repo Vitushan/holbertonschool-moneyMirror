@@ -52,8 +52,8 @@ export default function TransactionsPage() {
     }
   };
 
-  const handleEdit = (id) => {
-    // Redirect to the edit page with the transaction ID
+  const handleEdit = async (id) => {
+    // Redirects to the edit page with the transaction ID
     router.push(`/transactions/edit/${id}`);
   };
 
