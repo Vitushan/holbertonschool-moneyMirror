@@ -52,6 +52,11 @@ export default function TransactionsPage() {
     }
   };
 
+  const handleEdit = (id) => {
+    // Redirect to the edit page with the transaction ID
+    router.push(`/transactions/edit/${id}`);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
@@ -99,7 +104,7 @@ export default function TransactionsPage() {
                 <td className="px-6 py-4 text-sm text-right">{formatAmount(transaction.amount)}</td>
                 <td className="px-6 py-4 text-sm">{transaction.note}</td>
                 <td className="px-6 py-4 text-sm text-center">
-                  <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
+                  <button onClick={() => handleEdit(transaction.id)} className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
                   <button onClick={() => handleDelete(transaction.id)} className="text-red-600 hover:text-red-900">Delete</button>
                 </td>
               </tr>
