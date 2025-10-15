@@ -25,19 +25,6 @@ export default function TransactionsPage() {
     fetchTransactions();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this transaction?")) return;
-    try {
-      const res = await fetch(`/api/transactions/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Failed to delete transaction");
-      setTransactions((prev) => prev.filter((transaction) => transaction.id !== id));
-    } catch (err) {
-      alert(err.message || "Unknown error");
-    }
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
@@ -58,7 +45,7 @@ export default function TransactionsPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-6xl bg-white shadow rounded-lg overflow-x-auto">
         <h1 className="text-3xl font-bold text-gray-800 p-6 text-center border-b border-gray-200">
-          Lists Transaction
+          List of Transactions
         </h1>
         <table className="w-full">
           <thead className="bg-gray-50">
@@ -81,12 +68,7 @@ export default function TransactionsPage() {
                 <td className="px-6 py-4 text-sm">{transaction.note}</td>
                 <td className="px-6 py-4 text-sm text-center">
                   <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                  <button
-                    className="text-red-600 hover:text-red-900"
-                    onClick={() => handleDelete(transaction.id)}
-                  >
-                    Delete
-                  </button>
+                  <button className="text-red-600 hover:text-red-900">Delete</button>
                 </td>
               </tr>
             ))}

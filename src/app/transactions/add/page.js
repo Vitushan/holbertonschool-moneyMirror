@@ -59,6 +59,12 @@ export default function AddTransactionPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if the amount is a valid number
+    if (!form.amount || isNaN(form.amount) || Number(form.amount) <= 0) {
+      setError("Le montant doit être un nombre valide supérieur à 0.");
+      return;
+    }
+
     // Check if the date is in the future
     const selectedDate = new Date(form.date);
     const today = new Date();
@@ -121,12 +127,17 @@ export default function AddTransactionPage() {
                 Amount <span className="text-red-500 ml-1">*</span>
               </label>
               <input 
-                type="number" 
+                type="text" 
                 name="amount" 
                 value={form.amount} 
-                onChange={handleChange} 
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow only positive numbers (no limit on size or decimals)
+                  if (/^\d*(\.\d*)?$/.test(value)) {
+                    handleChange(e);
+                  }
+                }} 
                 required 
-                step="0.01"
                 placeholder="0.00"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
               />
@@ -185,6 +196,7 @@ export default function AddTransactionPage() {
             {/* Type */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <span className="mr-2">⚖️</span>
                 Type <span className="text-red-500">*</span>
               </label>
               <select 
