@@ -122,6 +122,8 @@ export default function EditTransaction() {
     setSuccess("");
 
     try {
+      console.log("Submitting form data:", form);
+
       const response = await fetch(`/api/transactions/${id}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -131,11 +133,14 @@ export default function EditTransaction() {
         }),
       });
 
+      console.log("API response status:", response.status);
+
       if (!response.ok) throw new Error("Error when updating the transaction!");
       
       setSuccess("Transaction updated successfully!");
       setTimeout(() => router.push("/transactions"), 1500);
     } catch (err) {
+      console.error("Error during submission:", err);
       setError(err.message || "Unknown error");
     } finally {
       setSaving(false);
