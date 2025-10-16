@@ -46,10 +46,17 @@ export default function EditTransaction() {
   // Load existing transaction data
   useEffect(() => {
     const fetchTransaction = async () => {
+      setLoading(true);
+      setError("");
       try {
         const res = await fetch(`/api/transactions/${id}`);
-        if (!res.ok) throw new Error("Transaction not found");
-        
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error("The transaction does not exist or has been deleted.");
+          } else {
+            throw new Error("Error while fetching the transaction.");
+          }
+        }
         const data = await res.json();
         setForm({
           amount: data.amount || "",
@@ -59,10 +66,10 @@ export default function EditTransaction() {
           note: data.note || "",
           currencyType: data.currencyType || "currency",
           currency: data.currency || "EUR",
-          date: data.date ? data.date.split('T')[0] : "" // Format YYYY-MM-DD
+          date: data.date ? data.date.split('T')[0] : ""
         });
       } catch (err) {
-        setError(err.message || "Error loading transaction");
+        setError(err.message || "Unknown error.");
       } finally {
         setLoading(false);
       }
@@ -92,7 +99,7 @@ export default function EditTransaction() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Messages d'erreur et de succès en anglais
+    // Error and Success message
     if (!form.amount || !form.type || !form.category || !form.date) {
         setError("All required fields must be filled.");
         return;
@@ -143,6 +150,7 @@ export default function EditTransaction() {
     );
   }
 
+  // Simplify the form fields to display only the current values for clarity
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-2xl">
@@ -158,14 +166,12 @@ export default function EditTransaction() {
         {/* Form card */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
           {/* Error and Success messages */}
-          {/* Success message */}
           {success && (
             <div className="mb-4 p-4 bg-green-100 border border-green-300 rounded-lg text-center">
               <p className="text-green-700 font-semibold">{success}</p>
             </div>
           )}
 
-          {/* Error message */}
           {error && (
             <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
               <p className="text-red-700 font-medium text-center">{error}</p>
@@ -175,83 +181,57 @@ export default function EditTransaction() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Amount field */}
             <div>
-              <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span className="text-blue-500 mr-2">$</span>
-                Amount <span className="text-red-500 ml-1">*</span>
-              </label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Amount</label>
               <input 
                 type="text" 
                 name="amount" 
                 value={form.amount} 
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // Allow only positive numbers (no limit on size or decimals)
-                  if (/^\d*(\.\d*)?$/.test(value)) {
-                    handleChange(e);
-                  }
-                }} 
+                onChange={handleChange} 
                 required 
-                placeholder="0.00"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
               />
             </div>
 
-            {/* Currency Type & Currency grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                  <span className="text-blue-500 mr-2">💱</span>
-                  Currency Type <span className="text-red-500 ml-1">*</span>
-                </label>
-                <select 
-                  name="currencyType" 
-                  value={form.currencyType} 
-                  onChange={handleChange} 
-                  required 
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
-                >
-                  <option value="currency">💵 Currency</option>
-                  <option value="cryptocurrency">₿ Cryptocurrency</option>
-                </select>
-              </div>
+            {/* Currency Type */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Currency Type</label>
+              <select 
+                name="currencyType" 
+                value={form.currencyType} 
+                onChange={handleChange} 
+                required 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
+              >
+                <option value="currency">Currency</option>
+                <option value="cryptocurrency">Cryptocurrency</option>
+              </select>
+            </div>
 
-              <div>
-                <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                  <span className="text-blue-500 mr-2">
-                    {form.currencyType === "currency" ? "💰" : "₿"}
-                  </span>
-                  {form.currencyType === "currency" ? "Currency" : "Cryptocurrency"} <span className="text-red-500 ml-1">*</span>
-                </label>
-                <select 
-                  name="currency" 
-                  value={form.currency} 
-                  onChange={handleChange} 
-                  required 
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
-                >
-                  {form.currencyType === "currency" ? (
-                    currencies.map((curr) => (
-                      <option key={curr.value} value={curr.value}>
-                        {curr.label}
-                      </option>
-                    ))
-                  ) : (
-                    cryptocurrencies.map((crypto) => (
-                      <option key={crypto.value} value={crypto.value}>
-                        {crypto.label}
-                      </option>
-                    ))
-                  )}
-                </select>
-              </div>
+            {/* Currency */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Currency</label>
+              <select 
+                name="currency" 
+                value={form.currency} 
+                onChange={handleChange} 
+                required 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
+              >
+                {form.currencyType === "currency" ? (
+                  currencies.map((curr) => (
+                    <option key={curr.value} value={curr.value}>{curr.label}</option>
+                  ))
+                ) : (
+                  cryptocurrencies.map((crypto) => (
+                    <option key={crypto.value} value={crypto.value}>{crypto.label}</option>
+                  ))
+                )}
+              </select>
             </div>
 
             {/* Type */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">⚖️</span>
-                Type <span className="text-red-500">*</span>
-              </label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Type</label>
               <select 
                 name="type" 
                 value={form.type} 
@@ -259,74 +239,57 @@ export default function EditTransaction() {
                 required 
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
               >
-                <option value="">Select type</option>
-                <option value="income">💰 Income</option>
-                <option value="expense">💸 Expense</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
               </select>
             </div>
 
-            {/* Category & Date grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                  <span className="text-blue-500 mr-2">🏷️</span>
-                  Category <span className="text-red-500 ml-1">*</span>
-                </label>
-                <input 
-                  type="text" 
-                  name="category" 
-                  value={form.category} 
-                  onChange={handleChange} 
-                  required 
-                  placeholder="e.g., Food, Salary, Transport"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
-                />
-              </div>
+            {/* Category */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Category</label>
+              <input 
+                type="text" 
+                name="category" 
+                value={form.category} 
+                onChange={handleChange} 
+                required 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              />
+            </div>
 
-              <div>
-                <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                  <span className="text-blue-500 mr-2">📅</span>
-                  Date <span className="text-red-500 ml-1">*</span>
-                </label>
-                <input 
-                  type="date" 
-                  name="date" 
-                  value={form.date} 
-                  onChange={handleChange} 
-                  required 
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
-                />
-              </div>
+            {/* Date */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Date</label>
+              <input 
+                type="date" 
+                name="date" 
+                value={form.date} 
+                onChange={handleChange} 
+                required 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              />
             </div>
 
             {/* Description */}
             <div>
-              <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span className="text-blue-500 mr-2">📝</span>
-                Description
-              </label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Description</label>
               <input 
                 type="text" 
                 name="description" 
                 value={form.description} 
                 onChange={handleChange} 
-                placeholder="Short description (optional)"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
               />
             </div>
 
             {/* Note */}
             <div>
-              <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span className="text-blue-500 mr-2">📄</span>
-                Note
-              </label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Note</label>
               <input 
                 type="text" 
                 name="note" 
                 value={form.note} 
                 onChange={handleChange} 
-                placeholder="Additional notes (optional)"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
               />
             </div>

@@ -1,3 +1,5 @@
+//transactionLists
+
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,7 +17,15 @@ export default function TransactionsPage() {
       setError("");
       try {
         const res = await fetch("/api/transactions");
-        if (!res.ok) throw new Error("Error while fetching");
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error("Transactions not found (404)");
+          } else if (res.status === 500) {
+            throw new Error("Server error (500)");
+          } else {
+            throw new Error("Error while fetching transactions");
+          }
+        }
         const data = await res.json();
         setTransactions(data.transactions || []);
       } catch (err) {
@@ -35,26 +45,50 @@ export default function TransactionsPage() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this transaction ?")) return;
+    if (!confirm("Are you sure you want to delete this transaction?")) return;
 
-    setDeleteError(""); // Reset delete error
+    setDeleteError(""); // reinitializing before start
     try {
       const res = await fetch(`/api/transactions/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Error while deleting the transaction");
+      if (!res.ok) {
+        if (res.status === 404) {
+          throw new Error("Transaction not found (404)");
+        } else if (res.status === 500) {
+          throw new Error("Server error (500)");
+        } else {
+          throw new Error("Failed to delete the transaction");
+        }
+      }
 
-      // Reload data from the backend after deletion
+      await reloadTransactions(); // Function separated for loaded data
+    } catch (err) {
+      setDeleteError(err.message || "An unexpected error occurred during deletion");
+    } finally {
+      setTimeout(() => setDeleteError(""), 5000); // message deleted after 5 seconds
+    }
+  };
+
+  const reloadTransactions = async () => {
+    try {
       const updatedRes = await fetch("/api/transactions");
-      if (!updatedRes.ok) throw new Error("Error while fetching updated transactions");
+      if (!updatedRes.ok) throw new Error("Failed to fetch updated transactions");
       const updatedData = await updatedRes.json();
       setTransactions(updatedData.transactions || []);
     } catch (err) {
-      setDeleteError(err.message || "Unknown error during deletion");
+      setError(err.message || "An unexpected error occurred while reloading transactions");
     }
   };
 
   const handleEdit = async (id) => {
-    // Redirects to the edit page with the transaction ID
-    router.push(`/transactions/edit/${id}`);
+    if (!id) {
+      console.error("Invalid transaction ID");
+      return;
+    }
+    try {
+      router.push(`/transactions/edit/${id}`);
+    } catch (err) {
+      console.error("Failed to navigate to the edit page", err);
+    }
   };
 
   if (loading) {
