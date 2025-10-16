@@ -59,19 +59,27 @@ export default function TransactionsPage() { // display transactions lists
                     </tr>
                 </thead> 
                 <tbody className="divide-y divide-gray-200">
-                    {transactions.map((transaction) => (
-                        <tr key={transaction.id} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 text-sm">{new Date(transaction.date).toLocaleDateString('fr-FR')}</td>
-                            <td className="px-6 py-4 text-sm">{transaction.description}</td>
-                            <td className="px-6 py-4 text-sm">{transaction.category}</td>
-                            <td className="px-6 py-4 text-sm text-right">{transaction.amount}</td>
-                            <td className="px-6 py-4 text-sm">{transaction.note}</td>
-                             <td className="px-6 py-4 text-sm text-center">
-                                <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                                <button className="text-red-600 hover:text-red-900">Delete</button>
-                             </td>
+                    {transactions.length === 0 ? (
+                        <tr>
+                            <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
+                                No transactions available.
+                            </td>
                         </tr>
-                    ))}
+                    ) : (
+                        transactions.map((transaction) => (
+                            <tr key={transaction.id} className="hover:bg-gray-50">
+                                <td className="px-6 py-4 text-sm">{new Date(transaction.date).toLocaleDateString('fr-FR')}</td>
+                                <td className="px-6 py-4 text-sm">{transaction.description}</td>
+                                <td className="px-6 py-4 text-sm">{transaction.category}</td>
+                                <td className="px-6 py-4 text-sm text-right">{transaction.amount}</td>
+                                <td className="px-6 py-4 text-sm">{transaction.note}</td>
+                                <td className="px-6 py-4 text-sm text-center">
+                                    <button className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
+                                    <button className="text-red-600 hover:text-red-900">Delete</button>
+                                </td>
+                            </tr>
+                        ))
+                    )}
                 </tbody>
             </table>
         </div>
