@@ -1,6 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"; // import PropTypes for type checking component props
 
+// modal component for confirmation dialogs
 const Modal = ({ onClose, onConfirm, children }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -23,10 +24,11 @@ const Modal = ({ onClose, onConfirm, children }) => {
   );
 };
 
+// property validation
 Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired, // function for cancel action
+  onConfirm: PropTypes.func.isRequired, // function for confirm action
+  children: PropTypes.node.isRequired, // modal content
 };
 
 export default Modal;
