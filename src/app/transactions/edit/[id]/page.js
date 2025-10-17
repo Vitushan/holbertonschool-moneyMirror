@@ -8,13 +8,13 @@ export default function EditTransaction() {
 
   const [form, setForm] = useState({
     amount: "",
-    type: "",
+    type: "income", // Default value
     category: "",
-    description: "",
-    note: "",
+    date: "",
     currencyType: "currency",
     currency: "EUR",
-    date: ""
+    description: "",
+    note: "",
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -60,7 +60,7 @@ export default function EditTransaction() {
         const data = await res.json();
         setForm({
           amount: data.amount || "",
-          type: data.type || "",
+          type: data.type || "income", // Default value
           category: data.category || "",
           description: data.description || "",
           note: data.note || "",
@@ -82,17 +82,10 @@ export default function EditTransaction() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    // If currency type changes, reset the currency
-    if (name === "currencyType") {
-      setForm((prev) => ({ 
-        ...prev, 
-        [name]: value,
-        currency: value === "currency" ? "EUR" : "BTC"
-      }));
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
   };
 
   // Handle form submission
@@ -100,12 +93,24 @@ export default function EditTransaction() {
     e.preventDefault();
 
     // Error and Success message
-    if (!form.amount || !form.type || !form.category || !form.date) {
-        setError("All required fields must be filled.");
+    if (!form.amount) {
+        setError("Amount is required.");
+        return;
+    }
+    if (!form.type || (form.type !== "income" && form.type !== "expense")) {
+        setError("Type is required.");
+        return;
+    }
+    if (!form.category) {
+        setError("Category is required.");
+        return;
+    }
+    if (!form.date) {
+        setError("Date is required.");
         return;
     }
 
-    if (!form.amount || isNaN(form.amount) || Number(form.amount) <= 0) {
+    if (isNaN(form.amount) || Number(form.amount) <= 0) {
         setError("Amount must be a valid number greater than 0.");
         return;
     }
@@ -122,8 +127,6 @@ export default function EditTransaction() {
     setSuccess("");
 
     try {
-      console.log("Submitting form data:", form);
-
       const response = await fetch(`/api/transactions/${id}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -133,14 +136,11 @@ export default function EditTransaction() {
         }),
       });
 
-      console.log("API response status:", response.status);
-
       if (!response.ok) throw new Error("Error when updating the transaction!");
       
       setSuccess("Transaction updated successfully!");
       setTimeout(() => router.push("/transactions"), 1500);
     } catch (err) {
-      console.error("Error during submission:", err);
       setError(err.message || "Unknown error");
     } finally {
       setSaving(false);
