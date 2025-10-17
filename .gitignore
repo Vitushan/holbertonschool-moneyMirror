@@ -47,3 +47,8 @@ prisma/dev.db-journal
 
 # OS
 Thumbs.db
+
+# Ignore temporary files
+*.txt
+*.sql
+*.sh

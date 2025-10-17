@@ -1,4 +1,3 @@
-
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]/route'
@@ -95,8 +94,10 @@ export async function POST(request) {
 export async function GET(request) {
   try {
     let userId = null;
+
     // Verify Authorization: Bearer token
     const authHeader = request.headers.get('authorization');
+
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.split(' ')[1];
       try {
@@ -122,10 +123,10 @@ export async function GET(request) {
       where: { userId },
       orderBy: { date: 'desc' },
     });
+
     return NextResponse.json({ success: true, transactions }, { status: 200 });
 
   } catch (error) {
-    console.error("Error fetching transactions:", error)
     return NextResponse.json({ error: "Oops! Internal server error" }, { status: 500 });
   }
 }

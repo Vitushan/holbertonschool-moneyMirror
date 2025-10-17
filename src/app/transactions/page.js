@@ -167,15 +167,20 @@ export default function TransactionsPage() {
         <h1 className="text-3xl font-bold text-gray-800 p-6 text-center border-b border-gray-200">
           List of Transactions
         </h1>
-        <h2 className="text-sm font-semibold p-2 text-right">
-          Total Income: <span className="text-green-600">{formatAmount(income)}</span>
-        </h2>
-        <h2 className="text-sm font-semibold p-2 text-right">
-          Total Expenses: <span className="text-red-600">{formatAmount(expenses)}</span>
-        </h2>
-        <h2 className="text-sm font-semibold p-2 text-right">
-          Total Sold: <span className="text-gray-800">{formatAmount(balance)}</span>
-        </h2>
+        <div className="p-4 border border-gray-300 rounded-md mb-8 space-y-2">
+          <div className="flex justify-between">
+            <span className="text-sm">Total Income:</span>
+            <span className="text-sm font-bold text-green-600">{formatAmount(income)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-sm">Total Expenses:</span>
+            <span className="text-sm font-bold text-red-600">{formatAmount(expenses)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-sm">Total Sold:</span>
+            <span className="text-sm font-bold text-blue-900">{formatAmount(balance)}</span>
+          </div>
+        </div>
         {deleteError && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-lg mb-4">
             <p className="text-red-700 font-medium text-center">{deleteError}</p>
