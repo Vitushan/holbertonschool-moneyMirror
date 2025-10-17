@@ -1,4 +1,3 @@
-
 # MoneyMirror – Full Project Documentation
 
 ## Table of Contents
@@ -33,6 +32,7 @@ MoneyMirror is a personal finance management application. It provides authentica
 - Zod (validation)
 - Docker support
 - Jest & Cypress (testing)
+- **Recharts.js** (data visualization for graphs)
 
 ## Environment Setup
 
@@ -223,17 +223,15 @@ Managed by NextAuth.js (Credentials Provider). Handles session, login, logout, J
 
 ## Testing
 
-- `test_nextauth.sh`: Tests NextAuth login/logout/session.
-- `test_all_api.sh`: Tests custom API endpoints (register/login).
-- Results in `result_test_nextauth.txt` and `result_all_api.txt`.
+The project includes unit and integration tests:
 
-**Example execution:**
+- **Unit Tests**: Focused on API routes, ensuring CRUD operations for transactions work as expected.
+- **Integration Tests**: Verify end-to-end functionality between the frontend and backend, including transaction management.
+
+To run tests:
 
 ```bash
-./test_nextauth.sh
-./test_all_api.sh
-cat result_test_nextauth.txt
-cat result_all_api.txt
+npm test
 ```
 
 ## Deployment Guide
