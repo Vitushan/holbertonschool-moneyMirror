@@ -24,7 +24,9 @@ export default function TransactionsPage() {
       try {
         const res = await fetch("/api/transactions");
         if (!res.ok) {
-          if (res.status === 404) {
+          if (res.status === 401) {
+            throw new Error("You must be logged in to view your transactions.");
+          } else if (res.status === 404) {
             throw new Error("Transactions not found (404)");
           } else if (res.status === 500) {
             throw new Error("Server error (500)");
@@ -34,7 +36,7 @@ export default function TransactionsPage() {
         }
         const data = await res.json();
         setTransactions(data.transactions || []);
-        setBalance(calculateBalance(data.transactions || [])); // Calcul du solde ici
+        setBalance(calculateBalance(data.transactions || [])); // Balance calculation here
       } catch (err) {
         setError(err.message || "Unknown error");
       } finally {

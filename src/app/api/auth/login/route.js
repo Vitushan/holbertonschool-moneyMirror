@@ -5,45 +5,38 @@ import jwt from 'jsonwebtoken'
 
 export async function POST(request) {
     try {
-        console.log('POST request received at /api/auth/login')
-
-        //Get login data (email and password from login form)
-        const { email, password } = await request.json()
-        console.log('Login attempt for:', email)
+        // Get login data (email and password from login form)
+        const { email, password } = await request.json();
 
         // Basic validation
         if (!email || !password) {
             return NextResponse.json(
-                {error: 'Email and password are required'},
+                { error: 'Email and password are required' },
                 { status: 400 }
-            )
+            );
         }
 
-        //Find user in Database by email
+        // Find user in Database by email
         const user = await prisma.user.findUnique({
-            where: { email }
-        })
+            where: { email },
+        });
 
-        //Check if user exists
+        // Check if user exists
         if (!user) {
             return NextResponse.json(
                 { error: 'Invalid email or password' },
                 { status: 401 }
-            )
+            );
         }
 
-        console.log('User found:', user.email)
-
-        //Compare password with hashed password in database
-        const isPasswordValid = await bcrypt.compare(password, user.password)
-    
+        // Compare password with hashed password in database
+        const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json(
-                { error: 'Invalid email or password '},
-                { status: 401}
-            )
+                { error: 'Invalid email or password' },
+                { status: 401 }
+            );
         }
-
 
         // ✨ AJOUT : Créer un token JWT
         const token = jwt.sign(

@@ -29,38 +29,36 @@ export default function Register() {
     
     try {
       if (password !== confirmPassword) {
-        throw new Error('The password is wrong');
+        throw new Error('Passwords do not match');
+      }
+
+      // API call to backend registration endpoint
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: username,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        window.location.href = '/dashboard';
+      } else {
+        console.error('Registration failed:', data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+      setMessage(error.message);
+      setMessageType('error');
+      setIsLoading(false);       // Stop loading state (loading end)
     }
-
-    // API call to backend registration endpoint
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: username,
-        email,
-        password,
-      }),
-    });
-
-    const data = await response.json(); // Ajout pour lire la réponse JSON
-
-    if (response.ok) {
-      console.log('Registration successful, redirecting to dashboard...');
-      window.location.href = '/dashboard';
-    } else {
-      console.error('Registration failed:', data.error);
-    }
-  } catch (error) {
-    // ERROR HANDLING: Both network errors and validation errors
-    console.error('Error:', error.message); // Log for debugging
-    setMessage(error.message);
-    setMessageType('error');   // Red styling
-    setIsLoading(false);       // Stop loading state (loading end)
   }
-}
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8"> {/* className = styles Tailwind (class)*/}
       <h1 className="text-3xl font-bold mb-6">Register - MoneyMirror</h1>
