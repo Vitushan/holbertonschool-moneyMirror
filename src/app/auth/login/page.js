@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   // if already logged in, show connected interface
   if (session) {
-    return (s
+    return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8 text-center">
           <div className="mb-6">
@@ -41,7 +41,7 @@ export default function LoginPage() {
               Go to dashboard
             </button>
             <button
-              onClick={() => signOut({ callbackUrl: '/' })}
+              onClick={() => signOut({ callbackUrl: '/login' })} // Redirect to /login
               className="w-full bg-gray-200 text-gray-800 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors"
             >
               Log out

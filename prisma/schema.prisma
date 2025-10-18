@@ -30,7 +30,7 @@ model Transaction {
   type String //"income" or "expense""
   category String
   date DateTime @default(now())
-  note String?
+  note String? // Made optional
   currency String
   description String?
 
