@@ -1,6 +1,6 @@
 'use client' // Client Component - required for browser features (useState, events, DOM interaction)
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
  
 export default function Register() {
   // Form data states - React hooks for controlled components
@@ -13,6 +13,13 @@ export default function Register() {
   const [message, setMessage] = useState('');         // Message text to display
   const [messageType, setMessageType] = useState(''); // 'success' or 'error' for styling
   const [isLoading, setIsLoading] = useState(false);  // Loading state for button/form
+
+  // Ensure dynamic data like Date.now() or Math.random() is handled properly
+  // Example: Move dynamic data to useEffect or useState to avoid hydration mismatch
+  const [timestamp, setTimestamp] = useState(null);
+  useEffect(() => {
+    setTimestamp(Date.now());
+  }, []);
 
   // Form submission handler - async function for API calls
   const handleSubmit = async (e) => {
@@ -41,17 +48,10 @@ export default function Register() {
     const data = await response.json(); // Ajout pour lire la réponse JSON
 
     if (response.ok) {
-      setMessage('Registration successful, Welcome to MoneyMirror !');
-      setMessageType('success');
-      setIsLoading(false);
-      // Reset form fields après succès
-      setUsername('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      console.log('Registration successful, redirecting to dashboard...');
+      window.location.href = '/dashboard';
     } else {
-      // Afficher l'erreur retournée par l'API
-      throw new Error(data.error || 'Registration failed');
+      console.error('Registration failed:', data.error);
     }
   } catch (error) {
     // ERROR HANDLING: Both network errors and validation errors
@@ -85,37 +85,46 @@ export default function Register() {
       
         {/* CONTROLLED INPUTS: value from state, onChange updates state */}
         <input type="text"
+        id="username"
+        name="username"
         placeholder="Username"
         value={username}
         onChange= {(e) => setUsername(e.target.value)} // (e) for event and target value for actually value
         className="border rounded p-2"
-        required/>
+        required
+        autocomplete="username"/>
 
         <input type="email"
+        id="email"
+        name="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="border rounded p-2"
         required
-        />
-    
+        autocomplete="email"/>
+
         <input type="password"
+        id="password"
+        name="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="border rounded p-2"
-        required/>
-      
+        required
+        autocomplete="new-password"/>
 
-      {/* type="password" masks input with dots for security */}
-      <input type="password"
-      placeholder="Confirm password"
-      value={confirmPassword}
-      onChange={(e) => setConfirmPassword(e.target.value)}
-      className="border rounded p-2"
-      required/>
+        <input type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        className="border rounded p-2"
+        required
+        autocomplete="new-password"/>
 
-      
+
       {/* DYNAMIC SUBMIT BUTTON: disabled during loading, text changes, cursor shows loading state */}
       <button 
         type="submit" 

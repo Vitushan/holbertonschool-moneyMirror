@@ -164,9 +164,17 @@ export default function TransactionsPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-6xl bg-white shadow rounded-lg overflow-x-auto">
-        <h1 className="text-3xl font-bold text-gray-800 p-6 text-center border-b border-gray-200">
-          List of Transactions
-        </h1>
+        {/* Title reverted to original size and position */}
+        <h1 className="text-3xl font-bold mb-6 text-center">List of Transactions</h1>
+        {/* Add Transaction Button at the top-right */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => router.push('/transactions/add')}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Add Transaction
+          </button>
+        </div>
         <div className="p-4 border border-gray-300 rounded-md mb-8 space-y-2">
           <div className="flex justify-between">
             <span className="text-sm">Total Income:</span>
