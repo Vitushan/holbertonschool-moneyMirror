@@ -1,67 +1,66 @@
-import { prisma } from '../../../lib/prisma'
+import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 
 
 export async function POST(request) {
   try {
-    console.log('POST request received')
-    //get forms data
-    const { name, email, password } = await request.json()
-    console.log('Data parsed:', { name, email, password: '***' })
-    //basic validation
+    // Get form data
+    const { name, email, password } = await request.json();
+
+    // Basic validation
     if (!name || !email || !password) {
       return Response.json(
-        { error: 'all fields is required' },
+        { error: 'All fields are required' },
         { status: 400 }
-      )
+      );
     }
     if (password.length < 6) {
       return Response.json(
-        { error: 'The password must be contain minimum 6 characters' },
+        { error: 'Password must be at least 6 characters long' },
         { status: 400 }
-      )
+      );
     }
 
-    //verify if email is already exist (unique mail by user)
+    // Verify if email already exists
     const existingUser = await prisma.user.findUnique({
-      where: { email }
-    })
+      where: { email },
+    });
 
     if (existingUser) {
       return Response.json(
-        { error: 'This email is already used' },
+        { error: 'This email is already in use' },
         { status: 400 }
-      )
+      );
     }
 
-    //validate for name length
+    // Validate name length
     if (name.length < 2) {
       return Response.json(
         { error: 'Name must be at least 2 characters long' },
         { status: 400 }
-      )
+      );
     }
 
-    //validate email format with regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    // Validate email format with regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return Response.json(
-        { error: 'Your mail address is wrong.' },
-        { status: 400}
-      )
+        { error: 'Invalid email format' },
+        { status: 400 },
+      );
     }
-  
-    // password hashing (12 is salt round, strong security but is slow)
-    const hashedPassword = await bcrypt.hash(password, 12)
 
-    //create User in MySQL db
+    // Password hashing
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create user in database
     const user = await prisma.user.create({
       data: {
         name,
         email,
-        password: hashedPassword //saving hash password
-      }
-    })
+        password: hashedPassword,
+      },
+    });
   
     // Success without returned password
     return Response.json({
@@ -76,11 +75,7 @@ export async function POST(request) {
     })
     
   } catch (error) {
-    console.error('Error in POST /api/auth/register:', error)
-    return Response.json(
-      { error: 'Server error: ' + error.message },
-      { status: 500 }
-    )
+    console.error('Error during registration:', error);
   }
 }
 

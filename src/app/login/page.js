@@ -35,10 +35,10 @@ export default function LoginPage() {
           
           <div className="space-y-4">
             <button
-              onClick={() => router.push('/dashboard')}
+              onClick={() => router.push('/transactions')}
               className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
             >
-              Go to dashboard
+              Go to transactions
             </button>
             <button
               onClick={() => signOut({ callbackUrl: '/' })}
@@ -80,7 +80,7 @@ export default function LoginPage() {
         setMessage('Login successful! Redirecting...')
         setMessageType('success')
         setTimeout(() => {
-          router.push('/dashboard')
+          router.push('/transactions')
         }, 1500)
       }
     } catch (error) {

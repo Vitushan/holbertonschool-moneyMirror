@@ -17,28 +17,26 @@ async function main() {
     },
   })
 
-  console.log('Created user:', user)
-
   // Create some sample transactions
   const transactions = [
     {
-      title: 'Salaire Octobre',
-      description: 'Salaire mensuel',
+      title: 'October Salary',
+      description: 'Monthly salary',
       amount: 2500.00,
       type: 'INCOME',
       category: 'SALARY',
       userId: user.id,
     },
     {
-      title: 'Courses Carrefour',
-      description: 'Courses hebdomadaires',
+      title: 'Carrefour Groceries',
+      description: 'Weekly groceries',
       amount: 85.50,
       type: 'EXPENSE',
       category: 'FOOD',
       userId: user.id,
     },
     {
-      title: 'Essence',
+      title: 'Gas',
       amount: 65.00,
       type: 'EXPENSE',
       category: 'TRANSPORT',
@@ -46,7 +44,7 @@ async function main() {
     },
     {
       title: 'Netflix',
-      description: 'Abonnement mensuel',
+      description: 'Monthly subscription',
       amount: 15.99,
       type: 'EXPENSE',
       category: 'ENTERTAINMENT',
@@ -59,8 +57,6 @@ async function main() {
       data: transaction,
     })
   }
-
-  console.log('Created sample transactions')
 }
 
 main()
