@@ -18,7 +18,6 @@ export async function POST(request) {
         const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
       } catch (err) {
-        console.error('[DEBUG] JWT verification failed:', err);
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
@@ -27,7 +26,6 @@ export async function POST(request) {
       try {
         session = await getServerSession(authOptions);
       } catch (err) {
-        console.error('[DEBUG] Session retrieval error:', err);
         return NextResponse.json({ error: 'Error retrieving session', details: String(err) }, { status: 500 });
       }
       if (session && session.user && session.user.id) {
@@ -36,7 +34,6 @@ export async function POST(request) {
     }
 
     if (!userId) {
-      console.warn('[DEBUG] No userId found, access denied.');
       return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 });
     }
 
@@ -45,7 +42,6 @@ export async function POST(request) {
     if (
       typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
     ) {
-      console.warn('[DEBUG] Invalid fields:', { amount, type, category });
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 });
     }
 
@@ -54,13 +50,11 @@ export async function POST(request) {
     if (date) {
       const parsedDate = new Date(date);
       if (isNaN(parsedDate.getTime())) {
-        console.warn('[DEBUG] Invalid date:', date);
         return NextResponse.json({ error: 'Please enter a valid date."' }, { status: 400 });
       }
       // Future dates are not allowed
       const now = new Date();
       if (parsedDate > now) {
-        console.warn('[DEBUG] Future date not allowed:', parsedDate);
         return NextResponse.json({ error: "Sorry, you can't travel to the future." }, { status: 400 });
       }
       transactionDate = parsedDate;
@@ -86,7 +80,6 @@ export async function POST(request) {
       transaction,
     }, { status: 201 });
   } catch (error) {
-    console.error('Transaction POST error:', error);
     return NextResponse.json({ error: 'Oops! Internal server error' }, { status: 500 });
   }
 }
