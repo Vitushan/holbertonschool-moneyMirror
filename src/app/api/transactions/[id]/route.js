@@ -1,15 +1,15 @@
 import { prisma } from '@/lib/prisma'
-import { getServerSession } from "next-auth" //Imports the NextAuth function which allows you to retrieve the session on the server side (check if the user is logged in)
+import { getServerSession } from "next-auth" // Importe la fonction NextAuth qui permet de récupérer la session côté serveur (vérifier si l'utilisateur est connecté)
 import { authOptions } from '../../auth/[...nextauth]/route' // Correction du chemin d'import pour NextAuth config
-import { NextResponse } from "next/server" //Next.js utility to construct and return HTTP responses from a route handler (App Router) used to return JSON with a status.
+import { NextResponse } from "next/server" // Utilitaire Next.js pour construire et retourner des réponses HTTP depuis un gestionnaire de route (App Router) utilisé pour retourner du JSON avec un statut.
 
 
-//this is a findOne for my crud (to read a specific transaction)
-// this route is used to read a single specific transaction from its unique ID.
-export async function GET(request, { params }) { // { params } = Next.js injects the dynamic parameters of the URL here (example: /api/transactions/[id], params.id contains the ID)
+// Ceci est un findOne pour mon CRUD (pour lire une transaction spécifique)
+// Cette route est utilisée pour lire une seule transaction spécifique à partir de son ID unique.
+export async function GET(request, { params }) { // { params } = Next.js injecte les paramètres dynamiques de l'URL ici (exemple: /api/transactions/[id], params.id contient l'ID)
   try {
     let userId = null;
-    // Verify Authorization: Bearer <token>
+    // Vérifier Authorization: Bearer <token>
     const authHeader = request.headers.get('authorization');
     let jwtLib;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -22,7 +22,7 @@ export async function GET(request, { params }) { // { params } = Next.js injects
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // Otherwise, fallback to the NextAuth session
+      // Sinon, utiliser la session NextAuth
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -54,7 +54,7 @@ export async function GET(request, { params }) { // { params } = Next.js injects
 export async function PUT(request, { params }) {
   try {
     let userId = null;
-    // Verify Authorization: Bearer <token>
+    // Vérifier Authorization: Bearer <token>
     const authHeader = request.headers.get('authorization');
     let jwtLib;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -67,7 +67,7 @@ export async function PUT(request, { params }) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // Otherwise, fallback to the NextAuth session
+      // Sinon, utiliser la session NextAuth
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -129,7 +129,7 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params}) {
   try {
     let userId = null;
-    // Verify Authorization: Bearer <token>
+    // Vérifier Authorization: Bearer <token>
     const authHeader = request.headers.get('authorization');
     let jwtLib;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -142,7 +142,7 @@ export async function DELETE(request, { params}) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // Otherwise, fallback to the NextAuth session
+      // Sinon, utiliser la session NextAuth
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;

@@ -5,10 +5,10 @@ import jwt from 'jsonwebtoken'
 
 export async function POST(request) {
     try {
-        // Get login data (email and password from login form)
+        // Récupérer les données de connexion (email et mot de passe du formulaire de connexion)
         const { email, password } = await request.json();
 
-        // Basic validation
+        // Validation de base
         if (!email || !password) {
             return NextResponse.json(
                 { error: 'Email and password are required' },
@@ -16,12 +16,12 @@ export async function POST(request) {
             );
         }
 
-        // Find user in Database by email
+        // Trouver l'utilisateur dans la base de données par email
         const user = await prisma.user.findUnique({
             where: { email },
         });
 
-        // Check if user exists
+        // Vérifier si l'utilisateur existe
         if (!user) {
             return NextResponse.json(
                 { error: 'Invalid email or password' },
@@ -29,7 +29,7 @@ export async function POST(request) {
             );
         }
 
-        // Compare password with hashed password in database
+        // Comparer le mot de passe avec le mot de passe haché dans la base de données
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json(
@@ -58,7 +58,7 @@ export async function POST(request) {
         })
 
     } catch (error) {
-        console.error('Error in login:', error)
+        console.error('Erreur lors de la connexion:', error)
         return NextResponse.json(
             { error: 'Server error: ' + error.message },
             { status: 500 }

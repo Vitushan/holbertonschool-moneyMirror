@@ -1,22 +1,36 @@
-//transactionLists
+// Page de liste des transactions
+// Affiche toutes les transactions de l'utilisateur avec possibilité de modifier et supprimer
+// Route protégée, nécessite une authentification
 
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Modal from "../../components/Modal"; // Assuming a Modal component exists
+import Modal from "../../components/Modal";
+import Logo from "@/components/Logo";
+import Footer from "@/components/Footer";
 
 export default function TransactionsPage() {
+  // État pour stocker la liste des transactions
   const [transactions, setTransactions] = useState([]);
+  // État pour le chargement initial
   const [loading, setLoading] = useState(true);
+  // État pour les erreurs de récupération
   const [error, setError] = useState("");
-  const [deleteError, setDeleteError] = useState(""); // New state for delete-specific errors
+  // État pour les erreurs de suppression
+  const [deleteError, setDeleteError] = useState("");
+  // État pour indiquer qu'une suppression est en cours
   const [isDeleting, setIsDeleting] = useState(false);
+  // État pour indiquer qu'un rechargement est en cours
   const [isReloading, setIsReloading] = useState(false);
+  // État pour contrôler l'affichage du modal de confirmation
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // État pour stocker l'ID de la transaction à supprimer
   const [transactionToDelete, setTransactionToDelete] = useState(null);
   const router = useRouter();
+  // État pour le solde total (revenus - dépenses)
   const [balance, setBalance] = useState(0);
 
+  // Récupérer les transactions au chargement de la page
   useEffect(() => {
     async function fetchTransactions() {
       setLoading(true);
@@ -25,20 +39,20 @@ export default function TransactionsPage() {
         const res = await fetch("/api/transactions");
         if (!res.ok) {
           if (res.status === 401) {
-            throw new Error("You must be logged in to view your transactions.");
+            throw new Error("Vous devez être connecté pour voir vos transactions.");
           } else if (res.status === 404) {
-            throw new Error("Transactions not found (404)");
+            throw new Error("Transactions introuvables (404)");
           } else if (res.status === 500) {
-            throw new Error("Server error (500)");
+            throw new Error("Erreur serveur (500)");
           } else {
-            throw new Error("Error while fetching transactions");
+            throw new Error("Erreur lors de la récupération des transactions");
           }
         }
         const data = await res.json();
         setTransactions(data.transactions || []);
-        setBalance(calculateBalance(data.transactions || [])); // Balance calculation here
+        setBalance(calculateBalance(data.transactions || []));
       } catch (err) {
-        setError(err.message || "Unknown error");
+        setError(err.message || "Erreur inconnue");
       } finally {
         setLoading(false);
       }
@@ -46,6 +60,7 @@ export default function TransactionsPage() {
     fetchTransactions();
   }, []);
 
+  // Fonction pour calculer le solde total (revenus - dépenses)
   const calculateBalance = (transactions) => {
     return transactions.reduce((total, transaction) => {
       return transaction.type === "income"
@@ -54,6 +69,7 @@ export default function TransactionsPage() {
     }, 0);
   };
 
+  // Fonction pour calculer séparément les revenus et les dépenses
   const calculateIncomeAndExpenses = (transactions) => {
     return transactions.reduce(
       (totals, transaction) => {
@@ -70,6 +86,7 @@ export default function TransactionsPage() {
 
   const { income, expenses } = calculateIncomeAndExpenses(transactions);
 
+  // Fonction pour formater les montants en euros
   const formatAmount = (amount) => {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
@@ -77,16 +94,19 @@ export default function TransactionsPage() {
     }).format(amount);
   };
 
+  // Fonction pour ouvrir le modal de confirmation de suppression
   const openModal = (id) => {
     setTransactionToDelete(id);
     setIsModalOpen(true);
   };
 
+  // Fonction pour fermer le modal de confirmation
   const closeModal = () => {
     setTransactionToDelete(null);
     setIsModalOpen(false);
   };
 
+  // Fonction pour confirmer et exécuter la suppression d'une transaction
   const confirmDelete = async () => {
     if (!transactionToDelete) return;
 
@@ -96,17 +116,17 @@ export default function TransactionsPage() {
       const res = await fetch(`/api/transactions/${transactionToDelete}`, { method: "DELETE" });
       if (!res.ok) {
         if (res.status === 404) {
-          throw new Error("Transaction not found (404)");
+          throw new Error("Transaction introuvable (404)");
         } else if (res.status === 500) {
-          throw new Error("Server error (500)");
+          throw new Error("Erreur serveur (500)");
         } else {
-          throw new Error("Failed to delete the transaction");
+          throw new Error("Échec de la suppression de la transaction");
         }
       }
 
       await reloadTransactions();
     } catch (err) {
-      setDeleteError(err.message || "An unexpected error occurred during deletion");
+      setDeleteError(err.message || "Une erreur inattendue s'est produite lors de la suppression");
     } finally {
       setIsDeleting(false);
       closeModal();
@@ -114,36 +134,38 @@ export default function TransactionsPage() {
     }
   };
 
+  // Fonction pour recharger la liste des transactions après modification
   const reloadTransactions = async () => {
-    setIsReloading(true); // Start loading indicator
+    setIsReloading(true);
     try {
       const updatedRes = await fetch("/api/transactions");
-      if (!updatedRes.ok) throw new Error("Failed to fetch updated transactions");
+      if (!updatedRes.ok) throw new Error("Échec de la récupération des transactions mises à jour");
       const updatedData = await updatedRes.json();
       setTransactions(updatedData.transactions || []);
     } catch (err) {
-      setError(err.message || "An unexpected error occurred while reloading transactions");
+      setError(err.message || "Une erreur inattendue s'est produite lors du rechargement des transactions");
     } finally {
-      setIsReloading(false); // Stop loading indicator
+      setIsReloading(false);
     }
   };
 
+  // Fonction pour naviguer vers la page de modification d'une transaction
   const handleEdit = async (id) => {
     if (!id) {
-      console.error("Invalid transaction ID");
+      console.error("ID de transaction invalide");
       return;
     }
     try {
       router.push(`/transactions/edit/${id}`);
     } catch (err) {
-      console.error("Failed to navigate to the edit page", err);
+      console.error("Échec de la navigation vers la page de modification", err);
     }
   };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
-        <div className="text-lg text-blue-600 font-medium">Loading...</div>
+        <div className="text-lg text-blue-600 font-medium">Chargement...</div>
       </div>
     );
   }
@@ -159,35 +181,54 @@ export default function TransactionsPage() {
   if (isDeleting || isReloading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
-        <div className="text-lg text-blue-600 font-medium">Processing...</div>
+        <div className="text-lg text-blue-600 font-medium">Traitement...</div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
-      <div className="w-full max-w-6xl bg-white shadow rounded-lg overflow-x-auto">
-        {/* Title reverted to original size and position */}
-        <h1 className="text-3xl font-bold mb-6 text-center">List of Transactions</h1>
-        {/* Add Transaction Button at the top-right */}
-        <div className="flex justify-end mb-4">
-          <button
-            onClick={() => router.push('/transactions/add')}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Add Transaction
-          </button>
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="bg-white border-b border-gray-200 px-8 py-4 shadow-sm">
+        <div className="max-w-7xl mx-auto">
+          <Logo />
         </div>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center p-6">
+        <div className="w-full max-w-6xl bg-white shadow rounded-lg overflow-x-auto p-6">
+          <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
+            <h1 className="text-3xl font-bold">Liste des Transactions</h1>
+            <div className="flex gap-3">
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Tableau de bord
+              </button>
+              <button
+                onClick={() => router.push('/transactions/add')}
+                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Ajouter Transaction
+              </button>
+            </div>
+          </div>
         <div className="p-4 border border-gray-300 rounded-md mb-8 space-y-2">
           <div className="flex justify-between">
-            <span className="text-sm">Total Income:</span>
+            <span className="text-sm">Total Revenus :</span>
             <span className="text-sm font-bold text-green-600">{formatAmount(income)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm">Total Expenses:</span>
+            <span className="text-sm">Total Dépenses :</span>
             <span className="text-sm font-bold text-red-600">{formatAmount(expenses)}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm">Total Sold:</span>
+            <span className="text-sm">Solde Total :</span>
             <span className="text-sm font-bold text-blue-900">{formatAmount(balance)}</span>
           </div>
         </div>
@@ -201,8 +242,8 @@ export default function TransactionsPage() {
             <tr>
               <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">Date</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">Description</th>
-              <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">Category</th>
-              <th className="px-6 py-3 text-right text-xs font-bold text-gray-700 uppercase">Amount</th>
+              <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">Catégorie</th>
+              <th className="px-6 py-3 text-right text-xs font-bold text-gray-700 uppercase">Montant</th>
               <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">Note</th>
               <th className="px-6 py-3 text-center text-xs font-bold text-gray-700 uppercase">Actions</th>
             </tr>
@@ -215,8 +256,8 @@ export default function TransactionsPage() {
                     <svg className="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <p className="text-gray-500 text-lg font-medium">No transactions found</p>
-                    <p className="text-gray-400 text-sm mt-2">Start by adding your first transaction!</p>
+                    <p className="text-gray-500 text-lg font-medium">Aucune transaction trouvée</p>
+                    <p className="text-gray-400 text-sm mt-2">Commencez par ajouter votre première transaction !</p>
                   </div>
                 </td>
               </tr>
@@ -231,8 +272,26 @@ export default function TransactionsPage() {
                   </td>
                   <td className="px-6 py-4 text-sm">{transaction.note || "-"}</td>
                   <td className="px-6 py-4 text-sm text-center">
-                    <button onClick={() => handleEdit(transaction.id)} className="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                    <button onClick={() => openModal(transaction.id)} className="text-red-600 hover:text-red-900">Delete</button>
+                    <div className="flex items-center justify-center gap-2">
+                      <button
+                        onClick={() => handleEdit(transaction.id)}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors font-medium text-sm"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        Modifier
+                      </button>
+                      <button
+                        onClick={() => openModal(transaction.id)}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-red-50 text-red-700 rounded-md hover:bg-red-100 transition-colors font-medium text-sm"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        Supprimer
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
@@ -241,10 +300,13 @@ export default function TransactionsPage() {
         </table>
         {isModalOpen && (
           <Modal onClose={closeModal} onConfirm={confirmDelete}>
-            <p>Are you sure you want to delete this transaction?</p>
+            <p>Êtes-vous sûr de vouloir supprimer cette transaction ?</p>
           </Modal>
         )}
+        </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

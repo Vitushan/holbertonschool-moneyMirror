@@ -1,37 +1,42 @@
+// Page d'inscription
+// Permet aux nouveaux utilisateurs de créer un compte
+// Valide les données et redirige vers la page de connexion après succès
+
 'use client'
 
 import { useState, useEffect } from "react"
 
 export default function Register() {
-  // Form data states - React hooks for controlled components
+  // États pour stocker les données du formulaire
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // UI feedback states
+  // États pour la gestion des messages et du chargement
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Ensure dynamic data like Date.now() is handled properly to avoid hydration mismatch
+  // Timestamp pour éviter les problèmes d'hydratation
   const [timestamp, setTimestamp] = useState(null);
   useEffect(() => {
     setTimestamp(Date.now());
   }, []);
 
-  // Form submission handler - async function for API calls
+  // Fonction pour gérer la soumission du formulaire d'inscription
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage('');
 
     try {
+      // Vérifier que les mots de passe correspondent
       if (password !== confirmPassword) {
-        throw new Error('Passwords do not match');
+        throw new Error('Les mots de passe ne correspondent pas');
       }
 
-      // API call to backend registration endpoint
+      // Envoyer la requête d'inscription à l'API
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -47,13 +52,13 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Registration successful! Redirecting...');
+        setMessage('Inscription réussie ! Redirection...');
         setMessageType('success');
         setTimeout(() => {
           window.location.href = '/login';
         }, 1500);
       } else {
-        setMessage(data.error || 'Registration failed');
+        setMessage(data.error || 'Échec de l\'inscription');
         setMessageType('error');
         setIsLoading(false);
       }
@@ -66,9 +71,9 @@ export default function Register() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-3xl font-bold mb-6">Register - MoneyMirror</h1>
+      <h1 className="text-3xl font-bold mb-6">Inscription - MoneyMirror</h1>
 
-      {/* Dynamic CSS classes - Show message only when it exists */}
+      {/* Classes CSS dynamiques - Afficher le message seulement s'il existe */}
       {message && (
         <div className={(() => {
           let messageClasses;
@@ -83,15 +88,15 @@ export default function Register() {
         </div>
       )}
 
-      {/* Registration form */}
+      {/* Formulaire d'inscription */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-sm">
 
-        {/* Controlled inputs: value from state, onChange updates state */}
+        {/* Inputs contrôlés : valeur depuis l'état, onChange met à jour l'état */}
         <input
           type="text"
           id="username"
           name="username"
-          placeholder="Username"
+          placeholder="Nom d'utilisateur"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="border rounded p-2"
@@ -115,7 +120,7 @@ export default function Register() {
           type="password"
           id="password"
           name="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="border rounded p-2"
@@ -127,7 +132,7 @@ export default function Register() {
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          placeholder="Confirm password"
+          placeholder="Confirmer le mot de passe"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           className="border rounded p-2"
@@ -135,24 +140,25 @@ export default function Register() {
           autoComplete="new-password"
         />
 
-        {/* Dynamic submit button: disabled during loading */}
+        {/* Bouton de soumission dynamique : désactivé pendant le chargement */}
         <button
           type="submit"
           disabled={isLoading}
           className="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? 'Loading...' : 'Sign Up'}
+          {isLoading ? 'Chargement...' : 'S\'inscrire'}
         </button>
       </form>
 
+      {/* Lien vers la page de connexion */}
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">
-          Already have an account?{' '}
+          Vous avez déjà un compte ?{' '}
           <a
             href="/login"
             className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
           >
-            Log in
+            Se connecter
           </a>
         </p>
       </div>

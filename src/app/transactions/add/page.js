@@ -1,34 +1,43 @@
+// Page d'ajout de transaction
+// Permet à l'utilisateur de créer une nouvelle transaction (revenu ou dépense)
+// Gère les devises traditionnelles et les cryptomonnaies
+
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AddTransactionPage() {
+  // État pour stocker les données du formulaire
   const [form, setForm] = useState({
-    amount: "",
-    type: "",
-    category: "",
-    description: "",
-    note: "",
-  currencyType: "currency", // "currency" or "cryptocurrency"
-    currency: "EUR",
-    date: ""
+    amount: "",           // Montant de la transaction
+    type: "",             // Type: 'income' ou 'expense'
+    category: "",         // Catégorie personnalisée
+    description: "",      // Description optionnelle
+    note: "",             // Note optionnelle
+    currencyType: "currency",  // Type de devise: 'currency' ou 'cryptocurrency'
+    currency: "EUR",      // Devise sélectionnée
+    date: ""              // Date de la transaction
   });
+  // État pour indiquer le chargement lors de la soumission
   const [loading, setLoading] = useState(false);
+  // État pour les messages d'erreur
   const [error, setError] = useState("");
+  // État pour les messages de succès
   const [success, setSuccess] = useState("");
   const router = useRouter();
 
-  // Currency and crypto lists
+  // Liste des devises traditionnelles disponibles
   const currencies = [
   { value: "EUR", label: "🇪🇺 EUR - Euro" },
-  { value: "USD", label: "🇺🇸 USD - US Dollar" },
-  { value: "GBP", label: "🇬🇧 GBP - Pound Sterling" },
-  { value: "CHF", label: "🇨🇭 CHF - Swiss Franc" },
+  { value: "USD", label: "🇺🇸 USD - Dollar US" },
+  { value: "GBP", label: "🇬🇧 GBP - Livre Sterling" },
+  { value: "CHF", label: "🇨🇭 CHF - Franc Suisse" },
   { value: "JPY", label: "🇯🇵 JPY - Yen" },
-  { value: "CAD", label: "🇨🇦 CAD - Canadian Dollar" },
-  { value: "AUD", label: "🇦🇺 AUD - Australian Dollar" }
+  { value: "CAD", label: "🇨🇦 CAD - Dollar Canadien" },
+  { value: "AUD", label: "🇦🇺 AUD - Dollar Australien" }
   ];
 
+  // Liste des cryptomonnaies disponibles
   const cryptocurrencies = [
     { value: "BTC", label: "₿ BTC - Bitcoin" },
     { value: "ETH", label: "Ξ ETH - Ethereum" },
@@ -40,14 +49,16 @@ export default function AddTransactionPage() {
     { value: "DOGE", label: "Ð DOGE - Dogecoin" }
   ];
 
+  // Fonction pour gérer les changements dans les champs du formulaire
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-  // If currency type changes, reset the currency
+
+    // Gestion spéciale pour le changement de type de devise
     if (name === "currencyType") {
-      setForm((prev) => ({ 
-        ...prev, 
+      setForm((prev) => ({
+        ...prev,
         [name]: value,
+        // Réinitialiser la devise selon le type sélectionné
         currency: value === "currency" ? "EUR" : "BTC"
       }));
     } else {
@@ -55,21 +66,21 @@ export default function AddTransactionPage() {
     }
   };
 
-  // Handle form submission
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if the amount is a valid number
+    // Validation du montant
     if (!form.amount || isNaN(form.amount) || Number(form.amount) <= 0) {
       setError("Le montant doit être un nombre valide supérieur à 0.");
       return;
     }
 
-    // Check if the date is in the future
+    // Validation de la date (pas de dates futures)
     const selectedDate = new Date(form.date);
     const today = new Date();
     if (selectedDate > today) {
-      setError("Sorry, don't travel to the future!");
+      setError("Désolé, pas de voyage dans le futur !");
       return;
     }
 
@@ -77,6 +88,7 @@ export default function AddTransactionPage() {
     setError("");
     setSuccess("");
     try {
+      // Envoi de la requête POST à l'API
       const res = await fetch("/api/transactions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -85,8 +97,9 @@ export default function AddTransactionPage() {
           amount: Number(form.amount),
         }),
       });
-      if (!res.ok) throw new Error("Failed to add transaction");
-      setSuccess("Transaction successfully added!");
+      if (!res.ok) throw new Error("Échec de l'ajout de la transaction");
+      setSuccess("Transaction ajoutée avec succès ! Redirection vers le tableau de bord...");
+      // Réinitialisation du formulaire
       setForm({
         amount: "",
         type: "",
@@ -97,9 +110,10 @@ export default function AddTransactionPage() {
         currency: "EUR",
         date: "",
       });
-      setTimeout(() => router.push("/transactions"), 1500);
+      // Redirection après 1.5 seconde
+      setTimeout(() => router.push("/dashboard"), 1500);
     } catch (err) {
-      setError(err.message || "Unknown error");
+      setError(err.message || "Erreur inconnue");
     } finally {
       setLoading(false);
     }
@@ -108,57 +122,56 @@ export default function AddTransactionPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-2xl">
-        {/* Header with icon */}
+        {/* En-tête avec icône */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-500 rounded-full mb-4 shadow-lg">
-            <span className="text-4xl text-white font-bold">$</span>
+            <span className="text-4xl text-white font-bold">€</span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Add Transaction</h1>
-          <p className="text-gray-600">Track your income and expenses</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Ajouter Transaction</h1>
+          <p className="text-gray-600">Suivez vos revenus et dépenses</p>
         </div>
 
-        {/* Form card */}
+        {/* Carte de formulaire */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Amount field at the top */}
+            {/* Champ montant en haut */}
             <div>
               <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
-                <span className="text-blue-500 mr-2">$</span>
-                Amount <span className="text-red-500 ml-1">*</span>
+                <span className="text-blue-500 mr-2">€</span>
+                Montant <span className="text-red-500 ml-1">*</span>
               </label>
-              <input 
-                type="text" 
-                name="amount" 
-                value={form.amount} 
+              <input
+                type="text"
+                name="amount"
+                value={form.amount}
                 onChange={(e) => {
                   const value = e.target.value.trim();
-                  // Validate using parseFloat to ensure proper number format
                   if (!isNaN(value) && parseFloat(value) > 0) {
                     handleChange(e);
                   }
-                }} 
-                required 
+                }}
+                required
                 placeholder="0.00"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
-            {/* Currency Type & Currency grid */}
+            {/* Grille Type de devise & Devise */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
                   <span className="text-blue-500 mr-2">💱</span>
-                  Currency Type <span className="text-red-500 ml-1">*</span>
+                  Type de devise <span className="text-red-500 ml-1">*</span>
                 </label>
-                <select 
-                  name="currencyType" 
-                  value={form.currencyType} 
-                  onChange={handleChange} 
-                  required 
+                <select
+                  name="currencyType"
+                  value={form.currencyType}
+                  onChange={handleChange}
+                  required
                   className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
                 >
-                  <option value="currency">💵 Currency</option>
-                  <option value="cryptocurrency">₿ Cryptocurrency</option>
+                  <option value="currency">💵 Devise</option>
+                  <option value="cryptocurrency">₿ Cryptomonnaie</option>
                 </select>
               </div>
 
@@ -167,13 +180,13 @@ export default function AddTransactionPage() {
                   <span className="text-blue-500 mr-2">
                     {form.currencyType === "currency" ? "💰" : "₿"}
                   </span>
-                  {form.currencyType === "currency" ? "Currency" : "Cryptocurrency"} <span className="text-red-500 ml-1">*</span>
+                  {form.currencyType === "currency" ? "Devise" : "Cryptomonnaie"} <span className="text-red-500 ml-1">*</span>
                 </label>
-                <select 
-                  name="currency" 
-                  value={form.currency} 
-                  onChange={handleChange} 
-                  required 
+                <select
+                  name="currency"
+                  value={form.currency}
+                  onChange={handleChange}
+                  required
                   className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
                 >
                   {form.currencyType === "currency" ? (
@@ -199,34 +212,34 @@ export default function AddTransactionPage() {
                 <span className="mr-2">⚖️</span>
                 Type <span className="text-red-500">*</span>
               </label>
-              <select 
-                name="type" 
-                value={form.type} 
-                onChange={handleChange} 
-                required 
+              <select
+                name="type"
+                value={form.type}
+                onChange={handleChange}
+                required
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
               >
-                <option value="">Select type</option>
-                <option value="income">💰 Income</option>
-                <option value="expense">💸 Expense</option>
+                <option value="">Sélectionner le type</option>
+                <option value="income">💰 Revenu</option>
+                <option value="expense">💸 Dépense</option>
               </select>
             </div>
 
-            {/* Category & Date grid */}
+            {/* Grille Catégorie & Date */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
                   <span className="text-blue-500 mr-2">🏷️</span>
-                  Category <span className="text-red-500 ml-1">*</span>
+                  Catégorie <span className="text-red-500 ml-1">*</span>
                 </label>
-                <input 
-                  type="text" 
-                  name="category" 
-                  value={form.category} 
-                  onChange={handleChange} 
-                  required 
-                  placeholder="e.g., Food, Salary, Transport"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+                <input
+                  type="text"
+                  name="category"
+                  value={form.category}
+                  onChange={handleChange}
+                  required
+                  placeholder="ex : Nourriture, Salaire, Transport"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
                 />
               </div>
 
@@ -235,14 +248,14 @@ export default function AddTransactionPage() {
                   <span className="text-blue-500 mr-2">📅</span>
                   Date <span className="text-red-500 ml-1">*</span>
                 </label>
-                <input 
-                  type="date" 
-                  name="date" 
-                  value={form.date} 
-                  onChange={handleChange} 
-                  required 
-                  placeholder="mm/dd/yyyy"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+                <input
+                  type="date"
+                  name="date"
+                  value={form.date}
+                  onChange={handleChange}
+                  required
+                  placeholder="jj/mm/aaaa"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
                 />
               </div>
             </div>
@@ -253,13 +266,13 @@ export default function AddTransactionPage() {
                 <span className="text-blue-500 mr-2">📝</span>
                 Description
               </label>
-              <input 
-                type="text" 
-                name="description" 
-                value={form.description} 
-                onChange={handleChange} 
-                placeholder="Short description (optional)"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <input
+                type="text"
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                placeholder="Courte description (optionnel)"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
@@ -269,33 +282,33 @@ export default function AddTransactionPage() {
                 <span className="text-blue-500 mr-2">📄</span>
                 Note
               </label>
-              <input 
-                type="text" 
-                name="note" 
-                value={form.note} 
-                onChange={handleChange} 
-                placeholder="Additional notes (optional)"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <input
+                type="text"
+                name="note"
+                value={form.note}
+                onChange={handleChange}
+                placeholder="Notes supplémentaires (optionnel)"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
-            {/* Submit button */}
-            <button 
-              type="submit" 
-              disabled={loading || !form.amount || !form.type || !form.category || !form.date} 
+            {/* Bouton de soumission */}
+            <button
+              type="submit"
+              disabled={loading || !form.amount || !form.type || !form.category || !form.date}
               className={`w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition font-semibold text-lg shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed ${loading ? 'cursor-wait' : ''}`}
             >
-              {loading ? "Adding Transaction..." : "Add Transaction"}
+              {loading ? "Ajout en cours..." : "Ajouter Transaction"}
             </button>
 
-            {/* Success message at the bottom */}
+            {/* Message de succès en bas */}
             {success && (
               <div className="mt-4 p-4 bg-green-100 border border-green-300 rounded-lg text-center">
                 <p className="text-green-700 font-semibold">{success}</p>
               </div>
             )}
 
-            {/* Error message at the bottom */}
+            {/* Message d'erreur en bas */}
             {error && (
               <div className="mt-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
                 <p className="text-red-700 font-medium text-center">{error}</p>

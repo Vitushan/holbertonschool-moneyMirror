@@ -3,8 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from '@/lib/prisma';
 import bcrypt from "bcryptjs";
 
-
-// Reusable NextAuth options
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -37,6 +35,9 @@ export const authOptions = {
     })
   ],
   session: { strategy: "jwt" },
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) token.id = user.id;
@@ -46,11 +47,17 @@ export const authOptions = {
       if (!session.user) session.user = {};
       if (token?.id) session.user.id = token.id;
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.includes('/api/auth/callback')) {
+        return `${baseUrl}/dashboard`;
+      }
+      if (url.startsWith(baseUrl)) return url;
+      return `${baseUrl}/dashboard`;
     }
   },
 };
 
-// Custom handler that wraps NextAuth with JSON error handling
 const customHandler = async (req, ctx) => {
   const wantsJson = req.headers.get("accept")?.includes("application/json");
   const nextAuthHandler = NextAuth({

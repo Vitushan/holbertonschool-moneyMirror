@@ -1,26 +1,26 @@
 import React from "react";
-import PropTypes from "prop-types"; // import PropTypes for type checking component props
+import PropTypes from "prop-types"; // Importer PropTypes pour la vérification de type des props du composant
 
-// modal component for confirmation dialogs
+// Composant modal pour les dialogues de confirmation
 const Modal = ({ onClose, onConfirm, children }) => {
   return (
-    // overlay background (semi-transparent layer behind the modal)
+    // Arrière-plan overlay (couche semi-transparente derrière le modal)
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      {/* modal container */}
+      {/* Conteneur du modal */}
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        {/* modal content */}
+        {/* Contenu du modal */}
         <div className="mb-4">{children}</div>
 
-        {/* action buttons */}
+        {/* Boutons d'action */}
         <div className="flex justify-end space-x-4">
-          {/* cancel button */}
+          {/* Bouton annuler */}
           <button
             onClick={onClose}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
             Cancel
           </button>
 
-          {/* confirm button */}
+          {/* Bouton confirmer */}
           <button
             onClick={onConfirm}
             className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
@@ -32,11 +32,11 @@ const Modal = ({ onClose, onConfirm, children }) => {
   );
 };
 
-// prop validation (define expected prop types) [props = properties]
-Modal.propTypes = { // propTypes = checks that the correct properties (props) are passed to the component
-  onClose: PropTypes.func.isRequired, // function for cancel action
-  onConfirm: PropTypes.func.isRequired, // function for confirm action
-  children: PropTypes.node.isRequired, // modal content
+// Validation des props (définir les types de props attendus) [props = propriétés]
+Modal.propTypes = { // propTypes = vérifie que les bonnes propriétés (props) sont passées au composant
+  onClose: PropTypes.func.isRequired, // Fonction pour l'action d'annulation
+  onConfirm: PropTypes.func.isRequired, // Fonction pour l'action de confirmation
+  children: PropTypes.node.isRequired, // Contenu du modal
 };
 
 export default Modal;

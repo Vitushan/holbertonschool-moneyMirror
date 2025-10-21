@@ -1,15 +1,12 @@
-// ============================================================================
 // PLAYWRIGHT E2E TESTS FOR TRANSACTIONS
-// ============================================================================
 // These are REAL integration tests that simulate a user interacting with
 // the application through the browser (frontend + backend together)
-// ============================================================================
 
 import { test, expect } from '@playwright/test';
 
-// ============================================================================
+
 // CONFIGURATION & HELPER FUNCTIONS
-// ============================================================================
+
 
 // Test user credentials (make sure this user exists in your database)
 const TEST_USER = {
@@ -45,9 +42,8 @@ async function logout(page) {
   await page.waitForURL('/login', { timeout: 5000 });
 }
 
-// ============================================================================
 // TEST SUITE: TRANSACTIONS E2E
-// ============================================================================
+
 
 test.describe('Transactions E2E Tests', () => {
 
@@ -57,9 +53,9 @@ test.describe('Transactions E2E Tests', () => {
     await page.goto('/');
   });
 
-  // ========================================================================
+
   // TEST 1: User can login and access transactions page
-  // ========================================================================
+
   test('should login successfully and access transactions page', async ({ page }) => {
     // Login
     await login(page);
@@ -74,9 +70,8 @@ test.describe('Transactions E2E Tests', () => {
     await expect(page.locator('h1, h2')).toContainText(/transactions/i);
   });
 
-  // ========================================================================
+ 
   // TEST 2: User can create a new transaction
-  // ========================================================================
   test('should create a new transaction', async ({ page }) => {
     // Login first
     await login(page);
@@ -119,9 +114,8 @@ test.describe('Transactions E2E Tests', () => {
     await expect(page.locator('body')).toContainText(TEST_TRANSACTION.amount.toString());
   });
 
-  // ========================================================================
+
   // TEST 3: User can view transaction details
-  // ========================================================================
   test('should view a transaction details', async ({ page }) => {
     // Login first
     await login(page);
@@ -140,9 +134,8 @@ test.describe('Transactions E2E Tests', () => {
     await expect(page.locator('body')).toContainText(/amount|category|date/i);
   });
 
-  // ========================================================================
+  
   // TEST 4: User can edit a transaction
-  // ========================================================================
   test('should edit an existing transaction', async ({ page }) => {
     // Login first
     await login(page);
@@ -173,9 +166,8 @@ test.describe('Transactions E2E Tests', () => {
     await expect(page.locator('body')).toContainText(newAmount);
   });
 
-  // ========================================================================
+ 
   // TEST 5: User can delete a transaction
-  // ========================================================================
   test('should delete a transaction', async ({ page }) => {
     // Login first
     await login(page);
@@ -204,9 +196,8 @@ test.describe('Transactions E2E Tests', () => {
     // In a real test, you'd verify by a unique identifier
   });
 
-  // ========================================================================
+
   // TEST 6: User can filter transactions by type
-  // ========================================================================
   test('should filter transactions by type (income/expense)', async ({ page }) => {
     // Login first
     await login(page);
@@ -238,9 +229,8 @@ test.describe('Transactions E2E Tests', () => {
     }
   });
 
-  // ========================================================================
+
   // TEST 7: User can search transactions
-  // ========================================================================
   test('should search transactions', async ({ page }) => {
     // Login first
     await login(page);
@@ -266,9 +256,8 @@ test.describe('Transactions E2E Tests', () => {
     }
   });
 
-  // ========================================================================
+
   // TEST 8: Unauthorized user cannot access transactions page
-  // ========================================================================
   // Skipping this test because authentication middleware is not yet implemented
   test.skip('should redirect to login when accessing transactions without auth', async ({ page }) => {
     // Try to access transactions page without logging in
@@ -281,9 +270,8 @@ test.describe('Transactions E2E Tests', () => {
     await expect(page.locator('body')).toContainText(/login|sign in/i);
   });
 
-  // ========================================================================
+
   // TEST 9: User can logout
-  // ========================================================================
   // Skipping this test until logout button implementation is confirmed
   test.skip('should logout successfully', async ({ page }) => {
     // Login first
@@ -299,9 +287,8 @@ test.describe('Transactions E2E Tests', () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
-  // ========================================================================
+
   // TEST 10: Form validation works
-  // ========================================================================
   test('should show validation errors for invalid transaction data', async ({ page }) => {
     // Login first
     await login(page);
@@ -319,36 +306,29 @@ test.describe('Transactions E2E Tests', () => {
 
 });
 
-// ============================================================================
 // SUMMARY OF E2E TESTS CREATED:
-// ============================================================================
-// ✅ TEST 1: Login and access transactions page
-// ✅ TEST 2: Create a new transaction
-// ✅ TEST 3: View transaction details
-// ✅ TEST 4: Edit an existing transaction
-// ✅ TEST 5: Delete a transaction
-// ✅ TEST 6: Filter transactions by type
-// ✅ TEST 7: Search transactions
-// ✅ TEST 8: Unauthorized access redirect
-// ✅ TEST 9: Logout functionality
-// ✅ TEST 10: Form validation
-// ============================================================================
+// TEST 1: Login and access transactions page
+// TEST 2: Create a new transaction
+// TEST 3: View transaction details
+// TEST 4: Edit an existing transaction
+// TEST 5: Delete a transaction
+// TEST 6: Filter transactions by type
+// TEST 7: Search transactions
+// TEST 8: Unauthorized access redirect
+// TEST 9: Logout functionality
+// TEST 10: Form validation
 
-// ============================================================================
+
 // HOW TO RUN THESE TESTS:
-// ============================================================================
 // 1. Make sure your dev server is running: npm run dev
 // 2. Run tests in headless mode: npm run test:integration
 // 3. Run tests with UI (see browser): npm run test:integration:ui
 // 4. Debug a specific test: npx playwright test --debug transactions.e2e.spec.js
-// ============================================================================
 
-// ============================================================================
+
 // NOTES:
-// ============================================================================
 // - These tests assume you have a test user in your database
 // - Selectors may need adjustment based on your actual UI
 // - Some tests use waitForTimeout which is not ideal for production
 //   (better to use waitForSelector or waitForURL with specific conditions)
 // - Consider setting up a test database that gets reset before each test run
-// ============================================================================

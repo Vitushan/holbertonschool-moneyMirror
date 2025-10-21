@@ -1,37 +1,47 @@
+// Page de modification de transaction
+// Permet à l'utilisateur de modifier une transaction existante
+// Récupère les données depuis l'API et les affiche dans le formulaire
+
 "use client";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function EditTransaction() {
   const router = useRouter();
-  const { id } = useParams();
+  const { id } = useParams();  // Récupérer l'ID de la transaction depuis l'URL
 
+  // État pour stocker les données du formulaire
   const [form, setForm] = useState({
-    amount: "",
-    type: "income", // Default value
-    category: "",
-    date: "",
-    currencyType: "currency",
-    currency: "EUR",
-    description: "",
-    note: "",
+    amount: "",           // Montant de la transaction
+    type: "income",       // Type: 'income' ou 'expense'
+    category: "",         // Catégorie
+    date: "",             // Date de la transaction
+    currencyType: "currency",  // Type de devise
+    currency: "EUR",      // Devise sélectionnée
+    description: "",      // Description optionnelle
+    note: "",             // Note optionnelle
   });
+  // État pour indiquer le chargement des données
   const [loading, setLoading] = useState(true);
+  // État pour indiquer l'enregistrement lors de la soumission
   const [saving, setSaving] = useState(false);
+  // État pour les messages d'erreur
   const [error, setError] = useState("");
+  // État pour les messages de succès
   const [success, setSuccess] = useState("");
 
-  // Currency and crypto lists
+  // Liste des devises traditionnelles disponibles
   const currencies = [
     { value: "EUR", label: "🇪🇺 EUR - Euro" },
-    { value: "USD", label: "🇺🇸 USD - US Dollar" },
-    { value: "GBP", label: "🇬🇧 GBP - Pound Sterling" },
-    { value: "CHF", label: "🇨🇭 CHF - Swiss Franc" },
+    { value: "USD", label: "🇺🇸 USD - Dollar US" },
+    { value: "GBP", label: "🇬🇧 GBP - Livre Sterling" },
+    { value: "CHF", label: "🇨🇭 CHF - Franc Suisse" },
     { value: "JPY", label: "🇯🇵 JPY - Yen" },
-    { value: "CAD", label: "🇨🇦 CAD - Canadian Dollar" },
-    { value: "AUD", label: "🇦🇺 AUD - Australian Dollar" }
+    { value: "CAD", label: "🇨🇦 CAD - Dollar Canadien" },
+    { value: "AUD", label: "🇦🇺 AUD - Dollar Australien" }
   ];
 
+  // Liste des cryptomonnaies disponibles
   const cryptocurrencies = [
     { value: "BTC", label: "₿ BTC - Bitcoin" },
     { value: "ETH", label: "Ξ ETH - Ethereum" },
@@ -43,7 +53,7 @@ export default function EditTransaction() {
     { value: "DOGE", label: "Ð DOGE - Dogecoin" }
   ];
 
-  // Load existing transaction data
+  // Récupérer les données de la transaction au chargement de la page
   useEffect(() => {
     const fetchTransaction = async () => {
       setLoading(true);
@@ -52,24 +62,27 @@ export default function EditTransaction() {
         const res = await fetch(`/api/transactions/${id}`);
         if (!res.ok) {
           if (res.status === 404) {
-            throw new Error("The transaction does not exist or has been deleted.");
+            throw new Error("La transaction n'existe pas ou a été supprimée.");
           } else {
-            throw new Error("Error while fetching the transaction.");
+            throw new Error("Erreur lors de la récupération de la transaction.");
           }
         }
         const data = await res.json();
+        const transaction = data.transaction; // L'API retourne { success: true, transaction }
+
+        // Remplir le formulaire avec les données récupérées
         setForm({
-          amount: data.amount || "",
-          type: data.type || "income", // Default value
-          category: data.category || "",
-          description: data.description || "",
-          note: data.note || "",
-          currencyType: data.currencyType || "currency",
-          currency: data.currency || "EUR",
-          date: data.date ? data.date.split('T')[0] : ""
+          amount: transaction.amount || "",
+          type: transaction.type || "income",
+          category: transaction.category || "",
+          description: transaction.description || "",
+          note: transaction.note || "",
+          currencyType: transaction.currencyType || "currency",
+          currency: transaction.currency || "EUR",
+          date: transaction.date ? transaction.date.split('T')[0] : ""  // Formater la date pour l'input date
         });
       } catch (err) {
-        setError(err.message || "Unknown error.");
+        setError(err.message || "Erreur inconnue.");
       } finally {
         setLoading(false);
       }
@@ -80,6 +93,7 @@ export default function EditTransaction() {
     }
   }, [id]);
 
+  // Fonction pour gérer les changements dans les champs du formulaire
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({
@@ -88,37 +102,42 @@ export default function EditTransaction() {
     }));
   };
 
-  // Handle form submission
+  // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Error and Success message
+    // Validation du montant
     if (!form.amount) {
-        setError("Amount is required.");
+        setError("Le montant est requis.");
         return;
     }
+    // Validation du type
     if (!form.type || (form.type !== "income" && form.type !== "expense")) {
-        setError("Type is required.");
+        setError("Le type est requis.");
         return;
     }
+    // Validation de la catégorie
     if (!form.category) {
-        setError("Category is required.");
+        setError("La catégorie est requise.");
         return;
     }
+    // Validation de la date
     if (!form.date) {
-        setError("Date is required.");
+        setError("La date est requise.");
         return;
     }
 
+    // Vérifier que le montant est un nombre valide
     if (isNaN(form.amount) || Number(form.amount) <= 0) {
-        setError("Amount must be a valid number greater than 0.");
+        setError("Le montant doit être un nombre valide supérieur à 0.");
         return;
     }
 
+    // Vérifier que la date n'est pas dans le futur
     const selectedDate = new Date(form.date);
     const today = new Date();
     if (selectedDate > today) {
-        setError("Sorry, the date cannot be in the future!");
+        setError("Désolé, la date ne peut pas être dans le futur !");
         return;
     }
 
@@ -127,6 +146,7 @@ export default function EditTransaction() {
     setSuccess("");
 
     try {
+      // Envoyer la requête PUT pour mettre à jour la transaction
       const response = await fetch(`/api/transactions/${id}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -136,47 +156,49 @@ export default function EditTransaction() {
         }),
       });
 
-      if (!response.ok) throw new Error("Error when updating the transaction!");
-      
-      setSuccess("Transaction updated successfully!");
+      if (!response.ok) throw new Error("Erreur lors de la mise à jour de la transaction !");
+
+      setSuccess("Transaction mise à jour avec succès !");
+      // Redirection vers la liste des transactions après 1.5 seconde
       setTimeout(() => router.push("/transactions"), 1500);
     } catch (err) {
-      setError(err.message || "Unknown error");
+      setError(err.message || "Erreur inconnue");
     } finally {
       setSaving(false);
     }
   };
 
+  // Affichage pendant le chargement des données
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF]">
-        <div className="text-lg text-blue-600 font-medium">Loading...</div>
+        <div className="text-lg text-blue-600 font-medium">Chargement...</div>
       </div>
     );
   }
 
-  // Simplify the form fields to display only the current values for clarity
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] p-6">
       <div className="w-full max-w-2xl">
-        {/* Header with icon */}
+        {/* En-tête avec icône */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-500 rounded-full mb-4 shadow-lg">
             <span className="text-4xl text-white font-bold">✏️</span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Edit Transaction</h1>
-          <p className="text-gray-600">Update your transaction details</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Modifier Transaction</h1>
+          <p className="text-gray-600">Mettez à jour les détails de votre transaction</p>
         </div>
 
-        {/* Form card */}
+        {/* Carte de formulaire */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          {/* Error and Success messages */}
+          {/* Message de succès */}
           {success && (
             <div className="mb-4 p-4 bg-green-100 border border-green-300 rounded-lg text-center">
               <p className="text-green-700 font-semibold">{success}</p>
             </div>
           )}
 
+          {/* Message d'erreur */}
           {error && (
             <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
               <p className="text-red-700 font-medium text-center">{error}</p>
@@ -184,42 +206,44 @@ export default function EditTransaction() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Amount field */}
+            {/* Champ montant */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Amount</label>
-              <input 
-                type="text" 
-                name="amount" 
-                value={form.amount} 
-                onChange={handleChange} 
-                required 
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Montant</label>
+              <input
+                type="text"
+                name="amount"
+                value={form.amount}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
-            {/* Currency Type */}
+            {/* Type de devise */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Currency Type</label>
-              <select 
-                name="currencyType" 
-                value={form.currencyType} 
-                onChange={handleChange} 
-                required 
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Type de devise</label>
+              <select
+                name="currencyType"
+                value={form.currencyType}
+                onChange={handleChange}
+                required
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
               >
-                <option value="currency">Currency</option>
-                <option value="cryptocurrency">Cryptocurrency</option>
+                <option value="currency">Devise</option>
+                <option value="cryptocurrency">Cryptomonnaie</option>
               </select>
             </div>
 
-            {/* Currency */}
+            {/* Devise */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Currency</label>
-              <select 
-                name="currency" 
-                value={form.currency} 
-                onChange={handleChange} 
-                required 
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                {form.currencyType === "currency" ? "Devise" : "Cryptomonnaie"}
+              </label>
+              <select
+                name="currency"
+                value={form.currency}
+                onChange={handleChange}
+                required
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
               >
                 {form.currencyType === "currency" ? (
@@ -237,83 +261,83 @@ export default function EditTransaction() {
             {/* Type */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Type</label>
-              <select 
-                name="type" 
-                value={form.type} 
-                onChange={handleChange} 
-                required 
+              <select
+                name="type"
+                value={form.type}
+                onChange={handleChange}
+                required
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition bg-white text-gray-700 outline-none"
               >
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
+                <option value="income">Revenu</option>
+                <option value="expense">Dépense</option>
               </select>
             </div>
 
-            {/* Category */}
+            {/* Catégorie */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Category</label>
-              <input 
-                type="text" 
-                name="category" 
-                value={form.category} 
-                onChange={handleChange} 
-                required 
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Catégorie</label>
+              <input
+                type="text"
+                name="category"
+                value={form.category}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
             {/* Date */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Date</label>
-              <input 
-                type="date" 
-                name="date" 
-                value={form.date} 
-                onChange={handleChange} 
-                required 
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <input
+                type="date"
+                name="date"
+                value={form.date}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
             {/* Description */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Description</label>
-              <input 
-                type="text" 
-                name="description" 
-                value={form.description} 
-                onChange={handleChange} 
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <input
+                type="text"
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
             {/* Note */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Note</label>
-              <input 
-                type="text" 
-                name="note" 
-                value={form.note} 
-                onChange={handleChange} 
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" 
+              <input
+                type="text"
+                name="note"
+                value={form.note}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none"
               />
             </div>
 
-            {/* Action buttons */}
+            {/* Boutons d'action */}
             <div className="flex gap-4">
-              <button 
+              <button
                 type="button"
                 onClick={() => router.push("/transactions")}
                 className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-lg hover:bg-gray-300 transition font-semibold text-lg"
               >
-                Cancel
+                Annuler
               </button>
-              <button 
-                type="submit" 
-                disabled={saving} 
+              <button
+                type="submit"
+                disabled={saving}
                 className="flex-1 bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition font-semibold text-lg shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {saving ? "Updating..." : "Update Transaction"}
+                {saving ? "Mise à jour..." : "Mettre à jour"}
               </button>
             </div>
           </form>

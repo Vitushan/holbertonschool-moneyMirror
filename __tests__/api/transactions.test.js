@@ -2,9 +2,8 @@
 // Unit and integration tests for the API endpoints related to transactions.
 // Verifies CRUD functionalities: create, read, update, and delete.
 
-// ============================================================================
+
 // 🔧 MAIN FIX #1: PROPER PRISMA MOCKING
-// ============================================================================
 // WHY THIS FIX WAS NEEDED:
 // - The previous mock wasn't working because it tried to mock '@/lib/prisma'
 //   which is a wrapper around PrismaClient
@@ -16,8 +15,6 @@
 // 2. Inside the factory, we create fake (mock) versions of Prisma methods
 // 3. We return a fake PrismaClient constructor that uses our mock methods
 // 4. We export __mockMethods so tests can control what data these methods return
-// ============================================================================
-
 jest.mock('@prisma/client', () => {
     // Create mock methods inside the factory function
     // Each method is a Jest mock function that we can control in our tests
@@ -42,14 +39,14 @@ jest.mock('@prisma/client', () => {
     };
 });
 
-// ============================================================================
+
 // 🔧 FIX #2: MOCK NEXTAUTH AUTHENTICATION
-// ============================================================================
+
 // WHY THIS FIX WAS NEEDED:
 // - Our API routes check if a user is authenticated using getServerSession
 // - Without this mock, the tests would fail with "user not authenticated"
 // - We mock it to return a fake authenticated user by default
-// ============================================================================
+
 
 jest.mock('next-auth', () => ({
     getServerSession: jest.fn(() =>
@@ -58,14 +55,13 @@ jest.mock('next-auth', () => ({
     ),
 }));
 
-// ============================================================================
+
 // 🔧 FIX #3: IMPORT ORDER MATTERS
-// ============================================================================
+
 // WHY THIS FIX WAS NEEDED:
 // - Mocks must be defined BEFORE importing the code that uses them
 // - If we import first, the real Prisma client is already loaded
 // - Jest processes jest.mock() calls before imports (hoisting)
-// ============================================================================
 
 // Import our API route handlers AFTER mocks are set up
 import { GET, POST } from "../../src/app/api/transactions/route";
@@ -78,9 +74,8 @@ import { __mockMethods } from '@prisma/client';
 // Now we can use mockTransaction.findMany(...) in our tests
 const mockTransaction = __mockMethods;
 
-// ============================================================================
+
 // TEST SUITE: Transactions API
-// ============================================================================
 describe('Transactions API', () => {
     // beforeEach runs before EACH test
     // This ensures each test starts with a clean slate
@@ -93,9 +88,8 @@ describe('Transactions API', () => {
         getServerSession.mockResolvedValue({ user: { id: 'test-user-id', email: 'test@example.com' } });
     });
 
-    // ========================================================================
-    // TEST GROUP: GET /api/transactions (Fetch all transactions)
-    // ========================================================================
+
+    // TEST GROUP: GET /api/transactions (Fetch all transactions)  
     describe('GET /api/transactions', () => {
         it("should return all transactions for authenticated user", async () => {
             // ARRANGE: Prepare test data
@@ -126,15 +120,15 @@ describe('Transactions API', () => {
             // ASSERT: Check the results
             expect(response.status).toBe(200);
 
-            // ================================================================
+       
             // 🔧 FIX #4: USE toMatchObject INSTEAD OF toEqual FOR DATES
-            // ================================================================
+
             // WHY THIS FIX WAS NEEDED:
             // - When data is sent over HTTP, dates are converted to strings (JSON serialization)
             // - toEqual() does exact comparison including date types
             // - toMatchObject() only checks that the properties exist and match
             // - This way we ignore the date serialization issue
-            // ================================================================
+
             expect(data.transactions).toMatchObject([{
                 id: '1',
                 amount: 100,
@@ -168,9 +162,7 @@ describe('Transactions API', () => {
         });
     });
 
-    // ========================================================================
-    // TEST GROUP: POST /api/transactions (Create new transaction)
-    // ========================================================================
+    // TEST GROUP: POST /api/transactions (Create new transaction)   
     describe('POST /api/transactions', () => {
         it('should create a new transaction', async () => {
             // ARRANGE: Prepare the data we want to create
@@ -237,9 +229,7 @@ describe('Transactions API', () => {
         });
     });
 
-    // ========================================================================
     // TEST GROUP: GET /api/transactions/[id] (Fetch single transaction)
-    // ========================================================================
     describe('GET /api/transactions/[id]', () => {
         it('should return a single transaction by ID', async () => {
             // ARRANGE: Prepare mock transaction data
@@ -301,9 +291,7 @@ describe('Transactions API', () => {
         });
     });
 
-    // ========================================================================
     // TEST GROUP: PUT /api/transactions/[id] (Update transaction)
-    // ========================================================================
     describe('PUT /api/transactions/[id]', () => {
         it('should update a transaction', async () => {
             // ARRANGE: Prepare existing transaction
@@ -369,9 +357,7 @@ describe('Transactions API', () => {
         });
     });
 
-    // ========================================================================
     // TEST GROUP: DELETE /api/transactions/[id] (Delete transaction)
-    // ========================================================================
     describe('DELETE /api/transactions/[id]', () => {
         it('should delete a transaction', async () => {
             // ARRANGE: Prepare existing transaction
@@ -399,14 +385,12 @@ describe('Transactions API', () => {
             // ASSERT: Check the results
             expect(response.status).toBe(200);
 
-            // ================================================================
+        
             // 🔧 FIX #5: CORRECTED ERROR MESSAGE
-            // ================================================================
             // WHY THIS FIX WAS NEEDED:
             // - The actual API returns "Transaction deleted successfully"
             // - The test was expecting "Transaction deleted successfully!"
             // - Fixed to match the actual response
-            // ================================================================
             expect(data.message).toBe('Transaction deleted successfully');
             expect(mockTransaction.delete).toHaveBeenCalledTimes(1);
             expect(mockTransaction.delete).toHaveBeenCalledWith({
@@ -434,24 +418,20 @@ describe('Transactions API', () => {
     });
 });
 
-// ============================================================================
-// 📝 SUMMARY OF ALL FIXES:
-// ============================================================================
-// ✅ FIX #1: Mock @prisma/client instead of @/lib/prisma
+
+// SUMMARY OF ALL FIXES:
+
+// FIX #1: Mock @prisma/client instead of @/lib/prisma
 //    - Prevents real database connections during tests
 //
-// ✅ FIX #2: Mock NextAuth getServerSession
+// FIX #2: Mock NextAuth getServerSession
 //    - Allows tests to run as authenticated user
 //
-// ✅ FIX #3: Proper import order (mocks before imports)
+// FIX #3: Proper import order (mocks before imports)
 //    - Ensures mocks are in place before code loads
 //
-// ✅ FIX #4: Use toMatchObject instead of toEqual for dates
+// FIX #4: Use toMatchObject instead of toEqual for dates
 //    - Handles JSON date serialization properly
 //
-// ✅ FIX #5: Corrected error messages to match actual API responses
+// FIX #5: Corrected error messages to match actual API responses
 //    - Tests now expect the correct error messages
-//
-// ✅ BONUS FIX: Removed conflicting mock from jest.setup.js
-//    - Eliminated mock conflicts
-// ============================================================================

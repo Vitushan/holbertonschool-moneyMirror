@@ -3,12 +3,12 @@
 // They test the backend with a real or test database
 // This is different from unit tests - we're testing actual API endpoints
 
-const request = require('supertest');
-const { PrismaClient } = require('@prisma/client');
+const request = require('supertest'); // supertest = library allows you to send HTTP requests (GET/POST/PUT/DELETE) to your server in tests.
+const { PrismaClient } = require('@prisma/client');  // Prisma client to access the DB (here used to prepare/clean the test data).
 const bcrypt = require('bcryptjs');
 
 // Initialize Prisma client for database operations
-const prisma = new PrismaClient();
+const prisma = new PrismaClient(); // instance used to manipulate the DB directly (creation/deletion)
 
 // Base URL for API requests
 const baseURL = 'http://localhost:3000';
@@ -33,7 +33,7 @@ beforeAll(async () => {
 
     // Create or update the test user in the database
     // Using upsert to avoid duplicate errors if user already exists
-    const user = await prisma.user.upsert({
+    const user = await prisma.user.upsert({ // creates the user if not present, otherwise does nothing (return without duplicate )
       where: { email: TEST_USER.email },
       update: {},
       create: {
@@ -44,7 +44,7 @@ beforeAll(async () => {
     });
 
     // Store user ID for later use
-    userId = user.id;
+    userId = user.id; // remembers the id for cleanup
   } catch (error) {
     console.error('Error creating test user:', error);
     throw error;
@@ -67,7 +67,7 @@ afterAll(async () => {
     });
 
     // Close the Prisma connection
-    await prisma.$disconnect();
+    await prisma.$disconnect(); // closing db connection
   } catch (error) {
     console.error('Error cleaning up test data:', error);
   }

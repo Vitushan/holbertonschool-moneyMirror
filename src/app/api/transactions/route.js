@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken'
 export async function POST(request) {
   try {
     let userId = null;
-    // Verify bearer token authentication
+    // Vérifier l'authentification par token bearer
     const authHeader = request.headers.get('authorization');
 
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -21,7 +21,7 @@ export async function POST(request) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // Otherwise, fallback to the NextAuth session
+      // Sinon, utiliser la session NextAuth
       let session = null;
       try {
         session = await getServerSession(authOptions);
@@ -45,14 +45,14 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 });
     }
 
-    // Date validation
+    // Validation de la date
     let transactionDate = new Date();
     if (date) {
       const parsedDate = new Date(date);
       if (isNaN(parsedDate.getTime())) {
         return NextResponse.json({ error: 'Please enter a valid date."' }, { status: 400 });
       }
-      // Future dates are not allowed
+      // Les dates futures ne sont pas autorisées
       const now = new Date();
       if (parsedDate > now) {
         return NextResponse.json({ error: "Sorry, you can't travel to the future." }, { status: 400 });
@@ -88,7 +88,7 @@ export async function GET(request) {
   try {
     let userId = null;
 
-    // Verify Authorization: Bearer token
+    // Vérifier Authorization: Bearer token
     const authHeader = request.headers.get('authorization');
 
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -100,7 +100,7 @@ export async function GET(request) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
       }
     } else {
-      // Otherwise, fallback to the NextAuth session
+      // Sinon, utiliser la session NextAuth
       const session = await getServerSession(authOptions);
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -111,7 +111,7 @@ export async function GET(request) {
       return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
     }
 
-    // Fetch all transactions from the database for the authenticated user
+    // Récupérer toutes les transactions depuis la base de données pour l'utilisateur authentifié
     const transactions = await prisma.transaction.findMany({
       where: { userId },
       orderBy: { date: 'desc' },
