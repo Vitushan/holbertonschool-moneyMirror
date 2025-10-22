@@ -69,7 +69,7 @@ export async function GET(request) {
 
     if (filter === 'week') {
       // Group by day of week
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      const days = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
       const dailyData = {}
 
       // Initialize all days
@@ -97,12 +97,12 @@ export async function GET(request) {
 
     } else if (filter === 'month') {
       // Group by week
-      const weekData = { 'Week 1': 0, 'Week 2': 0, 'Week 3': 0, 'Week 4': 0 }
+      const weekData = { 'Semaine 1': 0, 'Semaine 2': 0, 'Semaine 3': 0, 'Semaine 4': 0 }
 
       transactions.forEach(t => {
         const daysDiff = Math.floor((new Date(t.date) - startDate) / (1000 * 60 * 60 * 24))
         const weekNum = Math.min(Math.floor(daysDiff / 7) + 1, 4)
-        const weekKey = `Week ${weekNum}`
+        const weekKey = `Semaine ${weekNum}`
         const value = t.type === 'income' ? t.amount : -t.amount
         weekData[weekKey] += value
       })
@@ -116,7 +116,7 @@ export async function GET(request) {
 
     } else if (filter === 'year') {
       // Group by month
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc']
       const monthData = {}
 
       // Initialize all months
@@ -163,7 +163,7 @@ export async function GET(request) {
 
     if (filter === 'week') {
       // Group by day of week
-      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      const days = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
       const dailyData = {}
 
       // Initialize all days
@@ -196,16 +196,16 @@ export async function GET(request) {
     } else if (filter === 'month') {
       // Group by week
       const weekData = {
-        'Week 1': { revenus: 0, dépenses: 0 },
-        'Week 2': { revenus: 0, dépenses: 0 },
-        'Week 3': { revenus: 0, dépenses: 0 },
-        'Week 4': { revenus: 0, dépenses: 0 }
+        'Semaine 1': { revenus: 0, dépenses: 0 },
+        'Semaine 2': { revenus: 0, dépenses: 0 },
+        'Semaine 3': { revenus: 0, dépenses: 0 },
+        'Semaine 4': { revenus: 0, dépenses: 0 }
       }
 
       transactions.forEach(t => {
         const daysDiff = Math.floor((new Date(t.date) - startDate) / (1000 * 60 * 60 * 24))
         const weekNum = Math.min(Math.floor(daysDiff / 7) + 1, 4)
-        const weekKey = `Week ${weekNum}`
+        const weekKey = `Semaine ${weekNum}`
 
         if (t.type === 'income') {
           weekData[weekKey].revenus += t.amount
