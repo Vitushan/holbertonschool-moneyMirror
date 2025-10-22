@@ -17,7 +17,6 @@ import {
 } from 'recharts'
 
 import Logo from '@/components/Logo'
-import Footer from '@/components/Footer'
 
 // Composant principal pour la page Dashboard
 export default function DashboardPage() {
@@ -672,15 +671,62 @@ export default function DashboardPage() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Section Totaux - Design élégant en bas du tableau */}
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-t-2 border-gray-300 px-6 py-5">
+                <div className="flex justify-end">
+                  <div className="w-full max-w-sm">
+                    <div className="text-right mb-3">
+                      <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wide">Totaux</h3>
+                    </div>
+
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 space-y-3">
+                      {/* Revenus */}
+                      <div className="flex justify-between items-center pb-2">
+                        <span className="text-sm text-gray-600 font-medium">Revenus</span>
+                        <span className="text-base font-bold text-green-600">
+                          +{recentTransactions
+                            .filter(t => t.type === 'income')
+                            .reduce((sum, t) => sum + t.amount, 0)
+                            .toFixed(2)} €
+                        </span>
+                      </div>
+
+                      {/* Dépenses */}
+                      <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                        <span className="text-sm text-gray-600 font-medium">Dépenses</span>
+                        <span className="text-base font-bold text-red-600">
+                          -{recentTransactions
+                            .filter(t => t.type === 'expense')
+                            .reduce((sum, t) => sum + t.amount, 0)
+                            .toFixed(2)} €
+                        </span>
+                      </div>
+
+                      {/* Solde Net */}
+                      <div className="flex justify-between items-center pt-1">
+                        <span className="text-sm text-gray-900 font-bold">Solde Net</span>
+                        <span className={`text-lg font-bold ${
+                          recentTransactions
+                            .reduce((sum, t) => t.type === 'income' ? sum + t.amount : sum - t.amount, 0) >= 0
+                            ? 'text-blue-600'
+                            : 'text-red-600'
+                        }`}>
+                          {recentTransactions
+                            .reduce((sum, t) => t.type === 'income' ? sum + t.amount : sum - t.amount, 0)
+                            .toFixed(2)} €
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
         </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </div>
   )
 }

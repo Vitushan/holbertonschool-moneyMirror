@@ -8,7 +8,6 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Logo from '@/components/Logo'
-import Footer from '@/components/Footer'
 
 export default function LoginPage() {
   // État pour stocker les données du formulaire
@@ -213,9 +212,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </div>
   )
 }

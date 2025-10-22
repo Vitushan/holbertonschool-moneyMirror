@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Modal from "../../components/Modal";
 import Logo from "@/components/Logo";
-import Footer from "@/components/Footer";
 
 export default function TransactionsPage() {
   // État pour stocker la liste des transactions
@@ -237,6 +236,7 @@ export default function TransactionsPage() {
             <p className="text-red-700 font-medium text-center">{deleteError}</p>
           </div>
         )}
+        <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
@@ -298,6 +298,7 @@ export default function TransactionsPage() {
             )}
           </tbody>
         </table>
+        </div>
         {isModalOpen && (
           <Modal onClose={closeModal} onConfirm={confirmDelete}>
             <p>Êtes-vous sûr de vouloir supprimer cette transaction ?</p>
@@ -305,8 +306,6 @@ export default function TransactionsPage() {
         )}
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 }
