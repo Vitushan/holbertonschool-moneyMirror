@@ -1,102 +1,125 @@
-import { NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../auth/[...nextauth]/route'
 import { prisma } from '@/lib/prisma'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../auth/[...nextauth]/route'
+import { NextResponse } from 'next/server'
+import jwt from 'jsonwebtoken'
 
-export async function GET(request) {
-  try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
-    }
 
-    const { searchParams } = new URL(request.url)
-    const page = parseInt(searchParams.get('page') || '1')
-    const limit = parseInt(searchParams.get('limit') || '10')
-    const type = searchParams.get('type')
-    const category = searchParams.get('category')
-    const startDate = searchParams.get('startDate')
-    const endDate = searchParams.get('endDate')
-
-    const skip = (page - 1) * limit
-
-    const where = {
-      userId: session.user.id,
-      ...(type && { type }),
-      ...(category && { category }),
-      ...(startDate && endDate && {
-        date: {
-          gte: new Date(startDate),
-          lte: new Date(endDate)
-        }
-      })
-    }
-
-    const [transactions, total] = await Promise.all([
-      prisma.transaction.findMany({
-        where,
-        orderBy: { date: 'desc' },
-        skip,
-        take: limit
-      }),
-      prisma.transaction.count({ where })
-    ])
-
-    return NextResponse.json({
-      transactions,
-      pagination: {
-        page,
-        limit,
-        total,
-        pages: Math.ceil(total / limit)
-      }
-    })
-  } catch (error) {
-    console.error('Erreur lors de la récupération des transactions:', error)
-    return NextResponse.json(
-      { error: 'Erreur serveur' },
-      { status: 500 }
-    )
-  }
-}
 
 export async function POST(request) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    let userId = null;
+    // Vérifier l'authentification par token bearer
+    const authHeader = request.headers.get('authorization');
+
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      try {
+        const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
+        userId = decoded.id;
+      } catch (err) {
+        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+      }
+    } else {
+      // Sinon, utiliser la session NextAuth
+      let session = null;
+      try {
+        session = await getServerSession(authOptions);
+      } catch (err) {
+        return NextResponse.json({ error: 'Error retrieving session', details: String(err) }, { status: 500 });
+      }
+      if (session && session.user && session.user.id) {
+        userId = session.user.id;
+      }
     }
 
-    const body = await request.json()
-    const { title, description, amount, type, category, date } = body
-
-    if (!title || !amount || !type || !category) {
-      return NextResponse.json(
-        { error: 'Champs requis manquants' },
-        { status: 400 }
-      )
+    if (!userId) {
+      return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 });
     }
+
+    const body = await request.json();
+    const { amount, type, category, date, note, description, currency } = body;
+    if (
+      typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
+    ) {
+      return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 });
+    }
+
+    // Validation de la date
+    let transactionDate = new Date();
+    if (date) {
+      const parsedDate = new Date(date);
+      if (isNaN(parsedDate.getTime())) {
+        return NextResponse.json({ error: 'Please enter a valid date."' }, { status: 400 });
+      }
+      // Les dates futures ne sont pas autorisées
+      const now = new Date();
+      if (parsedDate > now) {
+        return NextResponse.json({ error: "Sorry, you can't travel to the future." }, { status: 400 });
+      }
+      transactionDate = parsedDate;
+    }
+
 
     const transaction = await prisma.transaction.create({
       data: {
-        title,
-        description,
-        amount: parseFloat(amount),
-        type,
-        category,
-        date: date ? new Date(date) : new Date(),
-        userId: session.user.id
-      }
-    })
+        userId: userId,
+        amount: amount,
+        type: type,
+        category: category,
+        date: transactionDate,
+        note: note,
+        description: description,
+        currency: currency,
+      },
+    });
 
-    return NextResponse.json(transaction, { status: 201 })
+    return NextResponse.json({
+      success: true,
+      message: 'Congrats, transaction created!',
+      transaction,
+    }, { status: 201 });
   } catch (error) {
-    console.error('Erreur lors de la création de la transaction:', error)
-    return NextResponse.json(
-      { error: 'Erreur serveur' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Oops! Internal server error' }, { status: 500 });
+  }
+}
+
+export async function GET(request) {
+  try {
+    let userId = null;
+
+    // Vérifier Authorization: Bearer token
+    const authHeader = request.headers.get('authorization');
+
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      try {
+        const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
+        userId = decoded.id;
+      } catch (err) {
+        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+      }
+    } else {
+      // Sinon, utiliser la session NextAuth
+      const session = await getServerSession(authOptions);
+      if (session && session.user && session.user.id) {
+        userId = session.user.id;
+      }
+    }
+
+    if (!userId) {
+      return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
+    }
+
+    // Récupérer toutes les transactions depuis la base de données pour l'utilisateur authentifié
+    const transactions = await prisma.transaction.findMany({
+      where: { userId },
+      orderBy: { date: 'desc' },
+    });
+
+    return NextResponse.json({ success: true, transactions }, { status: 200 });
+
+  } catch (error) {
+    return NextResponse.json({ error: "Oops! Internal server error" }, { status: 500 });
   }
 }

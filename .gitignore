@@ -47,3 +47,27 @@ prisma/dev.db-journal
 
 # OS
 Thumbs.db
+
+# Ignore temporary files
+*.txt
+*.sql
+*.sh
+# Claude Code CLI (AI tool)
+.claude/
+
+# Test files with tokens
+cookies.txt
+csrf.txt
+test_*.sh
+result_*.txt
+
+# SQL backups
+*.sql
+*.sqlmysqldump
+
+# Personal notes
+*_style.txt
+
+# Playwright reports
+playwright-report/
+test-results/

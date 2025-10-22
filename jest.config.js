@@ -1,32 +1,28 @@
-const nextJest = require('next/jest')
+/// Configuration for Jest file
 
+// Import Next.js Jest configuration helper
+const nextJest = require("next/jest");
+
+// Create Jest configuration factory with Next.js integration
 const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files
-  dir: './',
-})
+    // Provide the path to my Next.js app to load next.config.js and .env files in my test environment
+    dir: './',
+});
 
-// Add any custom config to be passed to Jest
+// Add custom Jest configuration
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  moduleNameMapper: {
-    // Handle module aliases (this will be automatically configured for you based on your tsconfig.json paths)
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
-  testEnvironment: 'jest-environment-jsdom',
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/app/layout.js',
-    '!src/app/globals.css',
-  ],
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html'],
-  testPathIgnorePatterns: [
-    '<rootDir>/.next/',
-    '<rootDir>/node_modules/',
-    '<rootDir>/tests/cypress/',
-  ],
-}
+    setupFilesAfterEnv: ["<rootDir>/jest.setup.js"], // Load jest.setup.js before tests
+    testEnvironment: "node",  // Use Node.js environment for backend testing
+    moduleNameMapper: {
+         '^@/(.*)$': '<rootDir>/src/$1', // Map @/ to the src folder
+    },
+    testMatch: ['**/__tests__/**/*.test.js', '**/__tests__.integration/**/*.spec.js'], // Locate test files
+    testPathIgnorePatterns: ['/node_modules/', '/.next/', '\\.e2e\\.spec\\.js$'], // Exclude E2E Playwright tests
+    collectCoverageFrom: [
+        "src/app/api/**/*.js", // Include API files for coverage
+        "!src/app/api/**/_*.js" // Exclude private API files
+    ],
+};
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = createJestConfig(customJestConfig)
+// Export the Jest configuration
+module.exports = createJestConfig(customJestConfig);
