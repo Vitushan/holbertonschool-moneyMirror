@@ -13,9 +13,9 @@ export default function Navbar() {
   const pathname = usePathname()
 
   const navigation = [
-    { name: 'Tableau de bord', href: '/dashboard', icon: '📊' },
-    { name: 'Transactions', href: '/transactions', icon: '💳' },
-    { name: 'Ajouter Transaction', href: '/transactions/add', icon: '➕' },
+    { name: 'Tableau de bord', href: '/dashboard' },
+    { name: 'Transactions', href: '/transactions' },
+    { name: 'Ajouter Transaction', href: '/transactions/add' },
   ]
 
   const handleLogout = async () => {
@@ -65,14 +65,13 @@ export default function Navbar() {
                 key={item.name}
                 onClick={() => router.push(item.href)}
                 className={cn(
-                  "px-3 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-2",
+                  "px-3 py-2 rounded-md text-sm font-medium transition-all",
                   pathname === item.href
                     ? "bg-blue-50 text-blue-600"
                     : "text-gray-700 hover:bg-gray-100"
                 )}
               >
-                <span>{item.icon}</span>
-                <span>{item.name}</span>
+                {item.name}
               </button>
             ))}
 
@@ -139,14 +138,13 @@ export default function Navbar() {
                 setIsOpen(false)
               }}
               className={cn(
-                "block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-all flex items-center gap-2",
+                "block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-all",
                 pathname === item.href
                   ? "bg-blue-50 text-blue-600"
                   : "text-gray-700 hover:bg-gray-100"
               )}
             >
-              <span>{item.icon}</span>
-              <span>{item.name}</span>
+              {item.name}
             </button>
           ))}
 

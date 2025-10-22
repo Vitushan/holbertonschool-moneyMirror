@@ -280,7 +280,7 @@ export default function DashboardPage() {
               <h1 className="text-2xl font-semibold text-gray-800 inline-block px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
                 Bienvenue à bord
               </h1>
-              <p className="text-gray-600 mt-3">Bienvenue, {session?.user?.name || 'Utilisateur'}</p>
+              <p className="text-gray-600 mt-3">Bonjour, {session?.user?.name || 'Utilisateur'}</p>
             </div>
 
             <div className="flex items-center gap-3 flex-wrap">
