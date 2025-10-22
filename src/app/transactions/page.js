@@ -6,7 +6,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Modal from "../../components/Modal";
-import Logo from "@/components/Logo";
 
 export default function TransactionsPage() {
   // État pour stocker la liste des transactions
@@ -186,12 +185,6 @@ export default function TransactionsPage() {
   }
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <div className="bg-white border-b border-gray-200 px-8 py-4 shadow-sm">
-        <div className="max-w-7xl mx-auto">
-          <Logo />
-        </div>
-      </div>
-
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-6xl bg-white shadow rounded-lg overflow-x-auto p-6">
           <div className="flex justify-between items-center mb-6 flex-wrap gap-4">

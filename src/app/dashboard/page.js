@@ -16,7 +16,6 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts'
 
-import Logo from '@/components/Logo'
 
 // Composant principal pour la page Dashboard
 export default function DashboardPage() {
@@ -260,12 +259,6 @@ export default function DashboardPage() {
   }
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <div className="bg-white border-b border-gray-200 px-8 py-4 shadow-sm">
-        <div className="max-w-7xl mx-auto">
-          <Logo />
-        </div>
-      </div>
-
       <div className="flex-1 p-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8 flex justify-between items-center flex-wrap gap-4">
