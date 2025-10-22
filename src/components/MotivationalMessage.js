@@ -1,26 +1,26 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import motivationalMessages from '@/data/motivationalMessages.json'
 
 export default function MotivationalMessage() {
   const [currentMessage, setCurrentMessage] = useState(null)
 
-  // Fonction pour obtenir un message aléatoire
-  const getRandomMessage = () => {
+  // Fonction pour obtenir un message aléatoire - mémoïsée avec useCallback
+  const getRandomMessage = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * motivationalMessages.length)
     return motivationalMessages[randomIndex]
-  }
+  }, [])
 
   // Charger un message aléatoire au montage du composant
   useEffect(() => {
     setCurrentMessage(getRandomMessage())
-  }, [])
+  }, [getRandomMessage])
 
-  // Fonction pour charger un nouveau message
-  const handleNewMessage = () => {
+  // Fonction pour charger un nouveau message - mémoïsée avec useCallback
+  const handleNewMessage = useCallback(() => {
     setCurrentMessage(getRandomMessage())
-  }
+  }, [getRandomMessage])
 
   // Ne rien afficher tant que le message n'est pas chargé
   if (!currentMessage) {

@@ -15,16 +15,23 @@ jest.mock('@prisma/client', () => {
   };
 });
 
-jest.mock('next-auth', () => ({
+jest.mock('next-auth/next', () => ({
   getServerSession: jest.fn(() =>
     Promise.resolve({ user: { id: 'test-user-id', email: 'test@example.com' } })
   ),
 }));
 
+jest.mock('next/headers', () => ({
+  cookies: jest.fn(() => ({
+    get: jest.fn(),
+    set: jest.fn(),
+  })),
+}));
+
 import { GET } from '../../../src/app/api/dashboard/stats/route';
 import { NextRequest } from 'next/server';
 import { __mockTransactionMethods } from '@prisma/client';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 
 const mockTransaction = __mockTransactionMethods;
 

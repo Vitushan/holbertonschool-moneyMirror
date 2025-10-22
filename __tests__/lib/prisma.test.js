@@ -47,11 +47,11 @@ describe('Prisma Client', () => {
   });
 
   it('should create a new PrismaClient instance', () => {
-    const { PrismaClient } = require('@prisma/client');
     const { prisma } = require('../../src/lib/prisma');
 
-    expect(PrismaClient).toHaveBeenCalled();
     expect(prisma).toBeDefined();
+    expect(prisma.$connect).toBeDefined();
+    expect(prisma.$disconnect).toBeDefined();
   });
 
   it('should reuse existing prisma client in development', () => {

@@ -6,15 +6,23 @@
 
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 
-// Importer les composants Recharts pour différents types de graphiques
-import {
-  LineChart, Line,
-  PieChart, Pie, Cell,
-  BarChart, Bar,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
-} from 'recharts'
+// Lazy loading des composants Recharts (optimisation du bundle initial)
+const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), { ssr: false })
+const Line = dynamic(() => import('recharts').then(mod => mod.Line), { ssr: false })
+const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), { ssr: false })
+const Pie = dynamic(() => import('recharts').then(mod => mod.Pie), { ssr: false })
+const Cell = dynamic(() => import('recharts').then(mod => mod.Cell), { ssr: false })
+const BarChart = dynamic(() => import('recharts').then(mod => mod.BarChart), { ssr: false })
+const Bar = dynamic(() => import('recharts').then(mod => mod.Bar), { ssr: false })
+const XAxis = dynamic(() => import('recharts').then(mod => mod.XAxis), { ssr: false })
+const YAxis = dynamic(() => import('recharts').then(mod => mod.YAxis), { ssr: false })
+const CartesianGrid = dynamic(() => import('recharts').then(mod => mod.CartesianGrid), { ssr: false })
+const Tooltip = dynamic(() => import('recharts').then(mod => mod.Tooltip), { ssr: false })
+const Legend = dynamic(() => import('recharts').then(mod => mod.Legend), { ssr: false })
+const ResponsiveContainer = dynamic(() => import('recharts').then(mod => mod.ResponsiveContainer), { ssr: false })
 
 
 // Composant principal pour la page Dashboard
@@ -67,23 +75,9 @@ export default function DashboardPage() {
   // recentTransactions: liste des dernières transactions
   const [recentTransactions, setRecentTransactions] = useState([])
 
-  // ÉTAPE 3 : Rediriger les utilisateurs non authentifiés vers la page de connexion
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login')
-    }
-  }, [status, router])
-
-  // ÉTAPE 4 : Récupérer les données du tableau de bord lors de l'authentification ou du changement de filtre
-  useEffect(() => {
-    if (status === 'authenticated') {
-      fetchDashboardData()
-    }
-  }, [status, filter])
-
-  // Fonction pour récupérer les données du dashboard depuis l'API
+  // Fonction pour récupérer les données du dashboard depuis l'API (mémoïsée avec useCallback)
   // Récupère les statistiques et les données des graphiques en fonction du filtre sélectionné
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     setIsLoading(true)
     setChartError(null)
 
@@ -148,11 +142,25 @@ export default function DashboardPage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [filter])
 
-  // Fonction pour télécharger le dashboard ou un graphique spécifique en PNG
+  // ÉTAPE 3 : Rediriger les utilisateurs non authentifiés vers la page de connexion
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login')
+    }
+  }, [status, router])
+
+  // ÉTAPE 4 : Récupérer les données du tableau de bord lors de l'authentification ou du changement de filtre
+  useEffect(() => {
+    if (status === 'authenticated') {
+      fetchDashboardData()
+    }
+  }, [status, fetchDashboardData])
+
+  // Fonction pour télécharger le dashboard ou un graphique spécifique en PNG (mémoïsée avec useCallback)
   // Utilise dom-to-image-more pour convertir les éléments HTML (y compris SVG) en image
-  const downloadDashboardAsPNG = async () => {
+  const downloadDashboardAsPNG = useCallback(async () => {
     try {
       setDownloadMessage({ type: 'loading', text: 'Génération du fichier PNG...' })
 
@@ -227,25 +235,31 @@ export default function DashboardPage() {
         setDownloadMessage(null)
       }, 5000)
     }
-  }
+  }, [selectedChart])
 
-  // Filtrage des données du graphique en ligne par terme de recherche
-  const filteredLineChartData = lineChartData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  // Filtrage des données du graphique en ligne par terme de recherche (mémoïsé pour performance)
+  const filteredLineChartData = useMemo(() => {
+    return lineChartData.filter(item =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [lineChartData, searchTerm])
 
-  // Filtrage des données du graphique camembert UNIQUEMENT par catégorie
+  // Filtrage des données du graphique camembert UNIQUEMENT par catégorie (mémoïsé pour performance)
   // (searchTerm ne s'applique pas car les noms sont des catégories, pas des dates)
-  const filteredPieChartData = pieChartData.filter(item => {
-    const matchesCategory = selectedCategory === 'all' ||
-      item.name.toLowerCase() === selectedCategory.toLowerCase()
-    return matchesCategory
-  })
+  const filteredPieChartData = useMemo(() => {
+    return pieChartData.filter(item => {
+      const matchesCategory = selectedCategory === 'all' ||
+        item.name.toLowerCase() === selectedCategory.toLowerCase()
+      return matchesCategory
+    })
+  }, [pieChartData, selectedCategory])
 
-  // Filtrage des données du graphique en barres par terme de recherche
-  const filteredBarChartData = barChartData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  // Filtrage des données du graphique en barres par terme de recherche (mémoïsé pour performance)
+  const filteredBarChartData = useMemo(() => {
+    return barChartData.filter(item =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [barChartData, searchTerm])
 
   // Couleurs pour le graphique camembert
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
@@ -264,7 +278,7 @@ export default function DashboardPage() {
           <div className="mb-8 flex justify-between items-center flex-wrap gap-4">
             <div>
               <h1 className="text-2xl font-semibold text-gray-800 inline-block px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
-                Tableau de bord
+                Bienvenue à bord
               </h1>
               <p className="text-gray-600 mt-3">Bienvenue, {session?.user?.name || 'Utilisateur'}</p>
             </div>

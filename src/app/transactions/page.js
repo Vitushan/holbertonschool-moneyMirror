@@ -3,9 +3,12 @@
 // Route protégée, nécessite une authentification
 
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import Modal from "../../components/Modal";
+import dynamic from "next/dynamic";
+
+// Lazy loading du Modal (optimisation du bundle)
+const Modal = dynamic(() => import("../../components/Modal"), { ssr: false });
 
 export default function TransactionsPage() {
   // État pour stocker la liste des transactions
@@ -58,17 +61,17 @@ export default function TransactionsPage() {
     fetchTransactions();
   }, []);
 
-  // Fonction pour calculer le solde total (revenus - dépenses)
-  const calculateBalance = (transactions) => {
+  // Fonction pour calculer le solde total (revenus - dépenses) - mémoïsée avec useCallback
+  const calculateBalance = useCallback((transactions) => {
     return transactions.reduce((total, transaction) => {
       return transaction.type === "income"
         ? total + transaction.amount
         : total - transaction.amount;
     }, 0);
-  };
+  }, []);
 
-  // Fonction pour calculer séparément les revenus et les dépenses
-  const calculateIncomeAndExpenses = (transactions) => {
+  // Calcul des revenus et dépenses séparément - mémoïsé avec useMemo pour éviter recalculs
+  const { income, expenses } = useMemo(() => {
     return transactions.reduce(
       (totals, transaction) => {
         if (transaction.type === "income") {
@@ -80,32 +83,45 @@ export default function TransactionsPage() {
       },
       { income: 0, expenses: 0 }
     );
-  };
+  }, [transactions]);
 
-  const { income, expenses } = calculateIncomeAndExpenses(transactions);
-
-  // Fonction pour formater les montants en euros
-  const formatAmount = (amount) => {
+  // Fonction pour formater les montants en euros - mémoïsée avec useCallback
+  const formatAmount = useCallback((amount) => {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
       currency: "EUR",
     }).format(amount);
-  };
+  }, []);
 
-  // Fonction pour ouvrir le modal de confirmation de suppression
-  const openModal = (id) => {
+  // Fonction pour ouvrir le modal de confirmation de suppression - mémoïsée avec useCallback
+  const openModal = useCallback((id) => {
     setTransactionToDelete(id);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  // Fonction pour fermer le modal de confirmation
-  const closeModal = () => {
+  // Fonction pour fermer le modal de confirmation - mémoïsée avec useCallback
+  const closeModal = useCallback(() => {
     setTransactionToDelete(null);
     setIsModalOpen(false);
-  };
+  }, []);
 
-  // Fonction pour confirmer et exécuter la suppression d'une transaction
-  const confirmDelete = async () => {
+  // Fonction pour recharger la liste des transactions après modification - mémoïsée avec useCallback
+  const reloadTransactions = useCallback(async () => {
+    setIsReloading(true);
+    try {
+      const updatedRes = await fetch("/api/transactions");
+      if (!updatedRes.ok) throw new Error("Échec de la récupération des transactions mises à jour");
+      const updatedData = await updatedRes.json();
+      setTransactions(updatedData.transactions || []);
+    } catch (err) {
+      setError(err.message || "Une erreur inattendue s'est produite lors du rechargement des transactions");
+    } finally {
+      setIsReloading(false);
+    }
+  }, []);
+
+  // Fonction pour confirmer et exécuter la suppression d'une transaction - mémoïsée avec useCallback
+  const confirmDelete = useCallback(async () => {
     if (!transactionToDelete) return;
 
     setDeleteError("");
@@ -130,25 +146,10 @@ export default function TransactionsPage() {
       closeModal();
       setTimeout(() => setDeleteError(""), 5000);
     }
-  };
+  }, [transactionToDelete, reloadTransactions, closeModal]);
 
-  // Fonction pour recharger la liste des transactions après modification
-  const reloadTransactions = async () => {
-    setIsReloading(true);
-    try {
-      const updatedRes = await fetch("/api/transactions");
-      if (!updatedRes.ok) throw new Error("Échec de la récupération des transactions mises à jour");
-      const updatedData = await updatedRes.json();
-      setTransactions(updatedData.transactions || []);
-    } catch (err) {
-      setError(err.message || "Une erreur inattendue s'est produite lors du rechargement des transactions");
-    } finally {
-      setIsReloading(false);
-    }
-  };
-
-  // Fonction pour naviguer vers la page de modification d'une transaction
-  const handleEdit = async (id) => {
+  // Fonction pour naviguer vers la page de modification d'une transaction - mémoïsée avec useCallback
+  const handleEdit = useCallback(async (id) => {
     if (!id) {
       console.error("ID de transaction invalide");
       return;
@@ -158,7 +159,7 @@ export default function TransactionsPage() {
     } catch (err) {
       console.error("Échec de la navigation vers la page de modification", err);
     }
-  };
+  }, [router]);
 
   if (loading) {
     return (
