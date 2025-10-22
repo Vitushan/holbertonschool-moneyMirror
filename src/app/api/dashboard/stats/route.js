@@ -106,9 +106,22 @@ export async function GET(request) {
         .filter(t => t.type === 'expense')
         .reduce((sum, t) => sum + t.amount, 0)
 
-    const growth = previousRevenue > 0
-      ? ((revenue - previousRevenue) / previousRevenue) * 100
-      : 0
+    // Calcul de la croissance avec gestion des cas limites
+    let growth = 0
+    if (previousRevenue === 0 && revenue > 0) {
+      // Si on passe de 0 à positif, c'est une croissance de 100%
+      growth = 100
+    } else if (previousRevenue === 0 && revenue < 0) {
+      // Si on passe de 0 à négatif, c'est une décroissance de -100%
+      growth = -100
+    } else if (previousRevenue !== 0) {
+      // Calcul normal de la croissance
+      growth = ((revenue - previousRevenue) / Math.abs(previousRevenue)) * 100
+    }
+    // Si les deux sont à 0, on garde growth = 0
+
+    console.log(`Previous period: ${previousTransactions.length} transactions, Revenue: ${previousRevenue}`)
+    console.log(`Growth calculation: ${growth}%`)
 
     // Count unique users (in this case, just 1 - the current user)
     // You might want to count something else like number of transactions
