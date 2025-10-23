@@ -5,6 +5,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import MotivationalMessage from "@/components/MotivationalMessage";
 
 export default function AddTransactionPage() {
   // État pour stocker les données du formulaire
@@ -24,6 +25,8 @@ export default function AddTransactionPage() {
   const [error, setError] = useState("");
   // État pour les messages de succès
   const [success, setSuccess] = useState("");
+  // État pour le type de transaction ajoutée (pour afficher le bon message)
+  const [addedTransactionType, setAddedTransactionType] = useState(null);
   const router = useRouter();
 
   // Liste des devises traditionnelles disponibles
@@ -98,8 +101,13 @@ export default function AddTransactionPage() {
         }),
       });
       if (!res.ok) throw new Error("Échec de l'ajout de la transaction");
-      setSuccess("Transaction ajoutée avec succès ! Redirection vers le tableau de bord...");
+
+      // Définir le type de transaction pour afficher le bon message
+      setAddedTransactionType(form.type);
+      setSuccess("Transaction ajoutée avec succès !");
+
       // Réinitialisation du formulaire
+      const previousType = form.type; // Garder le type pour l'affichage du message
       setForm({
         amount: "",
         type: "",
@@ -110,8 +118,9 @@ export default function AddTransactionPage() {
         currency: "EUR",
         date: "",
       });
-      // Redirection après 1.5 seconde
-      setTimeout(() => router.push("/dashboard"), 1500);
+
+      // Redirection après 3 secondes (pour laisser le temps de lire le message)
+      setTimeout(() => router.push("/dashboard"), 3000);
     } catch (err) {
       setError(err.message || "Erreur inconnue");
     } finally {
@@ -301,10 +310,14 @@ export default function AddTransactionPage() {
               {loading ? "Ajout en cours..." : "Ajouter Transaction"}
             </button>
 
-            {/* Message de succès en bas */}
-            {success && (
-              <div className="mt-4 p-4 bg-green-100 border border-green-300 rounded-lg text-center">
-                <p className="text-green-700 font-semibold">{success}</p>
+            {/* Message de succès avec message motivationnel contextuel */}
+            {success && addedTransactionType && (
+              <div className="mt-4 space-y-4">
+                <div className="p-4 bg-green-100 border border-green-300 rounded-lg text-center">
+                  <p className="text-green-700 font-semibold">{success}</p>
+                </div>
+                {/* Message motivationnel adapté au type de transaction */}
+                <MotivationalMessage messageType={addedTransactionType} />
               </div>
             )}
 

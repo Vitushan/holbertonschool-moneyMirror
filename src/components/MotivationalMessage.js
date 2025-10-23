@@ -3,16 +3,17 @@
 import { useState, useEffect, useCallback } from 'react'
 import motivationalMessages from '@/data/motivationalMessages.json'
 
-export default function MotivationalMessage() {
+export default function MotivationalMessage({ messageType = 'general' }) {
   const [currentMessage, setCurrentMessage] = useState(null)
 
-  // Fonction pour obtenir un message aléatoire - mémoïsée avec useCallback
+  // Fonction pour obtenir un message aléatoire selon le type - mémoïsée avec useCallback
   const getRandomMessage = useCallback(() => {
-    const randomIndex = Math.floor(Math.random() * motivationalMessages.length)
-    return motivationalMessages[randomIndex]
-  }, [])
+    const messages = motivationalMessages[messageType] || motivationalMessages.general
+    const randomIndex = Math.floor(Math.random() * messages.length)
+    return messages[randomIndex]
+  }, [messageType])
 
-  // Charger un message aléatoire au montage du composant
+  // Charger un message aléatoire au montage du composant ou quand le type change
   useEffect(() => {
     setCurrentMessage(getRandomMessage())
   }, [getRandomMessage])

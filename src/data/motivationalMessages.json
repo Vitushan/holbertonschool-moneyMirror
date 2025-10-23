@@ -1,82 +1,168 @@
-[
-  {
-    "id": 1,
-    "text": "Vous avez ce don rare de comprendre la vraie valeur de l'argent, même si parfois vous doutez de vos choix. Votre intuition financière est plus forte que vous ne le pensez."
-  },
-  {
-    "id": 2,
-    "text": "Les gens autour de vous ne voient pas les sacrifices que vous faites. Mais chaque euro que vous mettez de côté construit secrètement votre empire personnel."
-  },
-  {
-    "id": 3,
-    "text": "Vous êtes du genre à analyser vos dépenses plus que la moyenne. Cette conscience financière vous place déjà dans le top 10% de votre génération."
-  },
-  {
-    "id": 4,
-    "text": "Votre personnalité révèle quelqu'un qui peut être généreux tout en restant prudent. C'est l'équilibre parfait pour bâtir une richesse durable."
-  },
-  {
-    "id": 5,
-    "text": "Vous avez déjà prouvé que vous pouvez surmonter des difficultés financières. Cette résilience est votre plus grand atout pour les années à venir."
-  },
-  {
-    "id": 6,
-    "text": "Peu de gens ont votre capacité à visualiser leur futur financier. Vous ne dépensez pas au hasard, vous investissez dans votre vision de demain."
-  },
-  {
-    "id": 7,
-    "text": "Votre rapport à l'argent est complexe, fait de désirs et de sagesse. C'est cette dualité qui fait de vous quelqu'un de financièrement mature."
-  },
-  {
-    "id": 8,
-    "text": "Vous êtes perfectionniste avec vos finances, parfois même trop dur envers vous-même. Mais c'est justement ce qui vous protégera des pièges financiers."
-  },
-  {
-    "id": 9,
-    "text": "Les statistiques montrent que ceux qui suivent leurs dépenses comme vous le faites ont 8 fois plus de chances d'atteindre l'indépendance financière."
-  },
-  {
-    "id": 10,
-    "text": "Votre intelligence émotionnelle vous permet de résister aux achats impulsifs que d'autres regrettent. C'est un super-pouvoir financier sous-estimé."
-  },
-  {
-    "id": 11,
-    "text": "Vous avez cette ambition secrète de ne plus jamais stresser pour l'argent. En suivant vos dépenses ici, vous êtes déjà sur le bon chemin."
-  },
-  {
-    "id": 12,
-    "text": "Même si personne ne le remarque, vous faites des choix financiers plus intelligents que 80% des gens. Votre discipline silencieuse paie toujours."
-  },
-  {
-    "id": 13,
-    "text": "Votre sensibilité aux variations de votre budget montre que vous êtes connecté à vos finances d'une manière que peu de gens comprennent."
-  },
-  {
-    "id": 14,
-    "text": "Vous avez cette qualité rare de pouvoir dire 'non' à certaines dépenses pour dire 'oui' à votre liberté future. C'est le secret des millionnaires self-made."
-  },
-  {
-    "id": 15,
-    "text": "Les personnes comme vous, qui prennent le temps de traquer chaque transaction, finissent toujours par dépasser leurs objectifs financiers initiaux."
-  },
-  {
-    "id": 16,
-    "text": "Votre capacité à remettre en question vos habitudes financières révèle une intelligence adaptative que peu de gens possèdent naturellement."
-  },
-  {
-    "id": 17,
-    "text": "Vous êtes probablement plus doué pour gérer l'argent que vos parents ne l'étaient à votre âge. Cette évolution familiale commence avec vous."
-  },
-  {
-    "id": 18,
-    "text": "Votre intuition vous dit que quelque chose doit changer dans vos finances. Écoutez-la. Cette petite voix intérieure vous a déjà sauvé plusieurs fois."
-  },
-  {
-    "id": 19,
-    "text": "Vous avez ce talent caché pour transformer de petites sommes en grandes opportunités. C'est juste une question de temps avant que ça devienne évident."
-  },
-  {
-    "id": 20,
-    "text": "Votre relation à l'argent est en train d'évoluer vers quelque chose de plus mature, de plus puissant. Vous le sentez, et les chiffres le confirmeront bientôt."
-  }
-]
+{
+  "general": [
+    {
+      "id": 1,
+      "text": "Vous avez ce don rare de comprendre la vraie valeur de l'argent, même si parfois vous doutez de vos choix. Votre intuition financière est plus forte que vous ne le pensez."
+    },
+    {
+      "id": 2,
+      "text": "Les gens autour de vous ne voient pas les sacrifices que vous faites. Mais chaque euro que vous mettez de côté construit secrètement votre empire personnel."
+    },
+    {
+      "id": 3,
+      "text": "Vous êtes du genre à analyser vos dépenses plus que la moyenne. Cette conscience financière vous place déjà dans le top 10% de votre génération."
+    },
+    {
+      "id": 4,
+      "text": "Votre personnalité révèle quelqu'un qui peut être généreux tout en restant prudent. C'est l'équilibre parfait pour bâtir une richesse durable."
+    },
+    {
+      "id": 5,
+      "text": "Vous avez déjà prouvé que vous pouvez surmonter des difficultés financières. Cette résilience est votre plus grand atout pour les années à venir."
+    },
+    {
+      "id": 6,
+      "text": "Peu de gens ont votre capacité à visualiser leur futur financier. Vous ne dépensez pas au hasard, vous investissez dans votre vision de demain."
+    },
+    {
+      "id": 7,
+      "text": "Votre rapport à l'argent est complexe, fait de désirs et de sagesse. C'est cette dualité qui fait de vous quelqu'un de financièrement mature."
+    },
+    {
+      "id": 8,
+      "text": "Vous êtes perfectionniste avec vos finances, parfois même trop dur envers vous-même. Mais c'est justement ce qui vous protégera des pièges financiers."
+    },
+    {
+      "id": 9,
+      "text": "Les statistiques montrent que ceux qui suivent leurs dépenses comme vous le faites ont 8 fois plus de chances d'atteindre l'indépendance financière."
+    },
+    {
+      "id": 10,
+      "text": "Votre intelligence émotionnelle vous permet de résister aux achats impulsifs que d'autres regrettent. C'est un super-pouvoir financier sous-estimé."
+    }
+  ],
+  "income": [
+    {
+      "id": 1,
+      "text": "Bravo ! Vous construisez votre empire financier, euro par euro. Chaque revenu est une victoire."
+    },
+    {
+      "id": 2,
+      "text": "Excellent ! Votre patrimoine grandit. Cette entrée d'argent prouve que vous êtes sur la bonne voie."
+    },
+    {
+      "id": 3,
+      "text": "Félicitations ! Chaque revenu est une pierre de plus dans votre édifice financier. Continuez comme ça !"
+    },
+    {
+      "id": 4,
+      "text": "Superbe ! Vous avez ce talent pour attirer l'argent. Cette capacité va vous mener loin."
+    },
+    {
+      "id": 5,
+      "text": "Magnifique ! Les revenus ne viennent pas par hasard, ils récompensent votre travail et votre intelligence."
+    },
+    {
+      "id": 6,
+      "text": "Bravo ! Vous êtes en train de créer une dynamique positive. L'argent appelle l'argent, et vous le prouvez."
+    },
+    {
+      "id": 7,
+      "text": "Excellent travail ! Ce revenu confirme que vos efforts payent. Votre futur financier s'annonce radieux."
+    },
+    {
+      "id": 8,
+      "text": "Fantastique ! Chaque euro qui entre renforce votre sécurité financière. Vous méritez cette réussite."
+    },
+    {
+      "id": 9,
+      "text": "Parfait ! Ce revenu n'est que le début. Votre potentiel financier est bien plus grand que vous ne l'imaginez."
+    },
+    {
+      "id": 10,
+      "text": "Impressionnant ! Vous avez cette capacité rare de transformer vos compétences en revenus. Continuez à briller !"
+    },
+    {
+      "id": 11,
+      "text": "Bravo ! L'argent que vous gagnez aujourd'hui construit la liberté de demain. Vous êtes sur le bon chemin."
+    },
+    {
+      "id": 12,
+      "text": "Génial ! Ce revenu prouve que vous savez créer de la valeur. Votre avenir financier est prometteur."
+    },
+    {
+      "id": 13,
+      "text": "Félicitations ! Vous attirez l'abondance. Cette énergie positive va multiplier vos opportunités."
+    },
+    {
+      "id": 14,
+      "text": "Excellent ! Chaque revenu renforce votre indépendance financière. Vous bâtissez quelque chose de solide."
+    },
+    {
+      "id": 15,
+      "text": "Bravo ! Ce revenu est la preuve que vous méritez la réussite. Votre travail porte ses fruits."
+    }
+  ],
+  "expense": [
+    {
+      "id": 1,
+      "text": "Attention, chaque dépense compte. Assurez-vous que celle-ci en vaut vraiment la peine pour votre futur."
+    },
+    {
+      "id": 2,
+      "text": "Votre vigilance est votre meilleur atout. Gardez le contrôle de vos dépenses, elles s'accumulent vite."
+    },
+    {
+      "id": 3,
+      "text": "Dépenser est facile, économiser est puissant. Trouvez l'équilibre qui vous mènera vers vos objectifs."
+    },
+    {
+      "id": 4,
+      "text": "Réfléchissez : cette dépense vous rapproche-t-elle de vos rêves ou vous en éloigne-t-elle ?"
+    },
+    {
+      "id": 5,
+      "text": "Chaque euro dépensé est un euro qui ne travaillera pas pour vous demain. Dépensez avec intention."
+    },
+    {
+      "id": 6,
+      "text": "Prudence : les petites dépenses font les grandes fuites. Restez conscient de vos habitudes."
+    },
+    {
+      "id": 7,
+      "text": "Votre futur vous remerciera de questionner chaque dépense. La richesse se construit dans les petits choix."
+    },
+    {
+      "id": 8,
+      "text": "Souvenez-vous : ce que vous ne dépensez pas aujourd'hui devient votre liberté de demain."
+    },
+    {
+      "id": 9,
+      "text": "Cette dépense est-elle un investissement ou une fuite ? Votre intelligence financière vous le dit."
+    },
+    {
+      "id": 10,
+      "text": "Attention aux dépenses émotionnelles. Les meilleures décisions financières sont réfléchies, pas impulsives."
+    },
+    {
+      "id": 11,
+      "text": "Gardez un œil sur vos dépenses. Les millionnaires ne le sont pas devenus en dépensant sans compter."
+    },
+    {
+      "id": 12,
+      "text": "Chaque dépense est un choix. Assurez-vous que vos choix construisent la vie que vous voulez."
+    },
+    {
+      "id": 13,
+      "text": "Sage conseil : différez cette dépense de 24h. Si elle est toujours nécessaire demain, alors faites-la."
+    },
+    {
+      "id": 14,
+      "text": "Vos dépenses racontent votre histoire. Assurez-vous d'écrire celle que vous voulez vivre."
+    },
+    {
+      "id": 15,
+      "text": "Pensez long terme : cette dépense sert-elle vos objectifs ou juste vos envies du moment ?"
+    }
+  ]
+}
