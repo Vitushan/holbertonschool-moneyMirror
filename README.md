@@ -39,9 +39,11 @@ Une application web complète de gestion financière construite avec Next.js 15,
 
 ### 🔐 Authentification
 - ✅ Inscription avec validation (email unique, mot de passe sécurisé)
+- ✅ **Connexion automatique après inscription** (pas besoin de se reconnecter)
 - ✅ Connexion avec NextAuth.js (session JWT)
 - ✅ Hachage des mots de passe avec bcryptjs
 - ✅ Protection des routes côté client et serveur
+- ✅ **Page d'accueil intelligente** : redirection automatique vers dashboard si connecté, sinon vers login
 - ✅ Redirection automatique vers le dashboard après connexion
 
 ### 💳 Gestion des Transactions
@@ -52,6 +54,14 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - ✅ Champs optionnels : description, note
 - ✅ Validation : montant positif, date non future
 - ✅ Liste paginée avec tri par date décroissante
+- ✅ **Messages motivationnels contextuels après ajout** :
+  - 💰 **Revenus** : Popup de félicitations avec messages encourageants
+  - ⚠️ **Dépenses** : Popup de conseil financier avec messages de prudence
+  - 🎨 Design premium avec overlay sombre, animations fluides
+  - ⏱️ Fermeture automatique après 10 secondes
+  - ❌ Bouton X et touche Escape pour fermeture manuelle
+  - 📊 Barre de progression visuelle (10s)
+  - 🎯 15 messages uniques par type (effet Barnum)
 
 ### 📊 Dashboard Interactif
 - ✅ **4 cartes de statistiques** :
@@ -86,11 +96,16 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - ✅ Composants UI shadcn/ui (Button, Card, Input)
 - ✅ Logo personnalisé avec gradient
 - ✅ Navbar avec navigation et déconnexion
-- ✅ Footer sur toutes les pages
-- ✅ Messages motivationnels (MotivationalMessage)
+- ✅ Footer sur toutes les pages avec messages motivationnels généraux
+- ✅ **Système de messages motivationnels à deux niveaux** :
+  - 💡 **Messages généraux** : En footer, visibles sur toutes les pages
+  - 🎉 **Messages contextuels** : Popup modal après ajout de transaction
+  - 🎨 Variant "alert" avec design premium (income vs expense)
+  - 🔄 Bouton pour générer un nouveau message aléatoire
+- ✅ **MotivationalModal** : Popup centré avec overlay sombre
 - ✅ Messages de succès/erreur
 - ✅ États de chargement (loading states)
-- ✅ Animations et transitions fluides
+- ✅ Animations CSS personnalisées (slideIn, fadeIn, progressBar, modalSlideIn)
 - ✅ Modales pour confirmations
 
 ### ⚡ Performance
@@ -108,7 +123,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 |------------|---------|-------------|
 | **Next.js** | 15.5.4 | Framework React avec SSR et App Router |
 | **React** | 18 | Bibliothèque UI pour les composants |
-| **Tailwind CSS** | Latest | Framework CSS utilitaire |
+| **Tailwind CSS** | Latest | Framework CSS utilitaire + animations personnalisées |
 | **Prisma** | Latest | ORM pour MySQL avec type-safety |
 | **MySQL** | 8.x | Base de données relationnelle |
 | **NextAuth.js** | Latest | Authentification (sessions JWT) |
@@ -314,13 +329,14 @@ holbertonschool-moneyMirror/
 │   │   ├── Footer.js                         # Composant Footer
 │   │   ├── Modal.js                          # Composant Modal
 │   │   ├── Navbar.js                         # Barre de navigation
-│   │   ├── MotivationalMessage.js            # Messages motivationnels
+│   │   ├── MotivationalMessage.js            # Messages motivationnels (général + contextuels)
+│   │   ├── MotivationalModal.js              # Popup modal pour messages contextuels
 │   │   └── ui/                               # Composants UI (shadcn/ui)
 │   │       ├── button.jsx                    # Bouton réutilisable
 │   │       ├── card.jsx                      # Carte avec Header/Content/Footer
 │   │       └── input.jsx                     # Input stylisé
 │   ├── data/
-│   │   └── motivationalMessages.json         # Messages inspirants
+│   │   └── motivationalMessages.json         # Messages inspirants (general, income, expense)
 │   └── lib/
 │       ├── prisma.js                         # Instance Prisma singleton
 │       └── utils.js                          # Utilitaires (cn, etc.)
@@ -1318,6 +1334,38 @@ Ce projet est développé dans le cadre d'un projet éducatif à **Holberton Sch
 
 ## 📝 Notes de Version
 
+### v1.2.0 (2025-10-23) - UX Améliorée & Messages Motivationnels 🎉
+
+**🎨 Expérience Utilisateur Améliorée :**
+- ✅ **Page d'accueil intelligente** : Redirection automatique vers dashboard si connecté, sinon vers login
+- ✅ **Connexion automatique après inscription** : Plus besoin de se reconnecter après création de compte
+- ✅ **Système de messages motivationnels contextuels** :
+  - 💰 **Revenus** : Popup de félicitations avec 15 messages encourageants uniques
+  - ⚠️ **Dépenses** : Popup de conseil financier avec 15 messages de prudence uniques
+  - 🎨 Design premium avec overlay sombre et animations fluides
+  - ⏱️ Fermeture automatique après 10 secondes
+  - ❌ Fermeture manuelle avec bouton X, clic overlay, ou touche Escape
+  - 📊 Barre de progression visuelle (10s)
+  - 🔄 Bouton pour générer un nouveau message aléatoire
+  - 🎯 Utilisation de l'effet Barnum pour engagement maximal
+
+**🎨 Nouveaux Composants :**
+- ✅ **MotivationalModal** : Popup modal centré avec overlay
+- ✅ **MotivationalMessage (amélioré)** : Support de variants (default, alert) et types (general, income, expense)
+- ✅ Animations CSS personnalisées : `modalSlideIn`, `progressBar`, `fadeIn`
+
+**📦 Structure Mise à Jour :**
+- ✅ Messages motivationnels restructurés en 3 catégories (general, income, expense)
+- ✅ Page d'accueil refactorisée avec détection de session
+- ✅ Page register avec connexion automatique
+
+**🎯 Impact :**
+- Meilleur onboarding des utilisateurs (moins de friction)
+- Engagement accru grâce aux messages contextuels personnalisés
+- Expérience premium avec animations et design soigné
+
+---
+
 ### v1.1.0 (2025-10-22) - Tests & Optimisations ⚡
 
 **🎯 Tests Complets :**
@@ -1378,8 +1426,11 @@ Ce projet est développé dans le cadre d'un projet éducatif à **Holberton Sch
 Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur GitHub.
 
 **Prochaines étapes :**
-- 🚀 Déploiement sur Vercel
+- ✅ Déploiement sur Vercel (fait : https://holbertonschool-money-mirror.vercel.app/)
 - 🔔 Notifications push
-- 📧 Système d'emails
-- 💾 Export CSV/PDF
+- 📧 Système d'emails (réinitialisation mot de passe)
+- 💾 Export CSV/PDF des transactions
 - 📱 Progressive Web App (PWA)
+- 🎯 Objectifs financiers avec tracking
+- 📈 Rapports mensuels automatiques
+- 🔄 Import de fichiers bancaires (CSV)
