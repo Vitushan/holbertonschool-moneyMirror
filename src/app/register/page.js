@@ -1,10 +1,11 @@
 // Page d'inscription
 // Permet aux nouveaux utilisateurs de créer un compte
-// Valide les données et redirige vers la page de connexion après succès
+// Valide les données et connecte automatiquement l'utilisateur vers le dashboard après succès
 
 'use client'
 
 import { useState, useEffect } from "react"
+import { signIn } from "next-auth/react"
 
 export default function Register() {
   // États pour stocker les données du formulaire
@@ -52,11 +53,14 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage('Inscription réussie ! Redirection...');
+        setMessage('Inscription réussie ! Connexion...');
         setMessageType('success');
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 1500);
+        // Connecter automatiquement l'utilisateur et rediriger vers le dashboard
+        await signIn('credentials', {
+          email,
+          password,
+          callbackUrl: '/dashboard'
+        });
       } else {
         setMessage(data.error || 'Échec de l\'inscription');
         setMessageType('error');
