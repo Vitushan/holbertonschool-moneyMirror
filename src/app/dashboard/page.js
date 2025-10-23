@@ -540,13 +540,13 @@ export default function DashboardPage() {
             <div id="pie-chart" className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Répartition par catégorie</h3>
               {filteredPieChartData.length > 0 ? (
-                <ResponsiveContainer width="100%" height={400}>
+                <ResponsiveContainer width="100%" height={450}>
                   <PieChart>
                     <Pie
                       data={filteredPieChartData}
-                      cx="50%"
+                      cx="35%"
                       cy="50%"
-                      outerRadius={120}
+                      outerRadius={100}
                       fill="#8884d8"
                       dataKey="value"
                     >
@@ -561,15 +561,17 @@ export default function DashboardPage() {
                       ]}
                     />
                     <Legend
-                      verticalAlign="bottom"
-                      height={80}
-                      wrapperStyle={{ paddingTop: '30px', fontSize: '14px' }}
+                      layout="vertical"
+                      verticalAlign="middle"
+                      align="right"
+                      wrapperStyle={{ paddingLeft: '40px', fontSize: '15px', lineHeight: '2.5' }}
                       iconType="circle"
+                      iconSize={12}
                     />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-[400px] flex items-center justify-center text-gray-500">
+                <div className="h-[450px] flex items-center justify-center text-gray-500">
                   Aucune donnée correspondant à votre recherche
                 </div>
               )}
