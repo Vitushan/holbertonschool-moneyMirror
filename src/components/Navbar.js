@@ -18,6 +18,8 @@ export default function Navbar() {
     { name: 'Ajouter Transaction', href: '/transactions/add' },
   ]
 
+  const supportButton = { name: 'Soutenir 💙', href: '/donation' }
+
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/' })
   }
@@ -74,6 +76,19 @@ export default function Navbar() {
                 {item.name}
               </button>
             ))}
+
+            {/* Bouton Soutenir */}
+            <button
+              onClick={() => router.push(supportButton.href)}
+              className={cn(
+                "px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm hover:shadow-md",
+                pathname === supportButton.href
+                  ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                  : "bg-gradient-to-r from-blue-500 to-green-500 text-white hover:from-blue-600 hover:to-green-600"
+              )}
+            >
+              {supportButton.name}
+            </button>
 
             {/* User Info + Logout */}
             <div className="flex items-center gap-3 ml-4 pl-4 border-l border-gray-200">
@@ -147,6 +162,22 @@ export default function Navbar() {
               {item.name}
             </button>
           ))}
+
+          {/* Support Button Mobile */}
+          <button
+            onClick={() => {
+              router.push(supportButton.href)
+              setIsOpen(false)
+            }}
+            className={cn(
+              "block w-full text-left px-3 py-2 rounded-lg text-base font-semibold transition-all shadow-sm",
+              pathname === supportButton.href
+                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                : "bg-gradient-to-r from-blue-500 to-green-500 text-white hover:from-blue-600 hover:to-green-600"
+            )}
+          >
+            {supportButton.name}
+          </button>
 
           {/* Logout Mobile */}
           <button
