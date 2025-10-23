@@ -55,12 +55,24 @@ export default function Register() {
       if (response.ok) {
         setMessage('Inscription réussie ! Connexion...');
         setMessageType('success');
-        // Connecter automatiquement l'utilisateur et rediriger vers le dashboard
-        await signIn('credentials', {
+
+        // Connecter automatiquement l'utilisateur
+        const result = await signIn('credentials', {
           email,
           password,
-          callbackUrl: '/dashboard'
+          redirect: false
         });
+
+        if (result?.ok) {
+          // Redirection manuelle vers le dashboard
+          window.location.href = '/dashboard';
+        } else {
+          setMessage('Inscription réussie ! Veuillez vous connecter.');
+          setMessageType('success');
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 2000);
+        }
       } else {
         setMessage(data.error || 'Échec de l\'inscription');
         setMessageType('error');

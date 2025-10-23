@@ -1,18 +1,34 @@
 // Page d'accueil de MoneyMirror
-// Point d'entrée principal de l'application
+// Redirige automatiquement vers le dashboard si connecté, sinon vers login
+
+'use client'
+
+import { useEffect } from "react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 export default function HomePage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Si la session est chargée
+    if (status === 'loading') return;
+
+    // Rediriger selon l'état de connexion
+    if (session) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
+    }
+  }, [session, status, router]);
+
+  // Afficher un loader pendant la vérification
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-6">MoneyMirror</h1>
-          <p className="text-lg mb-8">Application de gestion financière</p>
-          <div className="bg-white p-6 rounded shadow">
-            <h2 className="text-xl font-bold mb-4">Statut de l'API</h2>
-            <p>API d'authentification disponible sur /api/auth/register</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">MoneyMirror</h1>
+        <p className="text-gray-600">Chargement...</p>
       </div>
     </div>
   )
