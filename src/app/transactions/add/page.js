@@ -5,7 +5,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import MotivationalMessage from "@/components/MotivationalMessage";
+import MotivationalModal from "@/components/MotivationalModal";
 
 export default function AddTransactionPage() {
   // État pour stocker les données du formulaire
@@ -27,6 +27,8 @@ export default function AddTransactionPage() {
   const [success, setSuccess] = useState("");
   // État pour le type de transaction ajoutée (pour afficher le bon message)
   const [addedTransactionType, setAddedTransactionType] = useState(null);
+  // État pour contrôler l'ouverture du modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   // Liste des devises traditionnelles disponibles
@@ -51,6 +53,15 @@ export default function AddTransactionPage() {
     { value: "ADA", label: "₳ ADA - Cardano" },
     { value: "DOGE", label: "Ð DOGE - Dogecoin" }
   ];
+
+  // Fonction pour fermer le modal et rediriger vers le dashboard
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setAddedTransactionType(null);
+    setSuccess("");
+    // Redirection vers le dashboard après fermeture du modal
+    setTimeout(() => router.push("/dashboard"), 300);
+  };
 
   // Fonction pour gérer les changements dans les champs du formulaire
   const handleChange = (e) => {
@@ -102,12 +113,12 @@ export default function AddTransactionPage() {
       });
       if (!res.ok) throw new Error("Échec de l'ajout de la transaction");
 
-      // Définir le type de transaction pour afficher le bon message
+      // Définir le type de transaction et ouvrir le modal
       setAddedTransactionType(form.type);
       setSuccess("Transaction ajoutée avec succès !");
+      setIsModalOpen(true);
 
       // Réinitialisation du formulaire
-      const previousType = form.type; // Garder le type pour l'affichage du message
       setForm({
         amount: "",
         type: "",
@@ -118,9 +129,6 @@ export default function AddTransactionPage() {
         currency: "EUR",
         date: "",
       });
-
-      // Redirection après 3 secondes (pour laisser le temps de lire le message)
-      setTimeout(() => router.push("/dashboard"), 3000);
     } catch (err) {
       setError(err.message || "Erreur inconnue");
     } finally {
@@ -310,17 +318,6 @@ export default function AddTransactionPage() {
               {loading ? "Ajout en cours..." : "Ajouter Transaction"}
             </button>
 
-            {/* Message de succès avec message motivationnel contextuel */}
-            {success && addedTransactionType && (
-              <div className="mt-6 space-y-4">
-                <div className="p-4 bg-green-100 border border-green-300 rounded-lg text-center animate-slideIn">
-                  <p className="text-green-700 font-semibold">{success}</p>
-                </div>
-                {/* Message d'alerte motivationnel adapté au type de transaction */}
-                <MotivationalMessage messageType={addedTransactionType} variant="alert" />
-              </div>
-            )}
-
             {/* Message d'erreur en bas */}
             {error && (
               <div className="mt-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
@@ -330,6 +327,13 @@ export default function AddTransactionPage() {
           </form>
         </div>
       </div>
+
+      {/* Modal de message motivationnel */}
+      <MotivationalModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        messageType={addedTransactionType}
+      />
     </div>
   );
 }
