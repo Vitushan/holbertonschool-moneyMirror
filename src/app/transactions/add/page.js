@@ -312,12 +312,12 @@ export default function AddTransactionPage() {
 
             {/* Message de succès avec message motivationnel contextuel */}
             {success && addedTransactionType && (
-              <div className="mt-4 space-y-4">
-                <div className="p-4 bg-green-100 border border-green-300 rounded-lg text-center">
+              <div className="mt-6 space-y-4">
+                <div className="p-4 bg-green-100 border border-green-300 rounded-lg text-center animate-slideIn">
                   <p className="text-green-700 font-semibold">{success}</p>
                 </div>
-                {/* Message motivationnel adapté au type de transaction */}
-                <MotivationalMessage messageType={addedTransactionType} />
+                {/* Message d'alerte motivationnel adapté au type de transaction */}
+                <MotivationalMessage messageType={addedTransactionType} variant="alert" />
               </div>
             )}
 
