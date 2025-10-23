@@ -71,6 +71,5 @@ export async function POST(request) {
 }
 
 export async function GET() {
-  console.log('GET request received at /api/auth/register')
   return Response.json({ message: 'GET method works! API is alive!' })
 }

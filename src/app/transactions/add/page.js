@@ -274,9 +274,6 @@ export default function AddTransactionPage() {
                   max={new Date().toISOString().split('T')[0]}
                   className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none cursor-text"
                 />
-                <p className="text-xs text-gray-500 mt-1">
-                  💡 Cliquez sur l'icône 📅 pour le calendrier ou tapez directement la date
-                </p>
               </div>
             </div>
 

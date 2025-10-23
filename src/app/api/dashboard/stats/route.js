@@ -15,12 +15,8 @@ export async function GET(request) {
     // Get session using getServerSession with authOptions
     const session = await getServerSession(authOptions)
 
-    console.log('=== STATS API DEBUG ===')
-    console.log('Session:', JSON.stringify(session, null, 2))
-
     if (session && session.user && session.user.id) {
       userId = session.user.id
-      console.log('User ID from session:', userId)
     }
 
     if (!userId) {
@@ -61,9 +57,6 @@ export async function GET(request) {
       }
     })
 
-    console.log(`Found ${transactions.length} transactions for filter: ${filter}`)
-    console.log(`Date range: ${startDate.toISOString()} to ${now.toISOString()}`)
-
     // Calculate statistics
     const totalIncome = transactions
       .filter(t => t.type === 'income')
@@ -74,8 +67,6 @@ export async function GET(request) {
       .reduce((sum, t) => sum + t.amount, 0)
 
     const revenue = totalIncome - totalExpense
-
-    console.log(`Income: ${totalIncome}, Expenses: ${totalExpense}, Revenue: ${revenue}`)
 
     // Calculate growth (compare with previous period)
     let previousStartDate = new Date(startDate)
@@ -119,9 +110,6 @@ export async function GET(request) {
       growth = ((revenue - previousRevenue) / Math.abs(previousRevenue)) * 100
     }
     // Si les deux sont à 0, on garde growth = 0
-
-    console.log(`Previous period: ${previousTransactions.length} transactions, Revenue: ${previousRevenue}`)
-    console.log(`Growth calculation: ${growth}%`)
 
     // Count unique users (in this case, just 1 - the current user)
     // You might want to count something else like number of transactions

@@ -15,12 +15,8 @@ export async function GET(request) {
     // Get session using getServerSession with authOptions
     const session = await getServerSession(authOptions)
 
-    console.log('=== CHARTS API DEBUG ===')
-    console.log('Session:', JSON.stringify(session, null, 2))
-
     if (session && session.user && session.user.id) {
       userId = session.user.id
-      console.log('User ID from session:', userId)
     }
 
     if (!userId) {
