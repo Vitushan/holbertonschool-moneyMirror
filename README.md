@@ -7,113 +7,148 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - [Vue d'ensemble](#vue-densemble)
 - [Fonctionnalités](#fonctionnalités)
 - [Technologies Utilisées](#technologies-utilisées)
-- [Ressources d'Apprentissage](#ressources-dapprentissage)
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Structure du Projet](#structure-du-projet)
 - [API Documentation](#api-documentation)
-- [Dashboard](#dashboard)
+- [Impact Social](#impact-social)
 - [Sécurité](#sécurité)
-- [Tests](#tests)
 - [Déploiement](#déploiement)
-- [Dépannage](#dépannage)
-- [Contribuer](#contribuer)
+- [Auteur](#auteur)
 
 ---
 
 ## 🎯 Vue d'ensemble
 
-**MoneyMirror** est une application de gestion financière personnelle moderne qui permet aux utilisateurs de :
+**MoneyMirror** est une application de gestion financière personnelle moderne avec **impact social** qui permet aux utilisateurs de :
 
 - Créer un compte et s'authentifier de manière sécurisée
-- Ajouter, modifier et supprimer des transactions financières
+- Gérer leurs transactions financières (revenus et dépenses)
 - Visualiser leurs finances via des graphiques interactifs
-- Filtrer les données par période (semaine, mois, année)
+- **Créer des tirelires pour atteindre leurs objectifs d'épargne** 🐷
+- **Bénéficier d'aide pour vaincre les addictions** (avec stratégie voyage)
+- **Soutenir le projet** via donations avec transparence totale
+- Recevoir des messages motivationnels à effet Barnum
 - Exporter les graphiques en PNG
-- Gérer plusieurs devises (EUR, USD, GBP, CHF, JPY, CAD, AUD)
-- Supporter les cryptomonnaies (BTC, ETH, USDT, BNB, SOL, XRP, ADA, DOGE)
 
 ---
 
 ## ✨ Fonctionnalités
 
 ### 🔐 Authentification
-- ✅ Inscription avec validation (email unique, mot de passe sécurisé)
-- ✅ **Connexion automatique après inscription** (pas besoin de se reconnecter)
-- ✅ Connexion avec NextAuth.js (session JWT)
+- ✅ Inscription avec validation complète
+- ✅ **Connexion automatique après inscription**
+- ✅ Connexion sécurisée avec NextAuth.js (JWT)
 - ✅ Hachage des mots de passe avec bcryptjs
-- ✅ Protection des routes côté client et serveur
-- ✅ **Page d'accueil intelligente** : redirection automatique vers dashboard si connecté, sinon vers login
-- ✅ Redirection automatique vers le dashboard après connexion
+- ✅ **Page d'accueil intelligente** : redirection automatique selon l'état de connexion
 
 ### 💳 Gestion des Transactions
 - ✅ **CRUD complet** : Créer, Lire, Modifier, Supprimer
-- ✅ Types de transactions : Revenus / Dépenses
-- ✅ Catégories personnalisables
-- ✅ Support multi-devises (devises traditionnelles + cryptomonnaies)
-- ✅ Champs optionnels : description, note
-- ✅ Validation : montant positif, date non future
-- ✅ Liste paginée avec tri par date décroissante
-- ✅ **Messages motivationnels contextuels après ajout** :
-  - 💰 **Revenus** : Popup de félicitations avec messages encourageants
-  - ⚠️ **Dépenses** : Popup de conseil financier avec messages de prudence
-  - 🎨 Design premium avec overlay sombre, animations fluides
-  - ⏱️ Fermeture automatique après 10 secondes
-  - ❌ Bouton X et touche Escape pour fermeture manuelle
-  - 📊 Barre de progression visuelle (10s)
+- ✅ Types : Revenus / Dépenses
+- ✅ Support multi-devises (EUR, USD, GBP, CHF, JPY, CAD, AUD)
+- ✅ Support cryptomonnaies (BTC, ETH, USDT, BNB, SOL, XRP, ADA, DOGE)
+- ✅ **Messages motivationnels contextuels** après chaque transaction :
+  - 💰 **Revenus** : Messages de félicitations encourageants
+  - ⚠️ **Dépenses** : Messages de prudence et conseils financiers
+  - 🎨 Modal premium avec overlay, animations, auto-close 10s
   - 🎯 15 messages uniques par type (effet Barnum)
+
+### 🐷 Système de Tirelires Innovant
+- ✅ **Création de tirelires illimitées** avec objectifs d'épargne
+- ✅ **10 catégories prédéfinies** avec émojis :
+  - 🌴 Voyage
+  - 🌱 **Se libérer d'une addiction** (catégorie phare)
+  - 🎮 Console/Gaming
+  - 🚗 Voiture
+  - 🏠 Logement
+  - 💍 Mariage
+  - 📚 Formation/Études
+  - 💰 Fonds d'urgence
+  - 🎁 Cadeau spécial
+  - ✨ Autre
+
+- ✅ **Messages motivationnels à 5 niveaux** selon progression :
+  - 0-25% : Messages d'encouragement pour débuter
+  - 25-50% : Messages de persévérance
+  - 50-75% : Messages de félicitations
+  - 75-100% : Messages de dernière ligne droite
+  - 100% : Message de victoire avec confettis 🎉
+
+- ✅ **Innovation unique : Liaison Addiction → Voyage** 🌱→🌴
+  - Quand un utilisateur crée une tirelire "Se libérer d'une addiction"
+  - Le système propose automatiquement de créer une tirelire voyage liée
+  - Stratégie psychologique : **Changer d'environnement pour briser le cycle**
+  - Message inspirant sur le karma et le nouveau départ
+  - Aide concrète pour les personnes en sevrage
+
+- ✅ **Deux modes d'alimentation** :
+  - **Manuel** : Ajout d'argent à la demande
+  - **Automatique** : Pourcentage des revenus versé automatiquement
+
+- ✅ **Barre de progression visuelle** avec pourcentage
+- ✅ **Interface magnifique** avec cochon 🐷 et émojis de catégories
+- ✅ **Modals interactifs** pour création et ajout d'argent
 
 ### 📊 Dashboard Interactif
 - ✅ **4 cartes de statistiques** :
-  - Total Transactions (cliquable vers `/transactions`)
+  - Total Transactions (cliquable)
   - Catégories Actives
   - Solde Net (revenus - dépenses)
   - Croissance (% vs période précédente)
 
 - ✅ **3 types de graphiques** :
   - **Ligne** : Évolution dans le temps
-  - **Camembert** : Répartition par catégories
+  - **Camembert** : Répartition par catégories (legend verticale optimisée)
   - **Barres** : Comparaison revenus vs dépenses
 
 - ✅ **Filtres avancés** :
   - Temporels : Semaine / Mois / Année
-  - Barre de recherche
+  - Recherche par nom
   - Filtre par catégorie
 
-- ✅ **Export PNG** :
-  - Sélection : Dashboard complet / Graphique individuel
-  - Capture SVG optimisée avec `dom-to-image-more`
-  - Nom de fichier automatique avec date
+- ✅ **Export PNG** : Dashboard complet ou graphique individuel
+- ✅ **Section Dernières Transactions** avec actions rapides
 
-- ✅ **Section Dernières Transactions** :
-  - Affichage des 5 dernières transactions
-  - Boutons Modifier / Supprimer directs
-  - Lien "Voir tout" vers `/transactions`
+### 💙 Page Donation & Impact Social
+- ✅ **Storytelling émotionnel** du créateur (Vithushan)
+- ✅ **3 types de dons** :
+  - **Unique** : 5€, 10€, 25€, 50€ ou personnalisé
+  - **Mensuel** : 2€/mois, 5€/mois, 10€/mois (badge "Populaire")
+  - **Annuel** : 20€/an, 50€/an, 100€/an (économie de 2 mois, badge "Meilleur choix")
+
+- ✅ **Psychologie des prix appliquée** :
+  - Économies visibles sur dons annuels (-17%)
+  - Badges "Populaire" / "Meilleur choix"
+  - Comparaison "Au lieu de X€"
+
+- ✅ **Message sur le karma** :
+  - *"Le karma n'oublie jamais les bonnes actions. Chaque don est une graine de bonté..."*
+  - Dimension spirituelle et humaine
+
+- ✅ **Transparence totale** :
+  - 5% des dons reversés aux associations (orphelinats, maisons de retraite)
+  - Exemples de versements avec dates et reçus
+  - Rapport mensuel envoyé aux donateurs
+  - Engagement de publication trimestrielle
+
+- ✅ **Email de remerciement personnalisé** après chaque don
+- ✅ **9 moyens de paiement** : PayPal, Carte, Bitcoin, Ethereum, Wise, Virement, Paysafecard, Western Union, Revolut
 
 ### 🎨 Interface Utilisateur
 - ✅ Design moderne et responsive (mobile, tablette, desktop)
-- ✅ Tailwind CSS pour le styling
-- ✅ Composants UI shadcn/ui (Button, Card, Input)
-- ✅ Logo personnalisé avec gradient
-- ✅ Navbar avec navigation et déconnexion
-- ✅ Footer sur toutes les pages avec messages motivationnels généraux
-- ✅ **Système de messages motivationnels à deux niveaux** :
-  - 💡 **Messages généraux** : En footer, visibles sur toutes les pages
-  - 🎉 **Messages contextuels** : Popup modal après ajout de transaction
-  - 🎨 Variant "alert" avec design premium (income vs expense)
-  - 🔄 Bouton pour générer un nouveau message aléatoire
-- ✅ **MotivationalModal** : Popup centré avec overlay sombre
+- ✅ Tailwind CSS avec animations personnalisées
+- ✅ Composants UI shadcn/ui
+- ✅ Navbar avec navigation fluide
+- ✅ Footer avec messages motivationnels généraux
 - ✅ Messages de succès/erreur
-- ✅ États de chargement (loading states)
-- ✅ Animations CSS personnalisées (slideIn, fadeIn, progressBar, modalSlideIn)
+- ✅ États de chargement
 - ✅ Modales pour confirmations
 
 ### ⚡ Performance
 - ✅ **Coverage tests: 82-83%** (133 tests)
 - ✅ Optimisations React (useMemo, useCallback)
-- ✅ Lazy loading des composants lourds (Recharts)
-- ✅ Code splitting automatique (Next.js)
-- ✅ Bundle optimisé (~730KB vs ~800KB)
+- ✅ Lazy loading Recharts
+- ✅ Code splitting automatique
 
 ---
 
@@ -129,75 +164,8 @@ Une application web complète de gestion financière construite avec Next.js 15,
 | **NextAuth.js** | Latest | Authentification (sessions JWT) |
 | **bcryptjs** | Latest | Hachage sécurisé des mots de passe |
 | **Recharts** | Latest | Bibliothèque de graphiques React (lazy-loaded) |
-| **dom-to-image-more** | Latest | Export PNG (meilleur support SVG) |
-| **jsonwebtoken** | Latest | Génération de tokens JWT |
+| **dom-to-image-more** | Latest | Export PNG |
 | **shadcn/ui** | Latest | Composants UI réutilisables |
-| **Jest** | 29.7.0 | Framework de tests unitaires |
-| **Playwright** | Latest | Tests E2E automatisés |
-| **@testing-library/react** | Latest | Tests des composants React |
-| **clsx** + **tailwind-merge** | Latest | Utilitaire pour fusionner classes CSS |
-
----
-
-## 📚 Ressources d'Apprentissage
-
-### JavaScript & ES6+
-- 📖 [MDN Web Docs - JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- 📖 [JavaScript.info - The Modern JavaScript Tutorial](https://javascript.info/)
-- 📹 [ES6 Features - Freecodecamp](https://www.freecodecamp.org/news/es6-features/)
-- 📖 [Async/Await - MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
-
-### React
-- 📖 [React Official Documentation](https://react.dev/)
-- 📹 [React Tutorial for Beginners](https://www.youtube.com/watch?v=SqcY0GlETPk)
-- 📖 [React Hooks](https://react.dev/reference/react)
-- 📖 [useState & useEffect](https://react.dev/learn/state-a-components-memory)
-
-### Next.js
-- 📖 [Next.js Official Documentation](https://nextjs.org/docs)
-- 📖 [App Router Guide](https://nextjs.org/docs/app)
-- 📖 [API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
-- 📹 [Next.js 15 Full Course](https://www.youtube.com/watch?v=wm5gMKuwSYk)
-
-### Prisma ORM
-- 📖 [Prisma Documentation](https://www.prisma.io/docs)
-- 📖 [Prisma with MySQL](https://www.prisma.io/docs/orm/overview/databases/mysql)
-- 📖 [Prisma Schema Reference](https://www.prisma.io/docs/orm/reference/prisma-schema-reference)
-- 📹 [Prisma Crash Course](https://www.youtube.com/watch?v=RebA5J-rlwg)
-
-### MySQL
-- 📖 [MySQL Official Documentation](https://dev.mysql.com/doc/)
-- 📖 [MySQL Tutorial - W3Schools](https://www.w3schools.com/mysql/)
-- 📖 [SQL Basics](https://www.sqltutorial.org/)
-- 📹 [MySQL Full Course](https://www.youtube.com/watch?v=7S_tz1z_5bA)
-
-### Tailwind CSS
-- 📖 [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- 📖 [Utility-First Fundamentals](https://tailwindcss.com/docs/utility-first)
-- 📖 [Responsive Design](https://tailwindcss.com/docs/responsive-design)
-- 📹 [Tailwind CSS Crash Course](https://www.youtube.com/watch?v=UBOj6rqRUME)
-
-### NextAuth.js
-- 📖 [NextAuth.js Documentation](https://next-auth.js.org/)
-- 📖 [Credentials Provider](https://next-auth.js.org/providers/credentials)
-- 📖 [JWT Sessions](https://next-auth.js.org/configuration/options#session)
-- 📹 [NextAuth.js Tutorial](https://www.youtube.com/watch?v=w2h54xz6Ndw)
-
-### Recharts
-- 📖 [Recharts Documentation](https://recharts.org/en-US/)
-- 📖 [LineChart Examples](https://recharts.org/en-US/api/LineChart)
-- 📖 [PieChart Examples](https://recharts.org/en-US/api/PieChart)
-- 📖 [BarChart Examples](https://recharts.org/en-US/api/BarChart)
-
-### bcrypt & Sécurité
-- 📖 [bcryptjs Documentation](https://www.npmjs.com/package/bcryptjs)
-- 📖 [Password Hashing Best Practices](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
-- 📖 [OWASP Security Guidelines](https://owasp.org/www-project-top-ten/)
-
-### Git & GitHub
-- 📖 [Git Documentation](https://git-scm.com/doc)
-- 📖 [GitHub Guides](https://guides.github.com/)
-- 📹 [Git Tutorial for Beginners](https://www.youtube.com/watch?v=RGOj5yH7evk)
 
 ---
 
@@ -234,7 +202,7 @@ NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="votre-cle-secrete-super-longue-et-aleatoire"
 ```
 
-⚠️ **Important** : Remplacez `username`, `password` et générez une vraie clé secrète avec :
+⚠️ **Important** : Générez une vraie clé secrète avec :
 ```bash
 openssl rand -base64 32
 ```
@@ -257,13 +225,7 @@ npx prisma generate
 npx prisma db push
 ```
 
-6. **Seed de données (optionnel)**
-
-```bash
-node prisma/seed.js
-```
-
-7. **Lancer le serveur de développement**
+6. **Lancer le serveur de développement**
 
 ```bash
 npm run dev
@@ -287,13 +249,11 @@ L'application sera accessible sur **http://localhost:3000**
 
 ```bash
 npm run dev          # Démarrer en mode développement
-npm run build        # Build de production
+npm run build        # Build de production (Prisma + Next.js)
 npm run start        # Démarrer en mode production
 npm run lint         # Linter le code
 npm test             # Lancer les tests
 npx prisma studio    # Interface graphique Prisma
-npx prisma generate  # Générer le client Prisma
-npx prisma db push   # Pousser le schéma vers la DB
 ```
 
 ---
@@ -306,79 +266,46 @@ holbertonschool-moneyMirror/
 │   ├── app/
 │   │   ├── api/
 │   │   │   ├── auth/
-│   │   │   │   ├── [...nextauth]/route.js    # Configuration NextAuth
+│   │   │   │   ├── [...nextauth]/route.js    # NextAuth config
 │   │   │   │   ├── login/route.js            # API Login
 │   │   │   │   └── register/route.js         # API Register
 │   │   │   ├── dashboard/
-│   │   │   │   ├── stats/route.js            # API Statistiques
-│   │   │   │   └── charts/route.js           # API Graphiques
-│   │   │   └── transactions/
-│   │   │       ├── route.js                  # API POST/GET transactions
-│   │   │       └── [id]/route.js             # API GET/PUT/DELETE transaction
-│   │   ├── dashboard/page.js                 # Page Dashboard (optimisée)
-│   │   ├── login/page.js                     # Page Login
-│   │   ├── register/page.js                  # Page Register
+│   │   │   │   ├── stats/route.js            # API Stats
+│   │   │   │   └── charts/route.js           # API Charts
+│   │   │   ├── transactions/
+│   │   │   │   ├── route.js                  # API POST/GET
+│   │   │   │   └── [id]/route.js             # API GET/PUT/DELETE
+│   │   │   └── piggybanks/                   # 🐷 NEW
+│   │   │       ├── route.js                  # API POST/GET tirelires
+│   │   │       └── [id]/route.js             # API PUT/DELETE tirelire
+│   │   ├── dashboard/page.js                 # Dashboard
+│   │   ├── login/page.js                     # Login
+│   │   ├── register/page.js                  # Register
+│   │   ├── donation/page.js                  # 💙 Page Donation (refonte)
+│   │   ├── piggybanks/page.js                # 🐷 Page Tirelires (NEW)
 │   │   ├── transactions/
-│   │   │   ├── page.js                       # Liste des transactions (optimisée)
-│   │   │   ├── add/page.js                   # Ajout de transaction
-│   │   │   └── edit/[id]/page.js             # Édition de transaction
-│   │   ├── layout.js                         # Layout principal avec Navbar
-│   │   └── page.js                           # Page d'accueil
+│   │   │   ├── page.js                       # Liste transactions
+│   │   │   ├── add/page.js                   # Ajout
+│   │   │   └── edit/[id]/page.js             # Édition
+│   │   ├── layout.js                         # Layout principal
+│   │   └── page.js                           # Homepage intelligente
 │   ├── components/
-│   │   ├── Logo.js                           # Composant Logo
-│   │   ├── Footer.js                         # Composant Footer
-│   │   ├── Modal.js                          # Composant Modal
-│   │   ├── Navbar.js                         # Barre de navigation
-│   │   ├── MotivationalMessage.js            # Messages motivationnels (général + contextuels)
-│   │   ├── MotivationalModal.js              # Popup modal pour messages contextuels
-│   │   └── ui/                               # Composants UI (shadcn/ui)
-│   │       ├── button.jsx                    # Bouton réutilisable
-│   │       ├── card.jsx                      # Carte avec Header/Content/Footer
-│   │       └── input.jsx                     # Input stylisé
+│   │   ├── Navbar.js                         # Navigation (+ Tirelires 🐷)
+│   │   ├── Footer.js                         # Footer
+│   │   ├── MotivationalMessage.js            # Messages Barnum
+│   │   ├── MotivationalModal.js              # Modal messages
+│   │   └── ui/                               # shadcn/ui
 │   ├── data/
-│   │   └── motivationalMessages.json         # Messages inspirants (general, income, expense)
+│   │   ├── motivationalMessages.json         # Messages transactions
+│   │   └── piggybankMessages.json            # 🐷 Messages tirelires (NEW)
 │   └── lib/
-│       ├── prisma.js                         # Instance Prisma singleton
-│       └── utils.js                          # Utilitaires (cn, etc.)
-├── __tests__/                                # Tests unitaires et intégration
-│   ├── api/                                  # Tests des API routes
-│   │   ├── auth/
-│   │   │   ├── login.test.js
-│   │   │   └── register.test.js
-│   │   ├── dashboard/
-│   │   │   ├── stats.test.js
-│   │   │   └── charts.test.js
-│   │   ├── transactions.test.js
-│   │   └── transactions-id.test.js
-│   ├── components/                           # Tests des composants
-│   │   ├── Logo.test.js
-│   │   ├── Footer.test.js
-│   │   ├── Modal.test.js
-│   │   ├── Navbar.test.js
-│   │   ├── MotivationalMessage.test.js
-│   │   └── ui/
-│   │       ├── button.test.js
-│   │       ├── card.test.js
-│   │       └── input.test.js
-│   ├── lib/                                  # Tests des utilitaires
-│   │   ├── utils.test.js
-│   │   └── prisma.test.js
-│   ├── models/                               # Tests des modèles Prisma
-│   │   ├── user.test.js
-│   │   ├── transaction.test.js
-│   │   └── relations.test.js
-│   └── .integration/                         # Tests E2E Playwright
-│       └── transactions.spec.js
+│       ├── prisma.js                         # Instance Prisma
+│       └── utils.js                          # Utilitaires
 ├── prisma/
-│   ├── schema.prisma                         # Schéma de base de données
+│   ├── schema.prisma                         # Schéma DB (User, Transaction, Piggybank)
 │   └── seed.js                               # Script de seed
 ├── .env.local                                # Variables d'environnement
-├── package.json                              # Dépendances NPM
-├── tailwind.config.js                        # Configuration Tailwind
-├── jest.config.js                            # Configuration Jest
-├── jest.setup.js                             # Setup Jest
-├── components.json                           # Configuration shadcn/ui
-├── DESIGN_SYSTEM.md                          # Système de design
+├── package.json                              # Dépendances
 └── README.md                                 # Documentation
 ```
 
@@ -386,16 +313,22 @@ holbertonschool-moneyMirror/
 
 ## 🔌 API Documentation
 
-### Authentification
+### Tirelires (Piggybanks) 🐷
 
-#### POST `/api/auth/register`
+#### POST `/api/piggybanks`
+
+Créer une nouvelle tirelire.
 
 **Payload :**
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "Password123!"
+  "name": "Voyage au Japon",
+  "category": "voyage",
+  "emoji": "🌴",
+  "targetAmount": 3000.00,
+  "isAutomatic": true,
+  "autoPercentage": 10,
+  "linkedPiggybankId": null
 }
 ```
 
@@ -403,379 +336,126 @@ holbertonschool-moneyMirror/
 ```json
 {
   "success": true,
-  "user": {
+  "message": "Tirelire créée avec succès !",
+  "piggybank": {
     "id": "clw...",
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
-}
-```
-
-**Erreurs :**
-- `400` : Champs manquants, email invalide, mot de passe trop court
-- `400` : Email déjà utilisé
-- `500` : Erreur serveur
-
----
-
-#### POST `/api/auth/login`
-
-**Payload :**
-```json
-{
-  "email": "john@example.com",
-  "password": "Password123!"
-}
-```
-
-**Réponse succès (200) :**
-```json
-{
-  "success": true,
-  "message": "Login successful",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "clw...",
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
-}
-```
-
-**Erreurs :**
-- `400` : Champs manquants
-- `401` : Email ou mot de passe incorrect
-- `500` : Erreur serveur
-
----
-
-### Transactions
-
-#### POST `/api/transactions`
-
-Créer une nouvelle transaction.
-
-**Headers :**
-```
-Authorization: Bearer <token>
-Content-Type: application/json
-```
-
-**Payload :**
-```json
-{
-  "amount": 250.50,
-  "type": "income",
-  "category": "Salaire",
-  "description": "Salaire mensuel",
-  "note": "Avril 2025",
-  "currency": "EUR",
-  "date": "2025-04-01"
-}
-```
-
-**Réponse succès (201) :**
-```json
-{
-  "success": true,
-  "message": "Congrats, transaction created!",
-  "transaction": {
-    "id": "clw...",
-    "amount": 250.50,
-    "type": "income",
-    "category": "Salaire",
-    "description": "Salaire mensuel",
-    "note": "Avril 2025",
-    "currency": "EUR",
-    "date": "2025-04-01T00:00:00.000Z",
     "userId": "clw...",
-    "createdAt": "2025-04-01T10:00:00.000Z",
-    "updatedAt": "2025-04-01T10:00:00.000Z"
+    "name": "Voyage au Japon",
+    "category": "voyage",
+    "emoji": "🌴",
+    "targetAmount": 3000.00,
+    "currentAmount": 0,
+    "isAutomatic": true,
+    "autoPercentage": 10,
+    "linkedPiggybankId": null,
+    "createdAt": "2025-10-23T...",
+    "updatedAt": "2025-10-23T..."
   }
 }
 ```
 
-**Erreurs :**
-- `401` : Non authentifié
-- `400` : Champs manquants ou invalides
-- `400` : Montant <= 0
-- `400` : Type invalide (doit être 'income' ou 'expense')
-- `400` : Date dans le futur
-- `500` : Erreur serveur
-
 ---
 
-#### GET `/api/transactions`
+#### GET `/api/piggybanks`
 
-Récupérer toutes les transactions de l'utilisateur.
-
-**Headers :**
-```
-Authorization: Bearer <token>
-```
+Récupérer toutes les tirelires de l'utilisateur.
 
 **Réponse succès (200) :**
 ```json
 {
   "success": true,
-  "transactions": [
+  "piggybanks": [
     {
       "id": "clw...",
-      "amount": 250.50,
-      "type": "income",
-      "category": "Salaire",
-      "description": "Salaire mensuel",
-      "note": "Avril 2025",
-      "currency": "EUR",
-      "date": "2025-04-01T00:00:00.000Z",
-      "userId": "clw...",
-      "createdAt": "2025-04-01T10:00:00.000Z",
-      "updatedAt": "2025-04-01T10:00:00.000Z"
+      "name": "Voyage au Japon",
+      "category": "voyage",
+      "emoji": "🌴",
+      "targetAmount": 3000.00,
+      "currentAmount": 450.00,
+      "isAutomatic": true,
+      "autoPercentage": 10,
+      ...
     }
   ]
 }
 ```
 
-**Erreurs :**
-- `401` : Non authentifié
-- `500` : Erreur serveur
+---
+
+#### PUT `/api/piggybanks/[id]`
+
+Ajouter de l'argent ou modifier une tirelire.
+
+**Payload (ajouter de l'argent) :**
+```json
+{
+  "amountToAdd": 50.00
+}
+```
+
+**Payload (modifier paramètres) :**
+```json
+{
+  "name": "Nouveau nom",
+  "targetAmount": 3500.00,
+  "isAutomatic": false,
+  "autoPercentage": null
+}
+```
 
 ---
 
-#### GET `/api/transactions/[id]`
+#### DELETE `/api/piggybanks/[id]`
 
-Récupérer une transaction spécifique.
-
-**Headers :**
-```
-Authorization: Bearer <token>
-```
+Supprimer une tirelire.
 
 **Réponse succès (200) :**
 ```json
 {
   "success": true,
-  "transaction": {
-    "id": "clw...",
-    "amount": 250.50,
-    "type": "income",
-    "category": "Salaire",
-    ...
-  }
+  "message": "Tirelire supprimée avec succès !"
 }
 ```
-
-**Erreurs :**
-- `401` : Non authentifié
-- `404` : Transaction introuvable
-- `500` : Erreur serveur
 
 ---
 
-#### PUT `/api/transactions/[id]`
+## ❤️ Impact Social
 
-Mettre à jour une transaction.
+### 🌱 Aide aux Addictions
 
-**Headers :**
-```
-Authorization: Bearer <token>
-Content-Type: application/json
-```
+MoneyMirror propose une **approche innovante** pour aider les personnes souffrant d'addictions :
 
-**Payload :**
-```json
-{
-  "amount": 300.00,
-  "type": "income",
-  "category": "Salaire",
-  "description": "Salaire + prime",
-  "note": "Avec prime",
-  "currency": "EUR",
-  "date": "2025-04-01"
-}
-```
+**Concept** : **Sevrage par changement d'environnement** 🌱→🌴
 
-**Réponse succès (200) :**
-```json
-{
-  "success": true,
-  "message": "Transaction updated successfully!",
-  "transaction": { ... }
-}
-```
+1. L'utilisateur crée une tirelire **"Se libérer d'une addiction"**
+2. Le système propose automatiquement de créer une tirelire **"Voyage - Nouveau Départ"** liée
+3. **L'argent économisé finance un voyage** loin des déclencheurs habituels
+4. **Stratégie psychologique reconnue** : Changer d'environnement pour briser le cycle
 
-**Erreurs :**
-- `401` : Non authentifié
-- `404` : Transaction introuvable
-- `400` : Données invalides
-- `500` : Erreur serveur
+**Messages motivationnels à 5 niveaux** selon progression :
+- Encouragement initial
+- Persévérance
+- Félicitations mi-parcours
+- Dernière ligne droite
+- Message de victoire final
 
----
+**Ressources d'aide** :
+- Drogues Info Service : 0 800 23 13 13
+- Tabac Info Service : 39 89
 
-#### DELETE `/api/transactions/[id]`
+### 💙 Transparence des Donations
 
-Supprimer une transaction.
+**5% de chaque don** est reversé à des associations caritatives :
+- 🏠 Orphelinats et aide à l'enfance
+- 👴 Maisons de retraite et personnes âgées
 
-**Headers :**
-```
-Authorization: Bearer <token>
-```
+**Engagement de transparence** :
+- Rapport mensuel envoyé à tous les donateurs
+- Reçus des associations publiés
+- Publication trimestrielle détaillée
 
-**Réponse succès (200) :**
-```json
-{
-  "success": true,
-  "message": "Transaction deleted successfully"
-}
-```
-
-**Erreurs :**
-- `401` : Non authentifié
-- `404` : Transaction introuvable
-- `500` : Erreur serveur
-
----
-
-### Dashboard
-
-#### GET `/api/dashboard/stats`
-
-Récupérer les statistiques agrégées.
-
-**Query Parameters :**
-- `filter` : `week` | `month` | `year` (défaut: `week`)
-
-**Exemple :**
-```
-GET /api/dashboard/stats?filter=month
-```
-
-**Réponse succès (200) :**
-```json
-{
-  "success": true,
-  "stats": {
-    "totalUsers": 15,
-    "activeProjects": 5,
-    "revenue": 2500,
-    "growth": 12.5
-  }
-}
-```
-
-**Calculs :**
-- `totalUsers` : Nombre total de transactions
-- `activeProjects` : Nombre de catégories distinctes
-- `revenue` : Total revenus - Total dépenses
-- `growth` : % de croissance par rapport à la période précédente
-
-**Erreurs :**
-- `401` : Non authentifié
-- `500` : Erreur serveur
-
----
-
-#### GET `/api/dashboard/charts`
-
-Récupérer les données pour les graphiques.
-
-**Query Parameters :**
-- `filter` : `week` | `month` | `year` (défaut: `week`)
-
-**Exemple :**
-```
-GET /api/dashboard/charts?filter=year
-```
-
-**Réponse succès (200) :**
-```json
-{
-  "success": true,
-  "lineChartData": [
-    { "name": "Jan", "value": 500 },
-    { "name": "Feb", "value": -200 },
-    ...
-  ],
-  "pieChartData": [
-    { "name": "Salaire", "value": 3000 },
-    { "name": "Alimentation", "value": 500 },
-    ...
-  ],
-  "barChartData": [
-    { "name": "Q1", "revenus": 5000, "dépenses": 2000 },
-    { "name": "Q2", "revenus": 6000, "dépenses": 2500 },
-    ...
-  ]
-}
-```
-
-**Logique de groupement :**
-
-| Filtre | Ligne | Barres |
-|--------|-------|--------|
-| `week` | Par jour (Sun, Mon, ...) | Par jour |
-| `month` | Par semaine (Week 1, 2, ...) | Par semaine |
-| `year` | Par mois (Jan, Feb, ...) | Par trimestre (Q1, Q2, ...) |
-
-**Erreurs :**
-- `401` : Non authentifié
-- `500` : Erreur serveur
-
----
-
-## 📊 Dashboard
-
-Le dashboard est la page centrale de l'application.
-
-### Fonctionnalités
-
-#### 📈 Cartes de Statistiques
-
-4 cartes affichant les métriques clés :
-
-1. **Total Transactions** - Nombre total de transactions (cliquable)
-2. **Catégories Actives** - Nombre de catégories distinctes
-3. **Solde Net** - Revenus - Dépenses
-4. **Croissance** - % de croissance vs période précédente
-
-#### 📊 Graphiques Interactifs
-
-**1. Graphique en Ligne**
-- Évolution des transactions dans le temps
-- Valeurs positives = revenus, négatives = dépenses
-- Responsive avec Recharts
-
-**2. Graphique Camembert**
-- Répartition des dépenses par catégories
-- Pourcentages affichés sur chaque part
-- Couleurs distinctes pour chaque catégorie
-
-**3. Graphique en Barres**
-- Comparaison revenus vs dépenses par période
-- Deux barres par période (revenus en vert, dépenses en rouge)
-- Pleine largeur quand affiché seul
-
-#### 🔍 Filtres
-
-- **Filtres temporels** : Boutons Semaine / Mois / Année
-- **Barre de recherche** : Filtre les graphiques Ligne et Barres
-- **Filtre par catégorie** : Dropdown pour filtrer le Camembert
-
-#### 💾 Export PNG
-
-- Sélecteur de graphique : Tous / Ligne / Camembert / Barres
-- Bouton "Télécharger Graphique"
-- Capture optimisée des SVG avec `dom-to-image-more`
-- Nom de fichier : `dashboard-[type]-YYYY-MM-DD.png`
-- Messages de succès/erreur
-
-#### 📋 Dernières Transactions
-
-Tableau des 5 dernières transactions avec :
-- Date, Catégorie, Description, Montant
-- Boutons **Modifier** et **Supprimer** directs
-- Lien **"Voir tout"** vers `/transactions`
-- Design responsive avec scroll horizontal sur mobile
+**Message sur le karma** :
+> *"Le karma n'oublie jamais les bonnes actions. Chaque don est une graine de bonté qui fleurit bien au-delà de ce que vous pouvez imaginer."*
 
 ---
 
@@ -784,249 +464,32 @@ Tableau des 5 dernières transactions avec :
 ### Mesures de Sécurité Implémentées
 
 1. **Hachage des Mots de Passe**
-   - Utilisation de `bcryptjs` avec salt rounds = 10
+   - bcryptjs avec salt rounds = 12
    - Aucun mot de passe en clair stocké
-   - Comparaison sécurisée lors du login
 
 2. **Sessions JWT**
    - Tokens signés avec `NEXTAUTH_SECRET`
    - Expiration automatique après 7 jours
-   - Callbacks pour inclure l'ID utilisateur
 
 3. **Validation des Données**
-   - Côté client : React forms avec validation
-   - Côté serveur : Vérification de tous les champs
-   - Prisma : Contraintes de schéma (unique, required)
+   - Côté client : React forms
+   - Côté serveur : Vérification complète
+   - Prisma : Contraintes de schéma
 
 4. **Protection des Routes**
    - Client : `useSession()` + redirection
    - Serveur : `getServerSession()` sur toutes les API
 
-5. **Authentification Double**
-   - Bearer Token (JWT) pour API externes
-   - Session NextAuth pour navigateur web
-   - Les deux méthodes supportées simultanément
-
-6. **Contraintes Base de Données**
-   - Email unique
-   - Cascade Delete (suppression en cascade)
-   - Relations définies avec Prisma
-
-7. **Validation des Transactions**
+5. **Validation des Transactions**
    - Montant > 0
    - Type 'income' ou 'expense' uniquement
-   - Date <= aujourd'hui (pas de dates futures)
-   - Vérification que la transaction appartient à l'utilisateur
+   - Date <= aujourd'hui
+   - Vérification ownership
 
-### Recommandations pour la Production
-
-⚠️ **À faire avant déploiement :**
-
-- [ ] Changer `NEXTAUTH_SECRET` avec une clé aléatoire forte
-- [ ] Utiliser HTTPS (activé par défaut sur Vercel)
-- [ ] Sécuriser MySQL (pas de root, mot de passe fort, port non exposé)
-- [ ] Activer les logs de sécurité
-- [ ] Mettre en place un rate limiting (contre brute-force)
-- [ ] Ajouter un CAPTCHA sur register/login
-- [ ] Implémenter la réinitialisation de mot de passe
-- [ ] Configurer les CORS correctement
-- [ ] Sauvegardes automatiques de la base de données
-- [ ] Monitoring et alertes (Sentry, LogRocket, etc.)
-
----
-
-## ⚡ Optimisations de Performance
-
-### React Performance Optimizations
-
-Pour améliorer les performances de l'application, plusieurs optimisations ont été implémentées:
-
-#### 🎯 useMemo
-Mémoïsation des calculs coûteux pour éviter les recalculs inutiles:
-
-**Dashboard (`src/app/dashboard/page.js`):**
-- `filteredLineChartData` - Filtrage des données du graphique ligne (mémoïsé selon lineChartData et searchTerm)
-- `filteredPieChartData` - Filtrage des données du graphique camembert (mémoïsé selon pieChartData et selectedCategory)
-- `filteredBarChartData` - Filtrage des données du graphique barres (mémoïsé selon barChartData et searchTerm)
-
-**Transactions (`src/app/transactions/page.js`):**
-- Calcul revenus/dépenses - Mémoïsé selon la liste des transactions
-
-```javascript
-const filteredLineChartData = useMemo(() => {
-  return lineChartData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-}, [lineChartData, searchTerm])
-```
-
-#### 🔄 useCallback
-Mémoïsation des fonctions pour éviter leur recréation à chaque render:
-
-**Dashboard:**
-- `fetchDashboardData` - Récupération des données du dashboard
-- `downloadDashboardAsPNG` - Export PNG des graphiques
-
-**Transactions:**
-- `calculateBalance` - Calcul du solde total
-- `formatAmount` - Formatage des montants
-- `openModal`, `closeModal` - Gestion du modal
-- `confirmDelete`, `reloadTransactions` - Opérations sur les transactions
-- `handleEdit` - Navigation vers l'édition
-
-**MotivationalMessage:**
-- `getRandomMessage` - Sélection aléatoire de message
-- `handleNewMessage` - Changement de message
-
-```javascript
-const fetchDashboardData = useCallback(async () => {
-  // Logic here
-}, [filter])
-```
-
-#### 📦 Lazy Loading (Code Splitting)
-
-**Recharts (Dashboard):**
-Tous les composants Recharts sont chargés dynamiquement pour réduire le bundle initial:
-
-```javascript
-const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), { ssr: false })
-const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), { ssr: false })
-const BarChart = dynamic(() => import('recharts').then(mod => mod.BarChart), { ssr: false })
-// ... et tous les autres composants Recharts
-```
-
-**Modal (Transactions):**
-```javascript
-const Modal = dynamic(() => import("../../components/Modal"), { ssr: false })
-```
-
-### Impact des Optimisations
-
-**Avant optimisations:**
-- ❌ Calculs de filtrage exécutés à chaque render
-- ❌ Fonctions recréées à chaque render
-- ❌ Bundle initial : ~800KB (avec Recharts)
-- ❌ Re-renders inutiles
-
-**Après optimisations:**
-- ✅ Calculs mémoïsés, exécutés uniquement quand nécessaire
-- ✅ Fonctions stables, pas de recréation
-- ✅ Bundle initial : ~730KB (réduction de ~50-70KB)
-- ✅ Re-renders minimisés
-- ✅ Temps de chargement initial réduit de ~15-20%
-
-### Mesurer les Performances
-
-**React DevTools Profiler:**
-```bash
-# En développement, activer le profiler React
-# F12 → Onglet "Profiler" → Enregistrer une session
-```
-
-**Lighthouse (Chrome):**
-```bash
-# F12 → Onglet "Lighthouse" → Generate report
-```
-
-**Bundle Analyzer:**
-```bash
-npm install --save-dev @next/bundle-analyzer
-# Ajouter dans next.config.js
-ANALYZE=true npm run build
-```
-
----
-
-## 🧪 Tests
-
-### Coverage ✅
-
-**Objectif atteint : 82-83% de couverture !**
-
-```bash
-npm test -- --coverage --testPathIgnore="integration|e2e"
-```
-
-**Résultats :**
-- **Statements**: 82.08% ✅
-- **Branches**: 74.57%
-- **Functions**: 78.04%
-- **Lines**: 83.33% ✅
-
-**20 suites de tests | 127 tests passent**
-
-### Tests Unitaires
-
-#### 📁 Tests des Fonctions Utilitaires
-- `__tests__/lib/utils.test.js` - Tests de la fonction `cn()` (9 tests)
-- `__tests__/lib/prisma.test.js` - Tests du client Prisma singleton (7 tests)
-
-#### 🔐 Tests des API Routes
-- `__tests__/api/auth/login.test.js` - Tests de l'API de connexion (6 tests)
-- `__tests__/api/auth/register.test.js` - Tests de l'API d'inscription (7 tests)
-- `__tests__/api/transactions.test.js` - Tests CRUD des transactions (10 tests)
-- `__tests__/api/transactions-id.test.js` - Tests des routes GET/PUT/DELETE par ID (24 tests)
-- `__tests__/api/dashboard/stats.test.js` - Tests des statistiques dashboard (8 tests)
-- `__tests__/api/dashboard/charts.test.js` - Tests des graphiques dashboard (8 tests)
-
-#### 🗄️ Tests des Modèles de Données
-- `__tests__/models/user.test.js` - Tests du modèle User (15 tests)
-- `__tests__/models/transaction.test.js` - Tests du modèle Transaction (16 tests)
-- `__tests__/models/relations.test.js` - Tests des relations User ↔ Transaction (10 tests)
-
-#### ⚛️ Tests des Composants React
-- `__tests__/components/Logo.test.js` - Composant Logo
-- `__tests__/components/Footer.test.js` - Composant Footer
-- `__tests__/components/Modal.test.js` - Composant Modal
-- `__tests__/components/Navbar.test.js` - Composant Navbar
-- `__tests__/components/MotivationalMessage.test.js` - Messages motivationnels
-- `__tests__/components/ui/button.test.js` - Composant Button (shadcn/ui)
-- `__tests__/components/ui/card.test.js` - Composant Card (shadcn/ui)
-- `__tests__/components/ui/input.test.js` - Composant Input (shadcn/ui)
-
-**Total : 133 tests couvrant :**
-- ✅ Routes API (auth, transactions, dashboard)
-- ✅ Validation des données côté serveur
-- ✅ Modèles Prisma et relations
-- ✅ Composants React et UI
-- ✅ Fonctions utilitaires
-
-### Tests d'Intégration
-
-Tests du flux complet end-to-end avec Playwright.
-
-**Lancer les tests E2E :**
-```bash
-npm run test:integration
-```
-
-**Scénarios testés :**
-- Inscription → Connexion → Dashboard
-- Ajout de transaction → Visualisation
-- Modification de transaction
-- Suppression de transaction
-- Filtres dashboard
-- Export PNG
-
-### Scripts de Tests
-
-```bash
-npm test                      # Tests unitaires
-npm test -- --coverage        # Tests avec coverage
-npm run test:integration      # Tests d'intégration Playwright
-npm run test:api              # Tests API uniquement
-```
-
-### Prisma Studio
-
-Interface graphique pour inspecter la base de données :
-
-```bash
-npx prisma studio
-```
-
-Accessible sur http://localhost:5555
+6. **Validation des Tirelires**
+   - Montant objectif > 0
+   - Pourcentage automatique entre 1-100%
+   - Vérification ownership
 
 ---
 
@@ -1034,291 +497,94 @@ Accessible sur http://localhost:5555
 
 ### Vercel (Recommandé)
 
+**Application déployée** : https://holbertonschool-money-mirror.vercel.app/
+
 **Étapes :**
 
-1. **Connecter le dépôt GitHub à Vercel**
-   - Aller sur https://vercel.com/import/git
-   - Sélectionner le repo `holbertonschool-moneyMirror`
-
-2. **Configurer les variables d'environnement**
-
-   Dans le dashboard Vercel → Settings → Environment Variables :
-   ```
-   DATABASE_URL=mysql://user:pass@host:port/db
-   NEXTAUTH_URL=https://votre-app.vercel.app
-   NEXTAUTH_SECRET=<générer avec openssl rand -base64 32>
-   ```
-
-3. **Déployer !**
-
-   Vercel déploie automatiquement à chaque push sur `main`.
+1. Connecter le dépôt GitHub à Vercel
+2. Configurer les variables d'environnement
+3. Vercel déploie automatiquement à chaque push sur `main`
 
 **Base de données :**
-- Utiliser un service MySQL managé : **PlanetScale**, **Railway**, **DigitalOcean**
+- Utiliser **Railway**, **PlanetScale**, ou **DigitalOcean**
 - Ou héberger MySQL sur un VPS
 
 ---
 
-### Docker
+## 📜 Notes de Version
 
-**Créer l'image Docker :**
+### v2.0.0 (2025-10-23) - Tirelires & Impact Social 🐷💙
 
-```bash
-docker build -t moneymirror .
-```
+**🐷 Système de Tirelires Complet :**
+- ✅ Base de données Prisma avec modèle Piggybank
+- ✅ Routes API complètes (POST, GET, PUT, DELETE)
+- ✅ Page frontend magnifique avec modals
+- ✅ 10 catégories avec émojis et logos de cochon
+- ✅ 50+ messages motivationnels à effet Barnum (5 niveaux par catégorie)
+- ✅ **Innovation : Liaison addiction → voyage** (changement d'environnement)
+- ✅ Mode manuel ET automatique (% des revenus)
+- ✅ Barre de progression, animations, confettis
+- ✅ Lien dans la Navbar
 
-**Lancer le conteneur :**
+**💙 Page Donation Refonte Complète :**
+- ✅ 3 types de dons (Unique / Mensuel / Annuel)
+- ✅ Onglets interactifs avec badges
+- ✅ Psychologie des prix (économies visibles -17%)
+- ✅ Section transparence avec reçus mockup
+- ✅ Message sur le karma et bonnes actions
+- ✅ Email de remerciement personnalisé mentionné
+- ✅ 9 moyens de paiement
+- ✅ Storytelling Vithushan préservé
 
-```bash
-docker run -p 3000:3000 \
-  -e DATABASE_URL="mysql://..." \
-  -e NEXTAUTH_URL="http://localhost:3000" \
-  -e NEXTAUTH_SECRET="..." \
-  moneymirror
-```
-
-**Avec Docker Compose :**
-
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-    depends_on:
-      - db
-
-  db:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: moneymirror
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-volumes:
-  mysql_data:
-```
-
-Lancer :
-```bash
-docker-compose up -d
-```
+**🎯 Impact :**
+- Aide concrète pour vaincre les addictions (stratégie voyage)
+- Modèle de donation éthique et transparent
+- Gamification de l'épargne
+- Dimension spirituelle et humaine
 
 ---
 
-### VPS (DigitalOcean, AWS, etc.)
+### v1.2.0 (2025-10-22) - UX Améliorée & Messages Motivationnels 🎉
 
-**Prérequis :**
-- Node.js 18+
-- MySQL 8+
-- PM2 pour la gestion de processus
-
-**Étapes :**
-
-1. **Cloner le repo sur le serveur**
-```bash
-git clone https://github.com/Vitushan/holbertonschool-moneyMirror.git
-cd holbertonschool-moneyMirror
-```
-
-2. **Installer les dépendances**
-```bash
-npm install
-```
-
-3. **Configurer `.env.local`**
-```bash
-nano .env.local
-```
-
-4. **Build de production**
-```bash
-npm run build
-```
-
-5. **Lancer avec PM2**
-```bash
-npm install -g pm2
-pm2 start npm --name "moneymirror" -- start
-pm2 save
-pm2 startup
-```
-
-6. **Configurer Nginx (reverse proxy)**
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-```
-
-7. **SSL avec Certbot**
-```bash
-sudo certbot --nginx -d yourdomain.com
-```
+**Expérience Utilisateur :**
+- ✅ Page d'accueil intelligente avec redirection automatique
+- ✅ Connexion automatique après inscription
+- ✅ Messages motivationnels contextuels (revenus vs dépenses)
+- ✅ MotivationalModal avec overlay et animations
+- ✅ Effet Barnum pour engagement maximal
 
 ---
 
-## 🐛 Dépannage
+### v1.1.0 (2025-10-21) - Tests & Optimisations ⚡
 
-### Problèmes Courants
+**Tests :**
+- ✅ Coverage 82-83% (133 tests)
+- ✅ Tests E2E avec Playwright
 
-#### 1. Erreur "PrismaClient is unable to connect"
-
-**Solution :**
-- Vérifier que MySQL est en cours d'exécution
-```bash
-sudo systemctl status mysql
-```
-- Vérifier `DATABASE_URL` dans `.env.local`
-- Tester la connexion :
-```bash
-mysql -u username -p -h localhost -P 3306
-```
+**Performance :**
+- ✅ useMemo, useCallback
+- ✅ Lazy loading Recharts
+- ✅ Réduction bundle ~50-70KB
 
 ---
 
-#### 2. Erreur "Module not found"
+### v1.0.0 (2025-10-20) - Release Initiale 🚀
 
-**Solution :**
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
----
-
-#### 3. Session non persistante (déconnexion automatique)
-
-**Solution :**
-- Vérifier que `NEXTAUTH_SECRET` est défini
-- S'assurer que les cookies sont activés
-- Vérifier que `NEXTAUTH_URL` correspond à l'URL utilisée
-
----
-
-#### 4. Graphiques ne s'affichent pas
-
-**Solution :**
-- Vérifier que les APIs `/api/dashboard/stats` et `/api/dashboard/charts` retournent des données
-- Ouvrir la console du navigateur (F12) pour voir les erreurs
-- Vérifier que `Recharts` est installé :
-```bash
-npm install recharts
-```
-
----
-
-#### 5. Export PNG ne fonctionne pas
-
-**Solution :**
-- Vérifier que `dom-to-image-more` est installé :
-```bash
-npm install dom-to-image-more
-```
-- Essayer sur un autre navigateur (Safari peut avoir des problèmes)
-- Vérifier les logs de la console
-
----
-
-#### 6. Prisma "Migration not applied"
-
-**Solution :**
-```bash
-npx prisma migrate reset
-npx prisma db push
-npx prisma generate
-```
-
----
-
-### Logs et Débogage
-
-**Logs serveur (terminal) :**
-```bash
-npm run dev
-```
-
-**Logs Prisma :**
-Ajouter dans `.env.local` :
-```env
-DEBUG=prisma:query
-```
-
-**Logs NextAuth :**
-Ajouter dans `authOptions` :
-```javascript
-debug: true,
-logger: {
-  error(code, metadata) {
-    console.error(code, metadata)
-  },
-  warn(code) {
-    console.warn(code)
-  },
-  debug(code, metadata) {
-    console.log(code, metadata)
-  }
-}
-```
-
-**Prisma Studio** :
-```bash
-npx prisma studio
-```
-
----
-
-## 🤝 Contribuer
-
-Les contributions sont les bienvenues !
-
-### Comment contribuer
-
-1. **Fork le projet**
-2. **Créer une branche** : `git checkout -b feature/ma-feature`
-3. **Commit** : `git commit -m "Ajout de ma feature"`
-4. **Push** : `git push origin feature/ma-feature`
-5. **Ouvrir une Pull Request**
-
-### Guidelines
-
-- Respecter la structure du projet
-- Commenter le code en français
-- Ajouter des tests pour les nouvelles fonctionnalités
-- Mettre à jour la documentation si nécessaire
-- Suivre les conventions de nommage existantes
-
----
-
-## 📜 Licence
-
-Ce projet est développé dans le cadre d'un projet éducatif à **Holberton School**.
+**Fonctionnalités initiales :**
+- ✅ Authentification complète
+- ✅ CRUD transactions
+- ✅ Dashboard avec 3 graphiques
+- ✅ Export PNG
+- ✅ Support multi-devises
 
 ---
 
 ## 👤 Auteur
 
-**Vitushan Satkunanathan**
+**Vithushan Satkunanathan**
 - GitHub: [@Vitushan](https://github.com/Vitushan)
 - Email: vitushansatkunanathan@gmail.com
+- LinkedIn: [Vithushan Satkunanathan](https://linkedin.com/in/vitushan)
 
 ---
 
@@ -1328,109 +594,22 @@ Ce projet est développé dans le cadre d'un projet éducatif à **Holberton Sch
 - **Next.js Team** pour le framework incroyable
 - **Prisma Team** pour l'ORM moderne
 - **Recharts** pour les graphiques interactifs
-- Toutes les ressources d'apprentissage listées ci-dessus
+- **Communauté open-source** pour les librairies utilisées
 
 ---
 
-## 📝 Notes de Version
+## 📝 Prochaines Étapes
 
-### v1.2.0 (2025-10-23) - UX Améliorée & Messages Motivationnels 🎉
-
-**🎨 Expérience Utilisateur Améliorée :**
-- ✅ **Page d'accueil intelligente** : Redirection automatique vers dashboard si connecté, sinon vers login
-- ✅ **Connexion automatique après inscription** : Plus besoin de se reconnecter après création de compte
-- ✅ **Système de messages motivationnels contextuels** :
-  - 💰 **Revenus** : Popup de félicitations avec 15 messages encourageants uniques
-  - ⚠️ **Dépenses** : Popup de conseil financier avec 15 messages de prudence uniques
-  - 🎨 Design premium avec overlay sombre et animations fluides
-  - ⏱️ Fermeture automatique après 10 secondes
-  - ❌ Fermeture manuelle avec bouton X, clic overlay, ou touche Escape
-  - 📊 Barre de progression visuelle (10s)
-  - 🔄 Bouton pour générer un nouveau message aléatoire
-  - 🎯 Utilisation de l'effet Barnum pour engagement maximal
-
-**🎨 Nouveaux Composants :**
-- ✅ **MotivationalModal** : Popup modal centré avec overlay
-- ✅ **MotivationalMessage (amélioré)** : Support de variants (default, alert) et types (general, income, expense)
-- ✅ Animations CSS personnalisées : `modalSlideIn`, `progressBar`, `fadeIn`
-
-**📦 Structure Mise à Jour :**
-- ✅ Messages motivationnels restructurés en 3 catégories (general, income, expense)
-- ✅ Page d'accueil refactorisée avec détection de session
-- ✅ Page register avec connexion automatique
-
-**🎯 Impact :**
-- Meilleur onboarding des utilisateurs (moins de friction)
-- Engagement accru grâce aux messages contextuels personnalisés
-- Expérience premium avec animations et design soigné
-
----
-
-### v1.1.0 (2025-10-22) - Tests & Optimisations ⚡
-
-**🎯 Tests Complets :**
-- ✅ **Coverage 82-83%** (objectif 80% atteint !)
-- ✅ 133 tests unitaires et d'intégration
-- ✅ 20 suites de tests
-- ✅ Tests des API routes (auth, transactions, dashboard)
-- ✅ Tests des modèles Prisma (User, Transaction, Relations)
-- ✅ Tests des composants React (8 composants)
-- ✅ Tests des utilitaires (cn, Prisma client)
-- ✅ Tests E2E avec Playwright
-
-**⚡ Optimisations de Performance :**
-- ✅ **useMemo** pour mémoïser les calculs coûteux (filtres dashboard)
-- ✅ **useCallback** pour éviter la recréation des fonctions
-- ✅ **Lazy loading** de Recharts (réduction bundle ~50-70KB)
-- ✅ **Code splitting** avec dynamic imports
-- ✅ Réduction du temps de chargement initial (~15-20%)
-- ✅ Re-renders minimisés
-
-**🎨 Nouveaux Composants UI :**
-- ✅ Navbar avec navigation et déconnexion
-- ✅ MotivationalMessage (messages inspirants)
-- ✅ Composants shadcn/ui (Button, Card, Input)
-- ✅ Système de design documenté (DESIGN_SYSTEM.md)
-
-**🐛 Corrections de Bugs :**
-- ✅ Fix bannières/headers dupliqués
-- ✅ Fix tests dashboard (imports next-auth)
-- ✅ Fix tests register (messages français)
-- ✅ Correction ordre déclaration fonctions React
-
-**📚 Documentation :**
-- ✅ README mis à jour avec tests et optimisations
-- ✅ Section Performance détaillée
-- ✅ Structure du projet complétée
-- ✅ Documentation des 133 tests
-
----
-
-### v1.0.0 (2025-10-21) - Release Initiale 🚀
-
-**Fonctionnalités initiales :**
-- ✅ Authentification complète (register/login)
-- ✅ CRUD transactions
-- ✅ Dashboard avec 3 graphiques
-- ✅ Export PNG
-- ✅ Support multi-devises et cryptomonnaies
-- ✅ Filtres temporels et recherche
-- ✅ Section Dernières Transactions
-- ✅ Interface responsive
-- ✅ Documentation complète
+- 🔔 Notifications push
+- 📧 Système d'emails (réinitialisation mot de passe)
+- 💾 Export CSV/PDF des transactions
+- 📱 Progressive Web App (PWA)
+- 📈 Rapports mensuels automatiques
+- 🔄 Import de fichiers bancaires (CSV)
+- 🌐 Multi-langue (EN/FR)
 
 ---
 
 **🎉 Merci d'utiliser MoneyMirror !**
 
-Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur GitHub.
-
-**Prochaines étapes :**
-- ✅ Déploiement sur Vercel (fait : https://holbertonschool-money-mirror.vercel.app/)
-- 🔔 Notifications push
-- 📧 Système d'emails (réinitialisation mot de passe)
-- 💾 Export CSV/PDF des transactions
-- 📱 Progressive Web App (PWA)
-- 🎯 Objectifs financiers avec tracking
-- 📈 Rapports mensuels automatiques
-- 🔄 Import de fichiers bancaires (CSV)
+*Une application de gestion financière avec impact social* 💙🐷

@@ -16,6 +16,7 @@ export default function Navbar() {
     { name: 'Tableau de bord', href: '/dashboard' },
     { name: 'Transactions', href: '/transactions' },
     { name: 'Ajouter Transaction', href: '/transactions/add' },
+    { name: 'Tirelires 🐷', href: '/piggybanks' },
   ]
 
   const supportButton = { name: 'Soutenir 💙', href: '/donation' }

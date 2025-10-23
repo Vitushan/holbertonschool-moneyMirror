@@ -1,0 +1,283 @@
+{
+  "voyage": {
+    "emoji": "🌴",
+    "messages": {
+      "0-25": [
+        "Votre esprit d'aventure montre que vous êtes quelqu'un qui voit au-delà du quotidien. Chaque euro économisé vous rapproche de la liberté.",
+        "Les grands voyages commencent par un premier pas. Vous l'avez fait, et c'est déjà magnifique.",
+        "Vous avez cette capacité rare de transformer un rêve en projet concret. Le monde vous attend."
+      ],
+      "25-50": [
+        "Vous êtes déjà à un quart du chemin ! Votre détermination prouve que ce voyage n'est pas qu'un rêve, c'est une promesse que vous vous faites.",
+        "Chaque euro mis de côté est une preuve de votre engagement envers vous-même. Le monde sera bientôt à vos pieds.",
+        "Vous construisez plus qu'un voyage, vous construisez une expérience qui changera votre perspective sur la vie."
+      ],
+      "50-75": [
+        "La moitié du chemin franchie ! Vous pouvez déjà sentir l'air de votre destination. Votre persévérance est admirable.",
+        "Vous êtes tellement proche maintenant. Chaque jour vous rapproche de cette sensation de liberté que vous méritez.",
+        "Votre objectif n'est plus un rêve, c'est une réalité en construction. Vous êtes un bâtisseur de liberté."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Ce voyage que vous avez imaginé devient tangible. Votre discipline vous honore.",
+        "Plus que quelques efforts et vous serez sur le chemin de l'aventure. Vous avez prouvé que vous savez aller au bout de vos rêves.",
+        "La ligne d'arrivée est en vue. Ce voyage sera la récompense de votre patience et de votre volonté."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre rêve est devenu réalité ! Vous avez prouvé que la discipline et la vision peuvent transformer une idée en aventure. Profitez de chaque instant de ce voyage, vous l'avez mérité. Bon voyage ! 🌍✈️"
+      ]
+    }
+  },
+  "addiction": {
+    "emoji": "🌱",
+    "messages": {
+      "0-25": [
+        "Chaque jour sans est une victoire. Vous avez le courage de changer, et c'est déjà immense. Votre corps commence à vous remercier.",
+        "Vous venez de faire le choix le plus difficile : commencer. Cette force en vous est rare et précieuse.",
+        "Briser une habitude demande un courage extraordinaire. Vous êtes en train de reprendre le contrôle de votre vie."
+      ],
+      "25-50": [
+        "Vous prouvez chaque jour que vous êtes plus fort que vos habitudes. Cette force intérieure que vous avez est rare et précieuse. Continuez.",
+        "Un quart du chemin parcouru ! Vous avez déjà brisé les chaînes les plus lourdes. Votre santé vous en remercie.",
+        "Chaque euro économisé est une preuve vivante de votre victoire. Vous n'êtes plus la même personne qu'au début."
+      ],
+      "50-75": [
+        "La moitié du chemin est franchie. Vous avez brisé les chaînes les plus lourdes. Votre santé, votre dignité, votre avenir vous appartiennent à nouveau.",
+        "Vous êtes en train de gagner la bataille la plus importante de votre vie. Chaque jour est une preuve de votre force.",
+        "Vous avez déjà parcouru tant de chemin. Les moments difficiles du début sont derrière vous. Vous êtes libre."
+      ],
+      "75-100": [
+        "Vous êtes une inspiration. Chaque euro économisé est une preuve de votre victoire sur ce qui vous contrôlait. Vous reprenez votre vie en main.",
+        "Plus que quelques efforts et vous aurez prouvé que rien n'est impossible. Votre transformation est remarquable.",
+        "Vous touchez au but. Cette personne que vous êtes devenue est infiniment plus forte que celle qui a commencé ce chemin."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Vous avez prouvé que rien n'est plus fort que votre volonté. Cet argent représente votre liberté reconquise. Vous méritez d'être fier de vous. Votre vie vous appartient à nouveau. 💪🌟"
+      ]
+    },
+    "linkedTravelMessage": "Ce voyage n'est pas qu'une escapade, c'est votre renaissance. Loin de vos anciens déclencheurs, vous allez redécouvrir qui vous êtes vraiment. Changer d'environnement est l'une des méthodes les plus efficaces pour briser définitivement un cycle. 🌅"
+  },
+  "console": {
+    "emoji": "🎮",
+    "messages": {
+      "0-25": [
+        "Vous savez que les meilleures choses valent la peine d'attendre. Cette patience que vous cultivez est admirable.",
+        "Chaque euro économisé est un pas vers le moment où vous tiendrez cette console entre vos mains. Le plaisir sera d'autant plus intense.",
+        "Vous vous offrez ce cadeau par votre propre discipline. C'est une preuve de maturité et de contrôle."
+      ],
+      "25-50": [
+        "Un quart du chemin déjà ! Vous êtes sur la bonne voie. Cette récompense que vous préparez sera d'autant plus douce.",
+        "Vous construisez votre plaisir futur euro par euro. Cette anticipation fait partie du bonheur.",
+        "Votre détermination montre que vous savez ce que vous voulez et que vous savez l'obtenir. Respect."
+      ],
+      "50-75": [
+        "La moitié franchie ! Vous pouvez presque sentir la manette dans vos mains. Votre patience porte ses fruits.",
+        "Vous êtes bien plus proche de votre objectif que de votre point de départ. Cette console sera bientôt à vous.",
+        "Chaque jour vous rapproche de ce moment où vous déballerez votre nouvelle console. L'attente en vaut la peine."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Quelques efforts encore et cette console sera vôtre, acquise par votre propre mérite.",
+        "La ligne d'arrivée approche. Cette sensation d'accomplissement sera aussi belle que la console elle-même.",
+        "Plus que quelques euros et vous aurez prouvé que rien ne vous arrête quand vous avez un objectif clair."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre console est à vous ! Vous avez prouvé que la patience et la discipline sont les clés du succès. Profitez-en, vous l'avez amplement mérité ! 🎮✨"
+      ]
+    }
+  },
+  "voiture": {
+    "emoji": "🚗",
+    "messages": {
+      "0-25": [
+        "Une voiture représente la liberté et l'indépendance. Vous construisez votre mobilité euro par euro.",
+        "Chaque économie vous rapproche du moment où vous tiendrez les clés de votre propre véhicule.",
+        "Vous investissez dans votre autonomie. C'est un projet intelligent et ambitieux."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Vous êtes sérieux dans votre démarche. Cette voiture sera le symbole de votre persévérance.",
+        "Vous construisez plus qu'une épargne, vous construisez votre indépendance. Continue comme ça.",
+        "Votre discipline aujourd'hui sera votre liberté de mouvement demain. Vous êtes sur la bonne voie."
+      ],
+      "50-75": [
+        "La moitié franchie ! Vous pouvez déjà imaginer votre premier trajet. Votre détermination est impressionnante.",
+        "Vous êtes à mi-chemin de votre indépendance. Cette voiture changera votre quotidien.",
+        "Chaque euro économisé est un kilomètre de liberté future. Vous construisez votre mobilité."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Quelques efforts encore et les clés seront dans votre poche.",
+        "La ligne d'arrivée est en vue. Cette voiture sera la récompense de vos sacrifices et de votre patience.",
+        "Plus que quelques euros et vous aurez gagné votre indépendance sur quatre roues."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre voiture vous attend ! Vous avez prouvé qu'avec de la discipline, tout est possible. Profitez de votre nouvelle liberté de mouvement ! 🚗🌟"
+      ]
+    }
+  },
+  "logement": {
+    "emoji": "🏠",
+    "messages": {
+      "0-25": [
+        "Un logement est bien plus qu'un toit, c'est votre sanctuaire. Vous construisez votre avenir pierre par pierre.",
+        "Chaque euro économisé est une brique de votre futur chez-vous. Votre vision à long terme est admirable.",
+        "Vous investissez dans votre stabilité et votre sécurité. C'est le projet le plus important de votre vie."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Vous bâtissez votre avenir avec sérieux. Votre logement sera le fruit de votre travail.",
+        "Vous êtes en train de construire votre indépendance et votre sécurité. C'est magnifique.",
+        "Chaque économie vous rapproche de ce moment où vous aurez les clés de VOTRE chez-vous."
+      ],
+      "50-75": [
+        "La moitié franchie ! Vous êtes sérieux et déterminé. Ce logement sera le symbole de votre réussite.",
+        "Vous avez parcouru la moitié du chemin vers votre indépendance totale. Votre futur chez-vous se dessine.",
+        "Chaque jour vous rapproche de votre sanctuaire personnel. Vous construisez votre stabilité."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Quelques efforts encore et vous aurez atteint un des objectifs les plus importants de la vie.",
+        "La ligne d'arrivée approche. Ce logement sera la preuve de votre persévérance et de votre sagesse.",
+        "Plus que quelques euros et vous aurez construit votre sécurité et votre indépendance."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre logement vous attend ! Vous avez accompli quelque chose d'extraordinaire. Bienvenue chez VOUS ! 🏠✨"
+      ]
+    }
+  },
+  "mariage": {
+    "emoji": "💍",
+    "messages": {
+      "0-25": [
+        "Vous préparez le plus beau jour de votre vie avec amour et discipline. Chaque euro est un témoignage de votre engagement.",
+        "Votre mariage sera le reflet de votre sérieux et de votre amour. Vous construisez quelque chose de magnifique.",
+        "Chaque économie est une preuve d'amour. Vous créez les fondations d'une union solide."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Votre mariage se prépare euro par euro. Votre engagement est touchant.",
+        "Vous construisez le plus beau jour de votre vie avec patience et amour. C'est admirable.",
+        "Chaque effort aujourd'hui sera un souvenir merveilleux demain. Vous préparez votre bonheur."
+      ],
+      "50-75": [
+        "La moitié franchie ! Votre grand jour se rapproche. Votre amour et votre discipline bâtissent quelque chose de beau.",
+        "Vous êtes à mi-chemin de votre rêve. Ce mariage sera le symbole de votre union et de votre persévérance.",
+        "Chaque euro économisé rend votre mariage plus proche. L'amour et la patience font des merveilles."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Le plus beau jour de votre vie approche grâce à vos efforts constants.",
+        "La ligne d'arrivée est en vue. Votre mariage sera la célébration de votre amour et de votre détermination.",
+        "Plus que quelques euros et vous célébrerez votre union dans la joie que vous avez préparée avec amour."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre mariage est financé ! Vous avez construit ensemble le plus beau jour de votre vie. Tous mes vœux de bonheur ! 💍✨"
+      ]
+    }
+  },
+  "formation": {
+    "emoji": "📚",
+    "messages": {
+      "0-25": [
+        "Investir dans votre éducation est le meilleur investissement que vous puissiez faire. Vous construisez votre futur.",
+        "Chaque euro économisé est une porte qui s'ouvre vers de nouvelles opportunités. Votre ambition est louable.",
+        "Vous investissez dans la ressource la plus précieuse : vous-même. C'est la marque des gagnants."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Vous prenez votre avenir en main. Cette formation transformera votre vie.",
+        "Vous construisez votre succès futur euro par euro. L'éducation est la clé de l'indépendance.",
+        "Chaque effort aujourd'hui est un investissement dans votre futur succès. Vous êtes sur la bonne voie."
+      ],
+      "50-75": [
+        "La moitié franchie ! Votre détermination à vous améliorer est inspirante. Cette formation ouvrira des portes.",
+        "Vous êtes à mi-chemin de votre transformation. L'investissement dans vos compétences est le meilleur qui soit.",
+        "Chaque jour vous rapproche de nouvelles compétences et opportunités. Vous bâtissez votre réussite."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Quelques efforts encore et vous aurez accès aux connaissances qui changeront votre vie.",
+        "La ligne d'arrivée approche. Cette formation sera le tremplin vers votre nouvelle vie professionnelle.",
+        "Plus que quelques euros et vous aurez investi dans ce qui compte le plus : vous-même."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre formation est financée ! Vous avez investi dans votre avenir. Le succès vous tend les bras ! 📚✨"
+      ]
+    }
+  },
+  "urgence": {
+    "emoji": "💰",
+    "messages": {
+      "0-25": [
+        "Vous construisez votre sécurité financière. Cette sagesse vous protégera des aléas de la vie.",
+        "Chaque euro mis de côté est une assurance contre l'imprévu. Votre prudence vous honore.",
+        "Vous créez votre filet de sécurité. C'est la marque d'une gestion financière mature et responsable."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Votre fonds d'urgence grandit. Vous dormez déjà un peu mieux la nuit.",
+        "Vous construisez votre tranquillité d'esprit euro par euro. La sécurité financière est un trésor.",
+        "Chaque économie renforce votre sérénité face aux imprévus. Vous êtes sur la voie de la stabilité."
+      ],
+      "50-75": [
+        "La moitié franchie ! Votre coussin de sécurité se forme. Vous êtes de plus en plus protégé contre les aléas.",
+        "Vous avez déjà une belle réserve. Cette sagesse financière vous apportera paix et sérénité.",
+        "Chaque jour vous rapproche de la tranquillité totale. Votre fonds d'urgence est votre meilleur allié."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Votre sécurité financière est presque complète. Quelle sagesse !",
+        "La ligne d'arrivée approche. Vous serez bientôt totalement protégé contre les imprévus de la vie.",
+        "Plus que quelques euros et vous aurez construit votre bouclier financier. Vous êtes presque libre de l'inquiétude."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre fonds d'urgence est complet ! Vous avez construit votre sécurité et votre tranquillité d'esprit. Dormez sur vos deux oreilles ! 💰🛡️"
+      ]
+    }
+  },
+  "cadeau": {
+    "emoji": "🎁",
+    "messages": {
+      "0-25": [
+        "Offrir un cadeau avec votre propre épargne montre votre générosité et votre amour. C'est magnifique.",
+        "Vous préparez le bonheur de quelqu'un que vous aimez. Cette attention est précieuse.",
+        "Chaque euro économisé est une preuve de votre affection. Vous êtes quelqu'un de généreux et attentionné."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Ce cadeau sera d'autant plus précieux qu'il vient de votre cœur et de vos efforts.",
+        "Vous construisez le bonheur d'autrui avec patience. C'est la marque d'une belle âme.",
+        "Chaque effort aujourd'hui sera de la joie partagée demain. Votre générosité est touchante."
+      ],
+      "50-75": [
+        "La moitié franchie ! Ce cadeau que vous préparez sera chargé d'amour et de sens.",
+        "Vous êtes à mi-chemin d'offrir un bonheur mérité. Votre attention aux autres est admirable.",
+        "Chaque euro vous rapproche du sourire de la personne que vous aimez. C'est magnifique."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Le bonheur que vous allez offrir est à portée de main.",
+        "La ligne d'arrivée approche. Ce cadeau sera la preuve de votre amour et de votre générosité.",
+        "Plus que quelques euros et vous offrirez un bonheur construit avec patience et amour."
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Votre cadeau est prêt ! Vous allez illuminer la journée de quelqu'un que vous aimez. Quelle belle âme vous avez ! 🎁💝"
+      ]
+    }
+  },
+  "autre": {
+    "emoji": "✨",
+    "messages": {
+      "0-25": [
+        "Vous avez un objectif clair et vous travaillez pour l'atteindre. Cette détermination vous mènera loin.",
+        "Chaque euro économisé vous rapproche de votre rêve. Votre discipline est admirable.",
+        "Vous construisez quelque chose d'important pour vous. Cette patience sera récompensée."
+      ],
+      "25-50": [
+        "Un quart du chemin ! Vous prouvez que quand on veut, on peut. Continue comme ça.",
+        "Vous êtes en train de transformer un rêve en réalité. Votre persévérance porte ses fruits.",
+        "Chaque effort vous rapproche de votre objectif. Vous êtes sur la bonne voie."
+      ],
+      "50-75": [
+        "La moitié franchie ! Votre détermination est impressionnante. Vous touchez au but.",
+        "Vous avez déjà parcouru tant de chemin. Votre objectif n'est plus un rêve, c'est une réalité en construction.",
+        "Chaque jour vous rapproche de ce que vous désirez. Votre discipline vous honore."
+      ],
+      "75-100": [
+        "Vous y êtes presque ! Quelques efforts encore et vous aurez atteint votre objectif.",
+        "La ligne d'arrivée est en vue. Vous avez prouvé que rien ne vous arrête.",
+        "Plus que quelques euros et vous aurez réalisé ce que vous vous êtes promis. Bravo !"
+      ],
+      "completed": [
+        "FÉLICITATIONS ! 🎉 Vous avez atteint votre objectif ! Vous avez prouvé que la discipline et la persévérance mènent au succès. Profitez de votre réussite ! ✨🌟"
+      ]
+    }
+  }
+}
