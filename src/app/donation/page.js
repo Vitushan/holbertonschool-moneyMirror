@@ -311,7 +311,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">PayPal</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Paiement sécurisé par carte ou compte PayPal</p>
               <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner via PayPal
+                Don via PayPal
               </button>
             </div>
 
@@ -321,7 +321,17 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Carte Bancaire</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Visa, Mastercard, American Express</p>
               <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner par carte
+                Don par carte
+              </button>
+            </div>
+
+          {/* Usdt */}
+            <div className="border-2 border-orange-200 rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-4xl mb-3 text-center">$</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Usdt</h3>
+              <p className="text-gray-600 text-sm mb-4 text-center">Paiement en Usdt</p>
+              <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 rounded-lg transition">
+                Don en Usdt
               </button>
             </div>
 
@@ -331,7 +341,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Bitcoin</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Paiement en BTC</p>
               <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner en Bitcoin
+                Don en Bitcoin
               </button>
             </div>
 
@@ -341,7 +351,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Ethereum</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Paiement en ETH</p>
               <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner en Ethereum
+                Don en Ethereum
               </button>
             </div>
 
@@ -351,7 +361,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Wise</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Transfert international</p>
               <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner via Wise
+                Don via Wise
               </button>
             </div>
 
@@ -371,7 +381,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Paysafecard</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Carte prépayée</p>
               <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner avec PCS
+                Don avec PCS
               </button>
             </div>
 
@@ -381,7 +391,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Western Union</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Transfert d'argent</p>
               <button className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg transition">
-                Donner via WU
+                Don via WU
               </button>
             </div>
 
@@ -391,7 +401,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Revolut</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Paiement instantané</p>
               <button className="w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 rounded-lg transition">
-                Donner via Revolut
+                Don via Revolut
               </button>
             </div>
           </div>
@@ -407,11 +417,11 @@ export default function DonationPage() {
           <div className="space-y-3 text-gray-700 mb-6">
             <p className="flex items-start">
               <span className="text-green-500 text-xl mr-2">✓</span>
-              <span>95% des dons servent au développement et à la maintenance de MoneyMirror</span>
+              <span>85% des dons servent au développement et à la maintenance de MoneyMirror</span>
             </p>
             <p className="flex items-start">
               <span className="text-green-500 text-xl mr-2">✓</span>
-              <span>5% sont reversés à des associations caritatives (orphelinats, maisons de retraite)</span>
+              <span>15% sont reversés à des associations caritatives (orphelinats, maisons de retraite)</span>
             </p>
             <p className="flex items-start">
               <span className="text-green-500 text-xl mr-2">✓</span>
@@ -527,7 +537,7 @@ export default function DonationPage() {
                 Avec toute ma gratitude et mon respect,
               </p>
               <p className="text-xl text-blue-600 font-semibold">
-                Bibi
+                Vithushan
               </p>
               <p className="text-sm text-gray-500">
                 Créateur de MoneyMirror
