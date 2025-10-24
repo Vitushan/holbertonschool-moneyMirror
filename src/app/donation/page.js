@@ -35,7 +35,7 @@ export default function DonationPage() {
           </div>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Salut, je suis <span className="font-bold text-blue-600">Bibi</span>, l'unique développeur derrière MoneyMirror.
+              Salut, je suis <span className="font-bold text-blue-600">Vithushan</span>, l'unique développeur derrière MoneyMirror.
               Comme beaucoup d'entre vous, j'ai longtemps eu du mal à gérer mes finances personnelles. Entre les dépenses imprévues,
               les oublis de transactions et le manque de vision claire sur mon budget, je me sentais perdu.
             </p>
@@ -515,7 +515,7 @@ export default function DonationPage() {
                 💌 Vous avez des questions ou des suggestions ?
               </p>
               <p className="text-blue-600 font-semibold">
-                bibi@live.fr
+                9880@holbertonschool.com
               </p>
               <p className="text-sm text-gray-500 mt-2">
                 Je réponds personnellement à chaque message !
