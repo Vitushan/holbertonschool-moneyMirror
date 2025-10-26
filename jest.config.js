@@ -16,8 +16,8 @@ const customJestConfig = {
     moduleNameMapper: {
          '^@/(.*)$': '<rootDir>/src/$1', // Map @/ to the src folder
     },
-    testMatch: ['**/__tests__/**/*.test.js', '**/__tests__.integration/**/*.spec.js'], // Locate test files
-    testPathIgnorePatterns: ['/node_modules/', '/.next/', '\\.e2e\\.spec\\.js$'], // Exclude E2E Playwright tests
+    testMatch: ['**/__tests__/**/*.test.js'], // Locate test files
+    testPathIgnorePatterns: ['/node_modules/', '/.next/', '\\.e2e\\.spec\\.js$', '/__tests__.integration/'], // Exclude E2E Playwright tests and integration tests
     collectCoverageFrom: [
         "src/app/api/**/*.js", // Include API files for coverage
         "!src/app/api/**/_*.js" // Exclude private API files

@@ -43,9 +43,13 @@ describe('Dashboard Charts API', () => {
 
   describe('GET /api/dashboard/charts', () => {
     it('should return chart data for authenticated user', async () => {
+      const today = new Date();
+      const yesterday = new Date();
+      yesterday.setDate(today.getDate() - 1);
+
       mockTransaction.findMany.mockResolvedValue([
-        { date: new Date('2025-01-01'), amount: 100, type: 'income', category: 'Salary' },
-        { date: new Date('2025-01-02'), amount: 50, type: 'expense', category: 'Food' }
+        { date: today, amount: 100, type: 'income', category: 'Salary' },
+        { date: yesterday, amount: 50, type: 'expense', category: 'Food' }
       ]);
 
       const request = new NextRequest('http://localhost:3000/api/dashboard/charts?filter=month');
@@ -102,9 +106,9 @@ describe('Dashboard Charts API', () => {
 
     it('should group transactions by category for pie chart', async () => {
       mockTransaction.findMany.mockResolvedValue([
-        { category: 'Food', amount: 100, type: 'expense' },
-        { category: 'Food', amount: 50, type: 'expense' },
-        { category: 'Salary', amount: 2000, type: 'income' }
+        { date: new Date('2025-01-01'), category: 'Food', amount: 100, type: 'expense' },
+        { date: new Date('2025-01-02'), category: 'Food', amount: 50, type: 'expense' },
+        { date: new Date('2025-01-03'), category: 'Salary', amount: 2000, type: 'income' }
       ]);
 
       const request = new NextRequest('http://localhost:3000/api/dashboard/charts');

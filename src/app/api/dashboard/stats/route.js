@@ -20,13 +20,8 @@ export async function GET(request) {
     }
 
     if (!userId) {
-      console.error('Aucun userId trouvé - utilisateur non authentifié')
       return NextResponse.json({
-        error: 'Utilisateur non authentifié',
-        debug: {
-          hasSession: !!session,
-          sessionUser: session?.user
-        }
+        error: 'Utilisateur non authentifié'
       }, { status: 401 })
     }
 
@@ -111,9 +106,16 @@ export async function GET(request) {
     }
     // Si les deux sont à 0, on garde growth = 0
 
-    // Compter les utilisateurs uniques (dans ce cas, juste 1 - l'utilisateur actuel)
-    // Vous pourriez vouloir compter autre chose comme le nombre de transactions
-    const totalUsers = transactions.length
+    // Compter le nombre total de transactions
+    const totalUsers = await prisma.transaction.count({
+      where: {
+        userId,
+        date: {
+          gte: startDate,
+          lte: now
+        }
+      }
+    })
 
     // Compter les "projets" actifs (pourrait être des catégories ou le nombre de transactions)
     const activeProjects = new Set(transactions.map(t => t.category)).size
@@ -129,7 +131,6 @@ export async function GET(request) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Erreur statistiques dashboard:', error)
     return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 })
   }
 }

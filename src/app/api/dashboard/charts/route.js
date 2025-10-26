@@ -20,13 +20,8 @@ export async function GET(request) {
     }
 
     if (!userId) {
-      console.error('Aucun userId trouvé - utilisateur non authentifié')
       return NextResponse.json({
-        error: 'Utilisateur non authentifié',
-        debug: {
-          hasSession: !!session,
-          sessionUser: session?.user
-        }
+        error: 'Utilisateur non authentifié'
       }, { status: 401 })
     }
 
@@ -59,6 +54,16 @@ export async function GET(request) {
         date: 'asc'
       }
     })
+
+    // Si pas de transactions, retourner des tableaux vides
+    if (transactions.length === 0) {
+      return NextResponse.json({
+        success: true,
+        lineChartData: [],
+        pieChartData: [],
+        barChartData: []
+      }, { status: 200 })
+    }
 
     // Générer les données du GRAPHIQUE EN LIGNE (tendance dans le temps)
     let lineChartData = []
@@ -256,7 +261,6 @@ export async function GET(request) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Erreur graphiques dashboard:', error)
     return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 })
   }
 }

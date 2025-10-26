@@ -87,7 +87,6 @@ export async function PUT(request, { params }) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Erreur lors de la mise à jour de la tirelire:', error)
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
 }
@@ -129,7 +128,6 @@ export async function DELETE(request, { params }) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Erreur lors de la suppression de la tirelire:', error)
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
 }

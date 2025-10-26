@@ -30,7 +30,6 @@ export async function GET(request) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Erreur lors de la récupération des tirelires:', error)
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
 }
@@ -98,7 +97,6 @@ export async function POST(request) {
     }, { status: 201 })
 
   } catch (error) {
-    console.error('Erreur lors de la création de la tirelire:', error)
     return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
   }
 }

@@ -58,7 +58,7 @@ describe('Login API', () => {
       const data = await response.json();
 
       expect(response.status).toBe(200);
-      expect(data.message).toBe('Login successful');
+      expect(data.message).toBe('Connexion réussie');
       expect(data.token).toBe('mock-jwt-token');
       expect(data.user).toMatchObject({
         id: 'user-1',
@@ -79,7 +79,7 @@ describe('Login API', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Email and password are required');
+      expect(data.error).toBe('Email et mot de passe requis');
     });
 
     it('should return 400 if password is missing', async () => {
@@ -94,7 +94,7 @@ describe('Login API', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Email and password are required');
+      expect(data.error).toBe('Email et mot de passe requis');
     });
 
     it('should return 401 if user not found', async () => {

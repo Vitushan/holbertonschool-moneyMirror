@@ -46,7 +46,6 @@ export async function GET(request, { params }) { // { params } = Next.js injecte
     }
     return NextResponse.json({ success: true, transaction }, { status: 200});
   } catch (error) {
-    console.error("Erreur lors de la récupération de la transaction", error)
     return NextResponse.json({ error: "Erreur interne du serveur" }, { status: 500 });
   }
 }
@@ -121,7 +120,6 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json({ success: true, message:'Transaction mise à jour avec succès !', transaction: updatedTransaction }, { status: 200 });
   } catch (error) {
-    console.error('Erreur lors de la mise à jour de la transaction', error);
     return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 });
   }
 }
@@ -166,7 +164,6 @@ export async function DELETE(request, { params}) {
     await prisma.transaction.delete({ where: { id: transaction.id }});
     return NextResponse.json({ success: true, message: 'Transaction supprimée avec succès' }, { status: 200});
   } catch (error) {
-    console.error('Erreur lors de la suppression de la transaction', error);
     return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500});
   }
 }

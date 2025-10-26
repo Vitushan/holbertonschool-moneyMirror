@@ -63,10 +63,13 @@ export async function POST(request) {
         name: user.name,
         email: user.email
       }
-    })
-    
+    }, { status: 201 })
+
   } catch (error) {
-    console.error('Erreur lors de l\'inscription:', error);
+    return Response.json(
+      { error: 'Erreur interne du serveur' },
+      { status: 500 }
+    );
   }
 }
 
