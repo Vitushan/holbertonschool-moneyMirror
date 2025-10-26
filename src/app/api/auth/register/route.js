@@ -66,10 +66,10 @@ export async function POST(request) {
     })
     
   } catch (error) {
-    console.error('Error during registration:', error);
+    console.error('Erreur lors de l\'inscription:', error);
   }
 }
 
 export async function GET() {
-  return Response.json({ message: 'GET method works! API is alive!' })
+  return Response.json({ message: 'La méthode GET fonctionne ! L\'API est en ligne !' })
 }

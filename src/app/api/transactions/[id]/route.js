@@ -19,7 +19,7 @@ export async function GET(request, { params }) { // { params } = Next.js injecte
         const decoded = jwtLib.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
       } catch (err) {
-        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+        return NextResponse.json({ error: 'Jeton invalide' }, { status: 401 });
       }
     } else {
       // Sinon, utiliser la session NextAuth
@@ -29,11 +29,11 @@ export async function GET(request, { params }) { // { params } = Next.js injecte
       }
     }
     if (!userId) {
-      return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
+      return NextResponse.json({ error: "Utilisateur non authentifié" }, { status: 401 });
     }
     const { id } = params;
     if (!id || typeof id !== "string" || id.trim().length === 0) {
-      return NextResponse.json({ error: "Invalid transaction ID" }, {status: 400 })
+      return NextResponse.json({ error: "ID de transaction invalide" }, {status: 400 })
     }
     const transaction = await prisma.transaction.findFirst({
       where: {
@@ -42,12 +42,12 @@ export async function GET(request, { params }) { // { params } = Next.js injecte
       },
     });
     if (!transaction) {
-      return NextResponse.json({ error: "Transaction not found" }, { status: 404});
+      return NextResponse.json({ error: "Transaction introuvable" }, { status: 404});
     }
     return NextResponse.json({ success: true, transaction }, { status: 200});
   } catch (error) {
-    console.error("Error fetching transaction", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error("Erreur lors de la récupération de la transaction", error)
+    return NextResponse.json({ error: "Erreur interne du serveur" }, { status: 500 });
   }
 }
 
@@ -64,7 +64,7 @@ export async function PUT(request, { params }) {
         const decoded = jwtLib.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
       } catch (err) {
-        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+        return NextResponse.json({ error: 'Jeton invalide' }, { status: 401 });
       }
     } else {
       // Sinon, utiliser la session NextAuth
@@ -75,33 +75,33 @@ export async function PUT(request, { params }) {
     }
 
     if (!userId) {
-      return NextResponse.json({ error: 'Please sign in to continue.' }, { status:401 })
+      return NextResponse.json({ error: 'Veuillez vous connecter pour continuer.' }, { status:401 })
     }
 
     const { id } = params;
     if (!id || typeof id !== 'string' || id.trim().length === 0) {
-      return NextResponse.json({ error: 'Invalid Transaction Id' }, { status: 400 })
+      return NextResponse.json({ error: 'ID de transaction invalide' }, { status: 400 })
     }
     const { amount, type, category, date, note, description, currency } = await request.json();
     if (typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category) {
-      return NextResponse.json({ error: 'Please fill all required fields.' }, {status: 400});
+      return NextResponse.json({ error: 'Veuillez remplir tous les champs obligatoires.' }, {status: 400});
     }
 
     const transaction = await prisma.transaction.findFirst({
       where: { id, userId }
     });
     if (!transaction) {
-      return NextResponse.json({ error: 'Transaction not found '}, { status: 404 })
+      return NextResponse.json({ error: 'Transaction introuvable'}, { status: 404 })
     }
 
     let transactionDate = transaction.date;
     if (date) {
       const parsedDate = new Date(date);
       if (isNaN(parsedDate.getTime())) {
-        return NextResponse.json({ error: 'Please enter a valid date.'}, { status: 400 })
+        return NextResponse.json({ error: 'Veuillez entrer une date valide.'}, { status: 400 })
       }
       if (parsedDate > new Date()) {
-        return NextResponse.json({ error: 'Sorry, you can’t travel to the future.' }, {status: 400})
+        return NextResponse.json({ error: 'Désolé, vous ne pouvez pas voyager dans le futur.' }, {status: 400})
       }
       transactionDate = parsedDate;
     }
@@ -119,10 +119,10 @@ export async function PUT(request, { params }) {
       },
     });
 
-    return NextResponse.json({ success: true, message:'Transaction updated successfully!', transaction: updatedTransaction }, { status: 200 });
+    return NextResponse.json({ success: true, message:'Transaction mise à jour avec succès !', transaction: updatedTransaction }, { status: 200 });
   } catch (error) {
-    console.error('Error updating transaction', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('Erreur lors de la mise à jour de la transaction', error);
+    return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 });
   }
 }
 
@@ -139,7 +139,7 @@ export async function DELETE(request, { params}) {
         const decoded = jwtLib.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
       } catch (err) {
-        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+        return NextResponse.json({ error: 'Jeton invalide' }, { status: 401 });
       }
     } else {
       // Sinon, utiliser la session NextAuth
@@ -150,23 +150,23 @@ export async function DELETE(request, { params}) {
     }
 
     if (!userId) {
-      return NextResponse.json({ error: 'Please sign in to continue '}, { status: 401 });
+      return NextResponse.json({ error: 'Veuillez vous connecter pour continuer'}, { status: 401 });
     }
 
     const { id } = params;
     if (!id || typeof id !== 'string' || id.trim().length === 0) {
-      return NextResponse.json({ error: 'Invalid transaction ID' }, { status: 400});
+      return NextResponse.json({ error: 'ID de transaction invalide' }, { status: 400});
     }
 
     const transaction = await prisma.transaction.findFirst({ where: { id, userId }});
     if (!transaction) {
-      return NextResponse.json({ error: 'Transaction not found' }, { status: 400 });
+      return NextResponse.json({ error: 'Transaction introuvable' }, { status: 400 });
     }
 
     await prisma.transaction.delete({ where: { id: transaction.id }});
-    return NextResponse.json({ success: true, message: 'Transaction deleted successfully' }, { status: 200});
+    return NextResponse.json({ success: true, message: 'Transaction supprimée avec succès' }, { status: 200});
   } catch (error) {
-    console.error('Error deleting transaction', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500});
+    console.error('Erreur lors de la suppression de la transaction', error);
+    return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500});
   }
 }

@@ -11,7 +11,7 @@ export async function POST(request) {
         // Validation de base
         if (!email || !password) {
             return NextResponse.json(
-                { error: 'Email and password are required' },
+                { error: 'Email et mot de passe requis' },
                 { status: 400 }
             );
         }
@@ -24,7 +24,7 @@ export async function POST(request) {
         // Vérifier si l'utilisateur existe
         if (!user) {
             return NextResponse.json(
-                { error: 'Invalid email or password' },
+                { error: 'Email ou mot de passe invalide' },
                 { status: 401 }
             );
         }
@@ -33,7 +33,7 @@ export async function POST(request) {
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json(
-                { error: 'Invalid email or password' },
+                { error: 'Email ou mot de passe invalide' },
                 { status: 401 }
             );
         }
@@ -48,7 +48,7 @@ export async function POST(request) {
         // Retourner avec le token
         return NextResponse.json({
             success: true,
-            message: 'Login successful',
+            message: 'Connexion réussie',
             token, // ← Ajout du token
             user: {
                 id: user.id,
@@ -60,7 +60,7 @@ export async function POST(request) {
     } catch (error) {
         console.error('Erreur lors de la connexion:', error)
         return NextResponse.json(
-            { error: 'Server error: ' + error.message },
+            { error: 'Erreur serveur : ' + error.message },
             { status: 500 }
         )
     }

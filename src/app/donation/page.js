@@ -1,6 +1,6 @@
 // Page de donation pour soutenir MoneyMirror
 // Présente les différents moyens de soutenir le projet
-// 5% des revenus sont reversés à une association caritative
+// 15% des revenus sont reversés à une association caritative
 
 'use client'
 

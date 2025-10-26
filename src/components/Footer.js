@@ -28,17 +28,17 @@ export default function Footer() {
               <span className="font-bold text-gray-900">
                 Money<span className="text-green-600">Mirror</span>
               </span>
-              <p className="text-xs text-gray-500">Your financial companion</p>
+              <p className="text-xs text-gray-500">Votre compagnon financier</p>
             </div>
           </div>
 
           {/* Copyright */}
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              © {currentYear} MoneyMirror. All rights reserved.
+              © {currentYear} MoneyMirror. Tous droits réservés.
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Made by Holberton School
+              Réalisé par Holberton School
             </p>
           </div>
         </div>

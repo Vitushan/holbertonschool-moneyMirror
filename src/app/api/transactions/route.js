@@ -18,7 +18,7 @@ export async function POST(request) {
         const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
       } catch (err) {
-        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+        return NextResponse.json({ error: 'Jeton invalide' }, { status: 401 });
       }
     } else {
       // Sinon, utiliser la session NextAuth
@@ -26,7 +26,7 @@ export async function POST(request) {
       try {
         session = await getServerSession(authOptions);
       } catch (err) {
-        return NextResponse.json({ error: 'Error retrieving session', details: String(err) }, { status: 500 });
+        return NextResponse.json({ error: 'Erreur lors de la récupération de la session', details: String(err) }, { status: 500 });
       }
       if (session && session.user && session.user.id) {
         userId = session.user.id;
@@ -34,7 +34,7 @@ export async function POST(request) {
     }
 
     if (!userId) {
-      return NextResponse.json({ error: 'Please sign in to continue.' }, { status: 401 });
+      return NextResponse.json({ error: 'Veuillez vous connecter pour continuer.' }, { status: 401 });
     }
 
     const body = await request.json();
@@ -42,7 +42,7 @@ export async function POST(request) {
     if (
       typeof amount !== 'number' || amount <= 0 || !['income', 'expense'].includes(type) || !category
     ) {
-      return NextResponse.json({ error: 'Please fill all required fields.' }, { status: 400 });
+      return NextResponse.json({ error: 'Veuillez remplir tous les champs obligatoires.' }, { status: 400 });
     }
 
     // Validation de la date
@@ -50,12 +50,12 @@ export async function POST(request) {
     if (date) {
       const parsedDate = new Date(date);
       if (isNaN(parsedDate.getTime())) {
-        return NextResponse.json({ error: 'Please enter a valid date."' }, { status: 400 });
+        return NextResponse.json({ error: 'Veuillez entrer une date valide."' }, { status: 400 });
       }
       // Les dates futures ne sont pas autorisées
       const now = new Date();
       if (parsedDate > now) {
-        return NextResponse.json({ error: "Sorry, you can't travel to the future." }, { status: 400 });
+        return NextResponse.json({ error: "Désolé, vous ne pouvez pas voyager dans le futur." }, { status: 400 });
       }
       transactionDate = parsedDate;
     }
@@ -76,11 +76,11 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Congrats, transaction created!',
+      message: 'Bravo, transaction créée !',
       transaction,
     }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: 'Oops! Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: 'Oups ! Erreur interne du serveur' }, { status: 500 });
   }
 }
 
@@ -97,7 +97,7 @@ export async function GET(request) {
         const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET || 'fallback-secret');
         userId = decoded.id;
       } catch (err) {
-        return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+        return NextResponse.json({ error: 'Jeton invalide' }, { status: 401 });
       }
     } else {
       // Sinon, utiliser la session NextAuth
@@ -108,7 +108,7 @@ export async function GET(request) {
     }
 
     if (!userId) {
-      return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
+      return NextResponse.json({ error: "Utilisateur non authentifié" }, { status: 401 });
     }
 
     // Récupérer toutes les transactions depuis la base de données pour l'utilisateur authentifié
@@ -120,6 +120,6 @@ export async function GET(request) {
     return NextResponse.json({ success: true, transactions }, { status: 200 });
 
   } catch (error) {
-    return NextResponse.json({ error: "Oops! Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Oups ! Erreur interne du serveur" }, { status: 500 });
   }
 }
