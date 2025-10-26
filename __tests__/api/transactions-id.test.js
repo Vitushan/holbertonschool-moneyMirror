@@ -99,12 +99,12 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('User not authenticated');
+      expect(data.error).toBe('Utilisateur non authentifié');
     });
 
     it('should return 401 with invalid Bearer token', async () => {
       jwt.verify = jest.fn().mockImplementation(() => {
-        throw new Error('Invalid token');
+        throw new Error('Jeton invalide');
       });
 
       mockRequest = {
@@ -117,7 +117,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('Invalid token');
+      expect(data.error).toBe('Jeton invalide');
     });
 
     it('should return 400 with invalid transaction ID', async () => {
@@ -133,7 +133,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Invalid transaction ID');
+      expect(data.error).toBe('ID de transaction invalide');
     });
 
     it('should return 404 if transaction not found', async () => {
@@ -150,7 +150,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(404);
-      expect(data.error).toBe('Transaction not found');
+      expect(data.error).toBe('Transaction introuvable');
     });
 
     it('should handle database errors', async () => {
@@ -167,7 +167,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(500);
-      expect(data.error).toBe('Internal server error');
+      expect(data.error).toBe('Erreur interne du serveur');
     });
   });
 
@@ -204,7 +204,7 @@ describe('Transactions/[id] API Route', () => {
 
       expect(response.status).toBe(200);
       expect(data.success).toBe(true);
-      expect(data.message).toBe('Transaction updated successfully!');
+      expect(data.message).toBe('Transaction mise à jour avec succès !');
     });
 
     it('should update transaction with NextAuth session', async () => {
@@ -246,7 +246,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('Please sign in to continue.');
+      expect(data.error).toBe('Veuillez vous connecter pour continuer.');
     });
 
     it('should return 400 with invalid transaction ID', async () => {
@@ -284,7 +284,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Please fill all required fields.');
+      expect(data.error).toBe('Veuillez remplir tous les champs obligatoires.');
     });
 
     it('should return 400 with invalid type', async () => {
@@ -305,7 +305,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Please fill all required fields.');
+      expect(data.error).toBe('Veuillez remplir tous les champs obligatoires.');
     });
 
     it('should return 404 if transaction not found', async () => {
@@ -327,7 +327,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(404);
-      expect(data.error).toBe('Transaction not found ');
+      expect(data.error).toBe('Transaction introuvable');
     });
 
     it('should return 400 with invalid date format', async () => {
@@ -350,7 +350,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Please enter a valid date.');
+      expect(data.error).toBe('Veuillez entrer une date valide.');
     });
 
     it('should return 400 with future date', async () => {
@@ -398,7 +398,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(500);
-      expect(data.error).toBe('Internal server error');
+      expect(data.error).toBe('Erreur interne du serveur');
     });
   });
 
@@ -420,7 +420,7 @@ describe('Transactions/[id] API Route', () => {
 
       expect(response.status).toBe(200);
       expect(data.success).toBe(true);
-      expect(data.message).toBe('Transaction deleted successfully');
+      expect(data.message).toBe('Transaction supprimée avec succès');
     });
 
     it('should delete transaction with NextAuth session', async () => {
@@ -456,12 +456,12 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('Please sign in to continue ');
+      expect(data.error).toBe('Veuillez vous connecter pour continuer');
     });
 
     it('should return 401 with invalid Bearer token', async () => {
       jwt.verify = jest.fn().mockImplementation(() => {
-        throw new Error('Invalid token');
+        throw new Error('Jeton invalide');
       });
 
       mockRequest = {
@@ -474,7 +474,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('Invalid token');
+      expect(data.error).toBe('Jeton invalide');
     });
 
     it('should return 400 with invalid transaction ID', async () => {
@@ -490,7 +490,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Invalid transaction ID');
+      expect(data.error).toBe('ID de transaction invalide');
     });
 
     it('should return 400 if transaction not found', async () => {
@@ -507,7 +507,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Transaction not found');
+      expect(data.error).toBe('Transaction introuvable');
     });
 
     it('should handle database errors', async () => {
@@ -524,7 +524,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(500);
-      expect(data.error).toBe('Internal server error');
+      expect(data.error).toBe('Erreur interne du serveur');
     });
   });
 });

@@ -158,7 +158,7 @@ describe('Transactions API', () => {
 
             // ASSERT: Should get 401 Unauthorized
             expect(response.status).toBe(401);
-            expect(data.error).toBe('User not authenticated');
+            expect(data.error).toBe('Utilisateur non authentifié');
         });
     });
 
@@ -287,7 +287,7 @@ describe('Transactions API', () => {
 
             // ASSERT: Should get 404 Not Found
             expect(response.status).toBe(404);
-            expect(data.error).toBe('Transaction not found');
+            expect(data.error).toBe('Transaction introuvable');
         });
     });
 
@@ -334,7 +334,7 @@ describe('Transactions API', () => {
 
             // ASSERT: Check the results
             expect(response.status).toBe(200);
-            expect(data.message).toBe('Transaction updated successfully!');
+            expect(data.message).toBe('Transaction mise à jour avec succès !');
             expect(mockTransaction.update).toHaveBeenCalledTimes(1);
         });
 
@@ -353,7 +353,7 @@ describe('Transactions API', () => {
 
             // ASSERT: Should get 404 Not Found
             expect(response.status).toBe(404);
-            expect(data.error).toBe('Transaction not found ');
+            expect(data.error).toBe('Transaction introuvable');
         });
     });
 
@@ -388,10 +388,10 @@ describe('Transactions API', () => {
         
             // 🔧 FIX #5: CORRECTED ERROR MESSAGE
             // WHY THIS FIX WAS NEEDED:
-            // - The actual API returns "Transaction deleted successfully"
+            // - The actual API returns "Transaction supprimée avec succès"
             // - The test was expecting "Transaction deleted successfully!"
             // - Fixed to match the actual response
-            expect(data.message).toBe('Transaction deleted successfully');
+            expect(data.message).toBe('Transaction supprimée avec succès');
             expect(mockTransaction.delete).toHaveBeenCalledTimes(1);
             expect(mockTransaction.delete).toHaveBeenCalledWith({
                 where: { id: '1' },
@@ -413,7 +413,7 @@ describe('Transactions API', () => {
             // ASSERT: Should get 400 Bad Request
             // Note: The API returns 400 (not 404) for this case
             expect(response.status).toBe(400);
-            expect(data.error).toBe('Transaction not found');
+            expect(data.error).toBe('Transaction introuvable');
         });
     });
 });

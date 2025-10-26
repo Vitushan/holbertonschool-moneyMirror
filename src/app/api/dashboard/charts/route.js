@@ -1,6 +1,6 @@
-// API Route: Dashboard Charts Data
-// Generates data for line, pie, and bar charts
-// Aggregates transaction data by time period and category
+// Route API : Données des Graphiques du Dashboard
+// Génère les données pour les graphiques en ligne, camembert et barres
+// Agrège les données de transactions par période et catégorie
 
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth/next'
@@ -12,7 +12,7 @@ export async function GET(request) {
   try {
     let userId = null
 
-    // Get session using getServerSession with authOptions
+    // Récupérer la session en utilisant getServerSession avec authOptions
     const session = await getServerSession(authOptions)
 
     if (session && session.user && session.user.id) {
@@ -20,9 +20,9 @@ export async function GET(request) {
     }
 
     if (!userId) {
-      console.error('No userId found - user not authenticated')
+      console.error('Aucun userId trouvé - utilisateur non authentifié')
       return NextResponse.json({
-        error: 'User not authenticated',
+        error: 'Utilisateur non authentifié',
         debug: {
           hasSession: !!session,
           sessionUser: session?.user
@@ -30,11 +30,11 @@ export async function GET(request) {
       }, { status: 401 })
     }
 
-    // Get filter parameter (week, month, year)
+    // Récupérer le paramètre de filtre (semaine, mois, année)
     const { searchParams } = new URL(request.url)
     const filter = searchParams.get('filter') || 'week'
 
-    // Calculate date range based on filter
+    // Calculer la plage de dates en fonction du filtre
     const now = new Date()
     let startDate = new Date()
 
@@ -46,7 +46,7 @@ export async function GET(request) {
       startDate.setFullYear(now.getFullYear() - 1)
     }
 
-    // Get all transactions for the user in the date range
+    // Récupérer toutes les transactions de l'utilisateur dans la plage de dates
     const transactions = await prisma.transaction.findMany({
       where: {
         userId,
@@ -60,15 +60,15 @@ export async function GET(request) {
       }
     })
 
-    // Generate LINE CHART data (trend over time)
+    // Générer les données du GRAPHIQUE EN LIGNE (tendance dans le temps)
     let lineChartData = []
 
     if (filter === 'week') {
-      // Group by day of week
+      // Grouper par jour de la semaine
       const days = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
       const dailyData = {}
 
-      // Initialize all days
+      // Initialiser tous les jours
       for (let i = 0; i < 7; i++) {
         const date = new Date()
         date.setDate(now.getDate() - (6 - i))
@@ -76,14 +76,14 @@ export async function GET(request) {
         dailyData[dayName] = 0
       }
 
-      // Aggregate transactions by day
+      // Agréger les transactions par jour
       transactions.forEach(t => {
         const dayName = days[new Date(t.date).getDay()]
         const value = t.type === 'income' ? t.amount : -t.amount
         dailyData[dayName] += value
       })
 
-      // Convert to array format
+      // Convertir au format tableau
       Object.keys(dailyData).forEach(day => {
         lineChartData.push({
           name: day,
@@ -92,7 +92,7 @@ export async function GET(request) {
       })
 
     } else if (filter === 'month') {
-      // Group by week
+      // Grouper par semaine
       const weekData = { 'Semaine 1': 0, 'Semaine 2': 0, 'Semaine 3': 0, 'Semaine 4': 0 }
 
       transactions.forEach(t => {
@@ -111,11 +111,11 @@ export async function GET(request) {
       })
 
     } else if (filter === 'year') {
-      // Group by month
+      // Grouper par mois
       const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc']
       const monthData = {}
 
-      // Initialize all months
+      // Initialiser tous les mois
       for (let i = 0; i < 12; i++) {
         const date = new Date()
         date.setMonth(now.getMonth() - (11 - i))
@@ -123,14 +123,14 @@ export async function GET(request) {
         monthData[monthName] = 0
       }
 
-      // Aggregate transactions by month
+      // Agréger les transactions par mois
       transactions.forEach(t => {
         const monthName = months[new Date(t.date).getMonth()]
         const value = t.type === 'income' ? t.amount : -t.amount
         monthData[monthName] += value
       })
 
-      // Convert to array format
+      // Convertir au format tableau
       Object.keys(monthData).forEach(month => {
         lineChartData.push({
           name: month,
@@ -139,7 +139,7 @@ export async function GET(request) {
       })
     }
 
-    // Generate PIE CHART data (distribution by category)
+    // Générer les données du GRAPHIQUE CAMEMBERT (répartition par catégorie)
     const categoryData = {}
 
     transactions.forEach(t => {
@@ -154,15 +154,15 @@ export async function GET(request) {
       value: Math.round(categoryData[category])
     }))
 
-    // Generate BAR CHART data (income vs expenses comparison)
+    // Générer les données du GRAPHIQUE EN BARRES (comparaison revenus vs dépenses)
     let barChartData = []
 
     if (filter === 'week') {
-      // Group by day of week
+      // Grouper par jour de la semaine
       const days = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
       const dailyData = {}
 
-      // Initialize all days
+      // Initialiser tous les jours
       for (let i = 0; i < 7; i++) {
         const date = new Date()
         date.setDate(now.getDate() - (6 - i))
@@ -170,7 +170,7 @@ export async function GET(request) {
         dailyData[dayName] = { revenus: 0, dépenses: 0 }
       }
 
-      // Aggregate transactions by day
+      // Agréger les transactions par jour
       transactions.forEach(t => {
         const dayName = days[new Date(t.date).getDay()]
         if (t.type === 'income') {
@@ -180,7 +180,7 @@ export async function GET(request) {
         }
       })
 
-      // Convert to array format
+      // Convertir au format tableau
       Object.keys(dailyData).forEach(day => {
         barChartData.push({
           name: day,
@@ -190,7 +190,7 @@ export async function GET(request) {
       })
 
     } else if (filter === 'month') {
-      // Group by week
+      // Grouper par semaine
       const weekData = {
         'Semaine 1': { revenus: 0, dépenses: 0 },
         'Semaine 2': { revenus: 0, dépenses: 0 },
@@ -219,7 +219,7 @@ export async function GET(request) {
       })
 
     } else if (filter === 'year') {
-      // Group by quarter
+      // Grouper par trimestre
       const quarterData = {
         'Q1': { revenus: 0, dépenses: 0 },
         'Q2': { revenus: 0, dépenses: 0 },
@@ -256,7 +256,7 @@ export async function GET(request) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Dashboard charts error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('Erreur graphiques dashboard:', error)
+    return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 })
   }
 }

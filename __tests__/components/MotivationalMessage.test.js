@@ -18,7 +18,12 @@ describe('MotivationalMessage Component - Structure Tests', () => {
   it('should verify motivational messages JSON exists', () => {
     const messages = require('../../src/data/motivationalMessages.json');
     expect(messages).toBeDefined();
-    expect(Array.isArray(messages)).toBe(true);
-    expect(messages.length).toBeGreaterThan(0);
+    expect(typeof messages).toBe('object');
+    expect(messages.general).toBeDefined();
+    expect(Array.isArray(messages.general)).toBe(true);
+    expect(messages.income).toBeDefined();
+    expect(Array.isArray(messages.income)).toBe(true);
+    expect(messages.expense).toBeDefined();
+    expect(Array.isArray(messages.expense)).toBe(true);
   });
 });

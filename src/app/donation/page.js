@@ -391,7 +391,7 @@ export default function DonationPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Western Union</h3>
               <p className="text-gray-600 text-sm mb-4 text-center">Transfert d'argent</p>
               <button className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 rounded-lg transition">
-                Don via WU
+                Don via Western Union
               </button>
             </div>
 

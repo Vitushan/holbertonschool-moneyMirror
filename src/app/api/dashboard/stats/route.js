@@ -1,6 +1,6 @@
-// API Route: Dashboard Statistics
-// Calculates aggregated stats from user transactions
-// Supports filtering by time period (week, month, year)
+// Route API : Statistiques du Dashboard
+// Calcule les statistiques agrégées des transactions utilisateur
+// Supporte le filtrage par période (semaine, mois, année)
 
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth/next'
@@ -12,7 +12,7 @@ export async function GET(request) {
   try {
     let userId = null
 
-    // Get session using getServerSession with authOptions
+    // Récupérer la session en utilisant getServerSession avec authOptions
     const session = await getServerSession(authOptions)
 
     if (session && session.user && session.user.id) {
@@ -20,9 +20,9 @@ export async function GET(request) {
     }
 
     if (!userId) {
-      console.error('No userId found - user not authenticated')
+      console.error('Aucun userId trouvé - utilisateur non authentifié')
       return NextResponse.json({
-        error: 'User not authenticated',
+        error: 'Utilisateur non authentifié',
         debug: {
           hasSession: !!session,
           sessionUser: session?.user
@@ -30,11 +30,11 @@ export async function GET(request) {
       }, { status: 401 })
     }
 
-    // Get filter parameter (week, month, year)
+    // Récupérer le paramètre de filtre (semaine, mois, année)
     const { searchParams } = new URL(request.url)
     const filter = searchParams.get('filter') || 'week'
 
-    // Calculate date range based on filter
+    // Calculer la plage de dates en fonction du filtre
     const now = new Date()
     let startDate = new Date()
 
@@ -46,7 +46,7 @@ export async function GET(request) {
       startDate.setFullYear(now.getFullYear() - 1)
     }
 
-    // Get all transactions for the user in the date range
+    // Récupérer toutes les transactions de l'utilisateur dans la plage de dates
     const transactions = await prisma.transaction.findMany({
       where: {
         userId,
@@ -57,7 +57,7 @@ export async function GET(request) {
       }
     })
 
-    // Calculate statistics
+    // Calculer les statistiques
     const totalIncome = transactions
       .filter(t => t.type === 'income')
       .reduce((sum, t) => sum + t.amount, 0)
@@ -68,7 +68,7 @@ export async function GET(request) {
 
     const revenue = totalIncome - totalExpense
 
-    // Calculate growth (compare with previous period)
+    // Calculer la croissance (comparaison avec la période précédente)
     let previousStartDate = new Date(startDate)
     let previousEndDate = new Date(startDate)
 
@@ -111,11 +111,11 @@ export async function GET(request) {
     }
     // Si les deux sont à 0, on garde growth = 0
 
-    // Count unique users (in this case, just 1 - the current user)
-    // You might want to count something else like number of transactions
+    // Compter les utilisateurs uniques (dans ce cas, juste 1 - l'utilisateur actuel)
+    // Vous pourriez vouloir compter autre chose comme le nombre de transactions
     const totalUsers = transactions.length
 
-    // Count active "projects" (could be categories or transaction count)
+    // Compter les "projets" actifs (pourrait être des catégories ou le nombre de transactions)
     const activeProjects = new Set(transactions.map(t => t.category)).size
 
     return NextResponse.json({
@@ -129,7 +129,7 @@ export async function GET(request) {
     }, { status: 200 })
 
   } catch (error) {
-    console.error('Dashboard stats error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('Erreur statistiques dashboard:', error)
+    return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 })
   }
 }

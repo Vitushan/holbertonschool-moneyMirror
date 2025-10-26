@@ -112,7 +112,7 @@ describe('Login API', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('Invalid email or password');
+      expect(data.error).toBe('Email ou mot de passe invalide');
     });
 
     it('should return 401 if password is incorrect', async () => {
@@ -138,7 +138,7 @@ describe('Login API', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('Invalid email or password');
+      expect(data.error).toBe('Email ou mot de passe invalide');
     });
 
     it('should handle database errors gracefully', async () => {

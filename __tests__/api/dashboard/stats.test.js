@@ -67,7 +67,7 @@ describe('Dashboard Stats API', () => {
       const data = await response.json();
 
       expect(response.status).toBe(401);
-      expect(data.error).toBe('User not authenticated');
+      expect(data.error).toBe('Utilisateur non authentifié');
     });
 
     it('should handle filter parameter - week', async () => {
