@@ -25,7 +25,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre rêve est devenu réalité ! Vous avez prouvé que la discipline et la vision peuvent transformer une idée en aventure. Profitez de chaque instant de ce voyage, vous l'avez mérité. Bon voyage ! 🌍✈️"
       ]
-    }
+    },
+    "rewardMessage": "🎊 OBJECTIF ATTEINT ! Maintenant, récompensez-vous ! Offrez-vous un bon guide touristique, un accessoire de voyage stylé, ou un resto dans votre destination. Se récompenser, c'est nourrir sa motivation pour le prochain défi ! 🍽️✈️"
   },
   "addiction": {
     "emoji": "🌱",
@@ -54,7 +55,8 @@
         "FÉLICITATIONS ! 🎉 Vous avez prouvé que rien n'est plus fort que votre volonté. Cet argent représente votre liberté reconquise. Vous méritez d'être fier de vous. Votre vie vous appartient à nouveau. 💪🌟"
       ]
     },
-    "linkedTravelMessage": "Ce voyage n'est pas qu'une escapade, c'est votre renaissance. Loin de vos anciens déclencheurs, vous allez redécouvrir qui vous êtes vraiment. Changer d'environnement est l'une des méthodes les plus efficaces pour briser définitivement un cycle. 🌅"
+    "linkedTravelMessage": "Ce voyage n'est pas qu'une escapade, c'est votre renaissance. Loin de vos anciens déclencheurs, vous allez redécouvrir qui vous êtes vraiment. Changer d'environnement est l'une des méthodes les plus efficaces pour briser définitivement un cycle. 🌅",
+    "rewardMessage": "🎊 VOUS ÊTES LIBRE ! Célébrez cette victoire incroyable ! Offrez-vous un massage, une séance de spa, une activité sportive, ou un moment bien-être. Vous avez transformé votre vie, vous méritez de célébrer cette renaissance ! 💆‍♂️🌟"
   },
   "console": {
     "emoji": "🎮",
@@ -82,7 +84,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre console est à vous ! Vous avez prouvé que la patience et la discipline sont les clés du succès. Profitez-en, vous l'avez amplement mérité ! 🎮✨"
       ]
-    }
+    },
+    "rewardMessage": "🎊 CONSOLE DÉBLOQUÉE ! Maintenant, gâtez-vous ! Prenez un abonnement premium, achetez ce jeu que vous vouliez, ou offrez-vous des snacks gaming. Vous avez été patient, savourez ce moment ! 🍕🎮"
   },
   "voiture": {
     "emoji": "🚗",
@@ -110,7 +113,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre voiture vous attend ! Vous avez prouvé qu'avec de la discipline, tout est possible. Profitez de votre nouvelle liberté de mouvement ! 🚗🌟"
       ]
-    }
+    },
+    "rewardMessage": "🎊 VOITURE FINANCÉE ! Célébrez cette liberté ! Offrez-vous un road trip, des accessoires auto stylés, ou un bon lavage premium. Vous avez gagné votre indépendance sur quatre roues, profitez-en ! 🚗🎉"
   },
   "logement": {
     "emoji": "🏠",
@@ -138,7 +142,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre logement vous attend ! Vous avez accompli quelque chose d'extraordinaire. Bienvenue chez VOUS ! 🏠✨"
       ]
-    }
+    },
+    "rewardMessage": "🎊 CHEZ-VOUS VOUS ATTEND ! Fêtez ça en beauté ! Offrez-vous un objet déco que vous aimez, un resto avec vos proches, ou une pendaison de crémaillère. Vous avez construit votre sanctuaire, célébrez ! 🍾🏡"
   },
   "mariage": {
     "emoji": "💍",
@@ -166,7 +171,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre mariage est financé ! Vous avez construit ensemble le plus beau jour de votre vie. Tous mes vœux de bonheur ! 💍✨"
       ]
-    }
+    },
+    "rewardMessage": "🎊 MARIAGE FINANCÉ ! Respirez et célébrez ! Offrez-vous une journée spa avant le grand jour, un resto en amoureux, ou ce petit plus qui rendra votre jour J encore plus magique. Vous le méritez tous les deux ! 💑🥂"
   },
   "formation": {
     "emoji": "📚",
@@ -194,7 +200,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre formation est financée ! Vous avez investi dans votre avenir. Le succès vous tend les bras ! 📚✨"
       ]
-    }
+    },
+    "rewardMessage": "🎊 FORMATION DÉBLOQUÉE ! Récompensez votre cerveau ! Offrez-vous de beaux cahiers, un bon café dans votre lieu d'étude préféré, ou un petit plaisir qui stimule votre apprentissage. Vous investissez en vous, célébrez ça ! ☕📖"
   },
   "urgence": {
     "emoji": "💰",
@@ -222,7 +229,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre fonds d'urgence est complet ! Vous avez construit votre sécurité et votre tranquillité d'esprit. Dormez sur vos deux oreilles ! 💰🛡️"
       ]
-    }
+    },
+    "rewardMessage": "🎊 SÉCURITÉ ATTEINTE ! Détendez-vous, vous l'avez mérité ! Offrez-vous un moment de relaxation, un bon repas sans culpabilité, ou une petite gâterie. Votre sagesse financière mérite d'être célébrée ! 🍰☮️"
   },
   "cadeau": {
     "emoji": "🎁",
@@ -250,7 +258,8 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Votre cadeau est prêt ! Vous allez illuminer la journée de quelqu'un que vous aimez. Quelle belle âme vous avez ! 🎁💝"
       ]
-    }
+    },
+    "rewardMessage": "🎊 CADEAU PRÊT ! Votre générosité est belle ! Maintenant, offrez-vous aussi un petit quelque chose : un café gourmand, une pâtisserie, ou un moment rien que pour vous. Donner aux autres, c'est bien. Penser à soi aussi ! ☕💝"
   },
   "autre": {
     "emoji": "✨",
@@ -278,6 +287,7 @@
       "completed": [
         "FÉLICITATIONS ! 🎉 Vous avez atteint votre objectif ! Vous avez prouvé que la discipline et la persévérance mènent au succès. Profitez de votre réussite ! ✨🌟"
       ]
-    }
+    },
+    "rewardMessage": "🎊 OBJECTIF ATTEINT ! Vous êtes incroyable ! Maintenant, chouchoutez-vous : un shopping plaisir, un bon resto, une sortie que vous rêviez de faire. Se récompenser booste votre motivation pour le prochain objectif ! 🎉🛍️"
   }
 }

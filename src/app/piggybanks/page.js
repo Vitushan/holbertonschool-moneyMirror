@@ -343,6 +343,23 @@ export default function PiggybanksPage() {
                     </p>
                   </div>
 
+                  {/* Message de récompense quand objectif atteint */}
+                  {isCompleted && piggybankMessages[piggybank.category]?.rewardMessage && (
+                    <div className="bg-gradient-to-r from-yellow-50 via-orange-50 to-red-50 rounded-xl p-5 mb-6 border-2 border-yellow-400 shadow-lg">
+                      <div className="flex items-start gap-3">
+                        <span className="text-3xl">🎁</span>
+                        <div>
+                          <p className="text-sm font-semibold text-orange-800 mb-2">
+                            💡 Pensez à vous récompenser !
+                          </p>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {piggybankMessages[piggybank.category].rewardMessage}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Message spécial addiction → voyage */}
                   {piggybank.category === 'addiction' && piggybank.linkedPiggybankId && (
                     <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-4 border-l-4 border-orange-400">
