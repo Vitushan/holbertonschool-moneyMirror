@@ -408,8 +408,18 @@ export default function DonationPage() {
             <div className="border-2 border-red-200 rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105">
               <div className="text-4xl mb-3 text-center">🎫</div>
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Paysafecard</h3>
-              <p className="text-gray-600 text-sm mb-4 text-center">Carte prépayée</p>
+              <p className="text-gray-600 text-sm mb-4 text-center">Code prépayé PIN</p>
               <button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition">
+                Don avec Paysafecard
+              </button>
+            </div>
+
+            {/* PCS Mastercard */}
+            <div className="border-2 border-blue-300 rounded-xl p-6 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-4xl mb-3 text-center">💳</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">PCS Mastercard</h3>
+              <p className="text-gray-600 text-sm mb-4 text-center">Carte prépayée rechargeable</p>
+              <button className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition">
                 Don avec PCS
               </button>
             </div>
