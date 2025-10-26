@@ -86,6 +86,10 @@ describe('Transactions API Integration Tests', () => {
         password: TEST_USER.password,
       });
 
+    // Debug: Log the response to see what's happening
+    console.log('Login response status:', response.status);
+    console.log('Login response body:', response.body);
+
     // Verify the response status code is 200 OK
     expect(response.status).toBe(200);
 

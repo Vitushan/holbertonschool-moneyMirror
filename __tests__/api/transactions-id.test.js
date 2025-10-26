@@ -263,7 +263,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toBe('Invalid Transaction Id');
+      expect(data.error).toBe('ID de transaction invalide');
     });
 
     it('should return 400 with invalid amount', async () => {
@@ -376,7 +376,7 @@ describe('Transactions/[id] API Route', () => {
       const data = await response.json();
 
       expect(response.status).toBe(400);
-      expect(data.error).toContain("future");
+      expect(data.error).toContain("futur");
     });
 
     it('should handle database errors', async () => {
