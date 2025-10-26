@@ -103,6 +103,35 @@ export default function DonationPage() {
                 de chaque don est reversé à une association
               </p>
             </div>
+
+            {/* Déduction fiscale */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-4 border-2 border-green-300">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-3xl">💰</span>
+                <div>
+                  <p className="text-xl font-bold text-green-700">
+                    66% de votre don déductible des impôts
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    (En France, selon l'article 200 du CGI)
+                  </p>
+                </div>
+              </div>
+              <div className="bg-white rounded-lg p-4 mt-3">
+                <p className="text-gray-700 font-semibold mb-2">📊 Exemple concret :</p>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Don de 100€</span>
+                  <span className="text-gray-400">→</span>
+                  <span className="text-gray-600">Déduction de 66€</span>
+                  <span className="text-gray-400">→</span>
+                  <span className="text-green-700 font-bold">Coût réel : 34€</span>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-3 italic">
+                📋 Un reçu fiscal vous sera automatiquement envoyé par email
+              </p>
+            </div>
+
             <p className="text-gray-700 mb-4">
               Nous soutenons des associations œuvrant pour :
             </p>
