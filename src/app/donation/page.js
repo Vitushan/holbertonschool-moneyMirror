@@ -20,7 +20,7 @@ export default function DonationPage() {
           </p>
           <div className="inline-block bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
             <p className="text-lg font-semibold">
-              🎁 5% des revenus reversés à une association caritative
+              🎁 15% des revenus reversés à une association caritative
             </p>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function DonationPage() {
               Votre impact social
             </h2>
             <div className="bg-white rounded-xl p-6 mb-4">
-              <p className="text-3xl font-bold text-orange-600 mb-2">5%</p>
+              <p className="text-3xl font-bold text-orange-600 mb-2">15%</p>
               <p className="text-gray-700 font-semibold">
                 de chaque don est reversé à une association
               </p>

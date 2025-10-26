@@ -445,7 +445,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ### 💙 Transparence des Donations
 
-**5% de chaque don** est reversé à des associations caritatives :
+**15% de chaque don** est reversé à des associations caritatives :
 - 🏠 Orphelinats et aide à l'enfance
 - 👴 Maisons de retraite et personnes âgées
 

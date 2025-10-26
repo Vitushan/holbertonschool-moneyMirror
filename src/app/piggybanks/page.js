@@ -143,7 +143,7 @@ export default function PiggybanksPage() {
           name: 'Voyage - Nouveau Départ',
           category: 'voyage',
           emoji: '🌴',
-          targetAmount: parseFloat(newPiggybank.targetAmount), // Même montant que l'addiction
+          targetAmount: parseFloat(newPiggybank.targetAmount), // Même montant que l'addiction et le reste
           isAutomatic: newPiggybank.isAutomatic,
           autoPercentage: newPiggybank.isAutomatic ? parseFloat(newPiggybank.autoPercentage) / 2 : null, // 50% du pourcentage
           linkedPiggybankId: newAddictionPiggybankId
