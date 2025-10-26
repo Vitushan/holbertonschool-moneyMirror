@@ -55,7 +55,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 
 ### 🐷 Système de Tirelires Innovant
 - ✅ **Création de tirelires illimitées** avec objectifs d'épargne
-- ✅ **10 catégories prédéfinies** avec émojis :
+- ✅ **9 catégories prédéfinies** avec émojis :
   - 🌴 Voyage
   - 🌱 **Se libérer d'une addiction** (catégorie phare)
   - 🎮 Console/Gaming
@@ -74,6 +74,13 @@ Une application web complète de gestion financière construite avec Next.js 15,
   - 75-100% : Messages de dernière ligne droite
   - 100% : Message de victoire avec confettis 🎉
 
+- ✅ **Système de récompense psychologique** 🎁
+  - Messages personnalisés par catégorie encourageant à se récompenser
+  - S'affiche automatiquement quand l'objectif est atteint (≥100%)
+  - Exemples concrets de récompenses adaptées à chaque objectif
+  - Renforce la motivation pour le prochain objectif
+  - Prévient le burnout financier
+
 - ✅ **Innovation unique : Liaison Addiction → Voyage** 🌱→🌴
   - Quand un utilisateur crée une tirelire "Se libérer d'une addiction"
   - Le système propose automatiquement de créer une tirelire voyage liée
@@ -88,6 +95,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - ✅ **Barre de progression visuelle** avec pourcentage
 - ✅ **Interface magnifique** avec cochon 🐷 et émojis de catégories
 - ✅ **Modals interactifs** pour création et ajout d'argent
+- ✅ **Navigation unique** : Onglet "Piggy Bank 🐷" (en anglais pour effet curiosité)
 
 ### 📊 Dashboard Interactif
 - ✅ **4 cartes de statistiques** :
@@ -121,18 +129,24 @@ Une application web complète de gestion financière construite avec Next.js 15,
   - Badges "Populaire" / "Meilleur choix"
   - Comparaison "Au lieu de X€"
 
+- ✅ **Déduction fiscale** 💰 :
+  - **66% de déduction d'impôts** (France, article 200 du CGI)
+  - Exemple concret : Don 100€ → Déduction 66€ → Coût réel 34€
+  - Reçu fiscal automatique par email
+  - Design professionnel avec calcul visuel
+
 - ✅ **Message sur le karma** :
   - *"Le karma n'oublie jamais les bonnes actions. Chaque don est une graine de bonté..."*
   - Dimension spirituelle et humaine
 
 - ✅ **Transparence totale** :
-  - 5% des dons reversés aux associations (orphelinats, maisons de retraite)
+  - **15% des dons reversés aux associations** (orphelinats, maisons de retraite)
   - Exemples de versements avec dates et reçus
   - Rapport mensuel envoyé aux donateurs
   - Engagement de publication trimestrielle
 
 - ✅ **Email de remerciement personnalisé** après chaque don
-- ✅ **9 moyens de paiement** : PayPal, Carte, Bitcoin, Ethereum, Wise, Virement, Paysafecard, Western Union, Revolut
+- ✅ **11 moyens de paiement** : PayPal, Carte Bancaire, USDT, Bitcoin, Ethereum, Wise, Virement, Paysafecard, PCS Mastercard, Western Union, Revolut
 
 ### 🎨 Interface Utilisateur
 - ✅ Design moderne et responsive (mobile, tablette, desktop)
@@ -439,6 +453,12 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Dernière ligne droite
 - Message de victoire final
 
+**Système de récompense psychologique** 🎁 :
+- À 100% de l'objectif, un message de récompense personnalisé s'affiche
+- Encourage l'utilisateur à célébrer sa victoire (spa, resto, activité)
+- Prévient le burnout et maintient la motivation
+- Adapté à chaque catégorie (ex: voyage → guide touristique, addiction → massage)
+
 **Ressources d'aide** :
 - Drogues Info Service : 0 800 23 13 13
 - Tabac Info Service : 39 89
@@ -513,13 +533,36 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ## 📜 Notes de Version
 
+### v2.1.0 (2025-10-26) - Gamification & Fiscalité 🎁💰
+
+**🎁 Système de Récompense Psychologique :**
+- ✅ Messages de récompense personnalisés par catégorie
+- ✅ Affichage automatique à 100% de l'objectif
+- ✅ 9 messages uniques encourageant à se récompenser
+- ✅ Prévention du burnout financier
+- ✅ Design spécial avec box jaune/orange
+
+**💰 Déduction Fiscale :**
+- ✅ Section déduction fiscale 66% (article 200 CGI)
+- ✅ Calcul visuel : Don 100€ → Coût réel 34€
+- ✅ Mention reçu fiscal automatique
+- ✅ Design professionnel avec dégradé vert
+
+**💙 Mise à Jour Donation :**
+- ✅ Passage de 5% à 15% reversés aux associations
+- ✅ Ajout PCS Mastercard (11 moyens de paiement)
+- ✅ Distinction Paysafecard vs PCS Mastercard
+
+**🐷 Navigation Unique :**
+- ✅ Onglet "Piggy Bank 🐷" (en anglais pour effet curiosité)
+
 ### v2.0.0 (2025-10-23) - Tirelires & Impact Social 🐷💙
 
 **🐷 Système de Tirelires Complet :**
 - ✅ Base de données Prisma avec modèle Piggybank
 - ✅ Routes API complètes (POST, GET, PUT, DELETE)
 - ✅ Page frontend magnifique avec modals
-- ✅ 10 catégories avec émojis et logos de cochon
+- ✅ 9 catégories avec émojis et logos de cochon
 - ✅ 50+ messages motivationnels à effet Barnum (5 niveaux par catégorie)
 - ✅ **Innovation : Liaison addiction → voyage** (changement d'environnement)
 - ✅ Mode manuel ET automatique (% des revenus)
@@ -533,7 +576,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - ✅ Section transparence avec reçus mockup
 - ✅ Message sur le karma et bonnes actions
 - ✅ Email de remerciement personnalisé mentionné
-- ✅ 9 moyens de paiement
+- ✅ 9 moyens de paiement initiaux
 - ✅ Storytelling Vithushan préservé
 
 **🎯 Impact :**
