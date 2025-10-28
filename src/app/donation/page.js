@@ -40,8 +40,7 @@ export default function DonationPage() {
               les oublis de transactions et le manque de vision claire sur mon budget, je me sentais perdu.
             </p>
             <p>
-              Un jour, après avoir dépassé mon budget mensuel pour la troisième fois d'affilée, je me suis dit :
-              <span className="italic">"Il doit y avoir une meilleure façon de faire." </span> C'est à ce moment que l'idée de MoneyMirror est née.
+              Un jour, après avoir dépassé mon budget mensuel pour la troisième fois d'affilée, je me suis dit : <span className="italic">"Il doit y avoir une meilleure façon de faire." </span> C'est à ce moment que l'idée de MoneyMirror est née.
             </p>
             <p>
               J'ai passé des centaines d'heures à créer cette application, non pas pour devenir riche, mais pour aider les gens
