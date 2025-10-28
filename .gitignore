@@ -9,6 +9,7 @@
 /coverage
 /tests/cypress/videos
 /tests/cypress/screenshots
+.swc/
 
 # next.js
 /.next/
