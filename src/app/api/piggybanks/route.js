@@ -76,6 +76,16 @@ export async function POST(request) {
     }
 
     // Créer la tirelire
+    let autoPercentageValue = null
+    if (isAutomatic) {
+      autoPercentageValue = parseFloat(autoPercentage)
+    }
+
+    let linkedPiggybankIdValue = null
+    if (linkedPiggybankId) {
+      linkedPiggybankIdValue = linkedPiggybankId
+    }
+
     const piggybank = await prisma.piggybank.create({
       data: {
         userId,
@@ -85,8 +95,8 @@ export async function POST(request) {
         targetAmount: parseFloat(targetAmount),
         currentAmount: 0,
         isAutomatic: isAutomatic || false,
-        autoPercentage: isAutomatic ? parseFloat(autoPercentage) : null,
-        linkedPiggybankId: linkedPiggybankId || null
+        autoPercentage: autoPercentageValue,
+        linkedPiggybankId: linkedPiggybankIdValue
       }
     })
 

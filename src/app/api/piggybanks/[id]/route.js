@@ -72,7 +72,13 @@ export async function PUT(request, { params }) {
     if (name !== undefined) updateData.name = name
     if (targetAmount !== undefined) updateData.targetAmount = parseFloat(targetAmount)
     if (isAutomatic !== undefined) updateData.isAutomatic = isAutomatic
-    if (autoPercentage !== undefined) updateData.autoPercentage = isAutomatic ? parseFloat(autoPercentage) : null
+    if (autoPercentage !== undefined) {
+      if (isAutomatic) {
+        updateData.autoPercentage = parseFloat(autoPercentage)
+      } else {
+        updateData.autoPercentage = null
+      }
+    }
 
     // Mettre à jour la tirelire
     const updatedPiggybank = await prisma.piggybank.update({

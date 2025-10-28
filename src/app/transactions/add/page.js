@@ -69,11 +69,17 @@ export default function AddTransactionPage() {
 
     // Gestion spéciale pour le changement de type de devise
     if (name === "currencyType") {
+      let defaultCurrency
+      if (value === "currency") {
+        defaultCurrency = "EUR"
+      } else {
+        defaultCurrency = "BTC"
+      }
+
       setForm((prev) => ({
         ...prev,
         [name]: value,
-        // Réinitialiser la devise selon le type sélectionné
-        currency: value === "currency" ? "EUR" : "BTC"
+        currency: defaultCurrency
       }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));

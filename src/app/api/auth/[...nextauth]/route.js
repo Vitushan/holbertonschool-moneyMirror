@@ -60,9 +60,15 @@ export const authOptions = {
 
 const customHandler = async (req, ctx) => {
   const wantsJson = req.headers.get("accept")?.includes("application/json");
+
+  let pagesConfig = {}
+  if (wantsJson) {
+    pagesConfig = { error: "/api/auth/json-error" }
+  }
+
   const nextAuthHandler = NextAuth({
     ...authOptions,
-    pages: wantsJson ? { error: "/api/auth/json-error" } : {},
+    pages: pagesConfig,
   });
   try {
     return await nextAuthHandler(req, ctx);
