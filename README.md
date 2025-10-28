@@ -208,7 +208,13 @@ npm install
 
 3. **Configurer les variables d'environnement**
 
-Créer un fichier `.env.local` à la racine du projet :
+Copier le fichier `.env.example` vers `.env` :
+
+```bash
+cp .env.example .env
+```
+
+Puis éditer `.env` avec vos vraies valeurs :
 
 ```env
 DATABASE_URL="mysql://username:password@localhost:3306/moneymirror"
