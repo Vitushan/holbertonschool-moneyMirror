@@ -41,7 +41,7 @@ export default function DonationPage() {
             </p>
             <p>
               Un jour, après avoir dépassé mon budget mensuel pour la troisième fois d'affilée, je me suis dit :
-              <span className="italic">"Il doit y avoir une meilleure façon de faire."</span>
+              <span className="italic">"Il doit y avoir une meilleure façon de faire. "</span>
               C'est à ce moment que l'idée de MoneyMirror est née.
             </p>
             <p>
