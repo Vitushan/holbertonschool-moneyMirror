@@ -25,7 +25,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - Créer un compte et s'authentifier de manière sécurisée
 - Gérer leurs transactions financières (revenus et dépenses)
 - Visualiser leurs finances via des graphiques interactifs
-- **Créer des tirelires pour atteindre leurs objectifs d'épargne** 
+- **Créer des tirelires pour atteindre leurs objectifs d'épargne**
 - **Bénéficier d'aide pour vaincre les addictions** (avec stratégie voyage)
 - **Soutenir le projet** via donations avec transparence totale
 - Recevoir des messages motivationnels à effet Barnum
@@ -36,6 +36,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 ## Fonctionnalités
 
 ### Authentification
+
 - Inscription avec validation complète
 - Connexion automatique après inscription
 - Connexion sécurisée avec NextAuth.js (JWT)
@@ -43,6 +44,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - Page d'accueil intelligente : redirection automatique selon l'état de connexion
 
 ### Gestion des Transactions
+
 - CRUD complet : Créer, Lire, Modifier, Supprimer
 - Types : Revenus / Dépenses
 - Support multi-devises (EUR, USD, GBP, CHF, JPY, CAD, AUD)
@@ -54,6 +56,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
   - 15 messages uniques par type (effet Barnum)
 
 ### Système de Tirelires Innovant
+
 - Création de tirelires illimitées avec objectifs d'épargne
 - 9 catégories prédéfinies avec émojis :
   - Voyage
@@ -72,16 +75,16 @@ Une application web complète de gestion financière construite avec Next.js 15,
   - 25-50% : Messages de persévérance
   - 50-75% : Messages de félicitations
   - 75-100% : Messages de dernière ligne droite
-  - 100% : Message de victoire avec confettis 
+  - 100% : Message de victoire avec confettis
 
-- **Système de récompense psychologique** 
+- **Système de récompense psychologique**
   - Messages personnalisés par catégorie encourageant à se récompenser
   - S'affiche automatiquement quand l'objectif est atteint (≥100%)
   - Exemples concrets de récompenses adaptées à chaque objectif
   - Renforce la motivation pour le prochain objectif
   - Prévient le burnout financier
 
-- **Innovation unique : Liaison Addiction → Voyage** 
+- **Innovation unique : Liaison Addiction → Voyage**
   - Quand un utilisateur crée une tirelire "Se libérer d'une addiction"
   - Le système propose automatiquement de créer une tirelire voyage liée
   - Stratégie psychologique : **Changer d'environnement pour briser le cycle**
@@ -98,6 +101,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - **Navigation unique** : Onglet "Piggy Bank " (en anglais pour effet curiosité)
 
 ### Dashboard Interactif
+
 - **4 cartes de statistiques** :
   - Total Transactions (cliquable)
   - Catégories Actives
@@ -118,6 +122,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - **Section Dernières Transactions** avec actions rapides
 
 ### Page Donation & Impact Social
+
 - **Storytelling émotionnel** du créateur (Vithushan)
 - **3 types de dons** :
   - **Unique** : 5€, 10€, 25€, 50€ ou personnalisé
@@ -149,6 +154,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - **11 moyens de paiement** : PayPal, Carte Bancaire, USDT, Bitcoin, Ethereum, Wise, Virement, Paysafecard, PCS Mastercard, Western Union, Revolut
 
 ### Interface Utilisateur
+
 - Design moderne et responsive (mobile, tablette, desktop)
 - Tailwind CSS avec animations personnalisées
 - Composants UI shadcn/ui
@@ -159,6 +165,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 - Modales pour confirmations
 
 ### Performance
+
 - **Coverage tests: 82-83%** (133 tests)
 - Optimisations React (useMemo, useCallback)
 - Lazy loading Recharts
@@ -200,13 +207,13 @@ git clone https://github.com/Vitushan/holbertonschool-moneyMirror.git
 cd holbertonschool-moneyMirror
 ```
 
-2. **Installer les dépendances**
+2 **Installer les dépendances**
 
 ```bash
 npm install
 ```
 
-3. **Configurer les variables d'environnement**
+3 **Configurer les variables d'environnement**
 
 Créer un fichier `.env.local` à la racine du projet :
 
@@ -217,11 +224,12 @@ NEXTAUTH_SECRET="votre-cle-secrete-super-longue-et-aleatoire"
 ```
 
 **Important** : Générez une vraie clé secrète avec :
+
 ```bash
 openssl rand -base64 32
 ```
 
-4. **Créer la base de données MySQL**
+4 **Créer la base de données MySQL**
 
 ```bash
 mysql -u root -p
@@ -232,14 +240,14 @@ CREATE DATABASE moneymirror;
 EXIT;
 ```
 
-5. **Initialiser Prisma**
+5 **Initialiser Prisma**
 
 ```bash
 npx prisma generate
 npx prisma db push
 ```
 
-6. **Lancer le serveur de développement**
+6 **Lancer le serveur de développement**
 
 ```bash
 npm run dev
@@ -274,7 +282,7 @@ npx prisma studio    # Interface graphique Prisma
 
 ## Structure du Projet
 
-```
+```fr
 holbertonschool-moneyMirror/
 ├── src/
 │   ├── app/
@@ -327,13 +335,14 @@ holbertonschool-moneyMirror/
 
 ## API Documentation
 
-### Tirelires (Piggybanks) 
+### Tirelires (Piggybanks)
 
 #### POST `/api/piggybanks`
 
 Créer une nouvelle tirelire.
 
 **Payload :**
+
 ```json
 {
   "name": "Voyage au Japon",
@@ -347,6 +356,7 @@ Créer une nouvelle tirelire.
 ```
 
 **Réponse succès (201) :**
+
 ```json
 {
   "success": true,
@@ -375,6 +385,7 @@ Créer une nouvelle tirelire.
 Récupérer toutes les tirelires de l'utilisateur.
 
 **Réponse succès (200) :**
+
 ```json
 {
   "success": true,
@@ -401,6 +412,7 @@ Récupérer toutes les tirelires de l'utilisateur.
 Ajouter de l'argent ou modifier une tirelire.
 
 **Payload (ajouter de l'argent) :**
+
 ```json
 {
   "amountToAdd": 50.00
@@ -408,6 +420,7 @@ Ajouter de l'argent ou modifier une tirelire.
 ```
 
 **Payload (modifier paramètres) :**
+
 ```json
 {
   "name": "Nouveau nom",
@@ -424,6 +437,7 @@ Ajouter de l'argent ou modifier une tirelire.
 Supprimer une tirelire.
 
 **Réponse succès (200) :**
+
 ```json
 {
   "success": true,
@@ -439,7 +453,7 @@ Supprimer une tirelire.
 
 MoneyMirror propose une **approche innovante** pour aider les personnes souffrant d'addictions :
 
-**Concept** : **Sevrage par changement d'environnement** 
+**Concept** : **Sevrage par changement d'environnement**
 
 1. L'utilisateur crée une tirelire **"Se libérer d'une addiction"**
 2. Le système propose automatiquement de créer une tirelire **"Voyage - Nouveau Départ"** liée
@@ -447,6 +461,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 4. **Stratégie psychologique reconnue** : Changer d'environnement pour briser le cycle
 
 **Messages motivationnels à 5 niveaux** selon progression :
+
 - Encouragement initial
 - Persévérance
 - Félicitations mi-parcours
@@ -454,22 +469,25 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Message de victoire final
 
 **Système de récompense psychologique** :
+
 - À 100% de l'objectif, un message de récompense personnalisé s'affiche
 - Encourage l'utilisateur à célébrer sa victoire (spa, resto, activité)
 - Prévient le burnout et maintient la motivation
 - Adapté à chaque catégorie (ex: voyage → guide touristique, addiction → massage)
 
 **Ressources d'aide** :
+
 - Drogues Info Service : 0 800 23 13 13
 - Tabac Info Service : 39 89
 
 ### Transparence des Donations
 
 **15% de chaque don** est reversé à des associations caritatives :
-- Orphelinats et aide à l'enfance
-- Maisons de retraite et personnes âgées
+-Orphelinats et aide à l'enfance
+-Maisons de retraite et personnes âgées
 
 **Engagement de transparence** :
+
 - Rapport mensuel envoyé à tous les donateurs
 - Reçus des associations publiés
 - Publication trimestrielle détaillée
@@ -517,7 +535,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ### Vercel (Recommandé)
 
-**Application déployée** : https://holbertonschool-money-mirror.vercel.app/
+**Application déployée** : https:www//holbertonschool-money-mirror.vercel.app/
 
 **Étapes :**
 
@@ -526,6 +544,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 3. Vercel déploie automatiquement à chaque push sur `main`
 
 **Base de données :**
+
 - Utiliser **Railway**, **PlanetScale**, ou **DigitalOcean**
 - Ou héberger MySQL sur un VPS
 
@@ -536,6 +555,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 ### v2.1.1 (2025-10-31) - Corrections Build & Favicon ✨
 
 **Corrections Techniques :**
+
 - Correction erreur build : séparation layout serveur/client
 - Création composant ClientProviders pour SessionProvider
 - Génération automatique favicon.ico depuis SVG
@@ -544,6 +564,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Logo SVG nettoyé (suppression duplications)
 
 **Build & Performance :**
+
 - Build production validé (0 erreurs)
 - 18 routes générées correctement
 - Optimisations Next.js 15.5.4 appliquées
@@ -551,6 +572,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 ### v2.1.0 (2025-10-26) - Gamification & Fiscalité 💰
 
 **Système de Récompense Psychologique :**
+
 - Messages de récompense personnalisés par catégorie
 - Affichage automatique à 100% de l'objectif
 - 9 messages uniques encourageant à se récompenser
@@ -558,22 +580,26 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Design spécial avec box jaune/orange
 
 **Déduction Fiscale :**
+
 - Section déduction fiscale 66% (article 200 CGI)
 - Calcul visuel : Don 100€ → Coût réel 34€
 - Mention reçu fiscal automatique
 - Design professionnel avec dégradé vert
 
 **Mise à Jour Donation :**
+
 - Passage de 5% à 15% reversés aux associations
 - Ajout PCS Mastercard (11 moyens de paiement)
 - Distinction Paysafecard vs PCS Mastercard
 
 **Navigation Unique :**
+
 - Onglet "Piggy Bank " (en anglais pour effet curiosité)
 
 ### v2.0.0 (2025-10-23) - Tirelires & Impact Social 💙
 
 **Système de Tirelires Complet :**
+
 - Base de données Prisma avec modèle Piggybank
 - Routes API complètes (POST, GET, PUT, DELETE)
 - Page frontend magnifique avec modals
@@ -585,6 +611,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Lien dans la Navbar
 
 **Page Donation Refonte Complète :**
+
 - 3 types de dons (Unique / Mensuel / Annuel)
 - Onglets interactifs avec badges
 - Psychologie des prix (économies visibles -17%)
@@ -595,6 +622,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Storytelling Vithushan préservé
 
 **Impact :**
+
 - Aide concrète pour vaincre les addictions (stratégie voyage)
 - Modèle de donation éthique et transparent
 - Gamification de l'épargne
@@ -602,9 +630,10 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-### v1.2.0 (2025-10-22) - UX Améliorée & Messages Motivationnels 
+### v1.2.0 (2025-10-22) - UX Améliorée & Messages Motivationnels
 
 **Expérience Utilisateur :**
+
 - Page d'accueil intelligente avec redirection automatique
 - Connexion automatique après inscription
 - Messages motivationnels contextuels (revenus vs dépenses)
@@ -613,22 +642,25 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-### v1.1.0 (2025-10-21) - Tests & Optimisations 
+### v1.1.0 (2025-10-21) - Tests & Optimisations
 
 **Tests :**
+
 - Coverage 82-83% (133 tests)
 - Tests E2E avec Playwright
 
 **Performance :**
+
 - useMemo, useCallback
 - Lazy loading Recharts
 - Réduction bundle ~50-70KB
 
 ---
 
-### v1.0.0 (2025-10-20) - Release Initiale 
+### v1.0.0 (2025-10-20) - Release Initiale
 
 **Fonctionnalités initiales :**
+
 - Authentification complète
 - CRUD transactions
 - Dashboard avec 3 graphiques
@@ -640,8 +672,9 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 ## Auteur
 
 **Vithushan Satkunanathan**
+
 - GitHub: [@Vitushan](https://github.com/Vitushan)
-- Email: vitushansatkunanathan@gmail.com
+- Email: vitushan@outlook.fr
 - LinkedIn: [Vithushan Satkunanathan](https://linkedin.com/in/vitushan)
 
 ---
