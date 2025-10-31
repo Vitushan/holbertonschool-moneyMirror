@@ -1,8 +1,8 @@
-# 💰 MoneyMirror – Application de Gestion Financière Personnelle
+# MoneyMirror - Application de Gestion Financière Personnelle
 
 Une application web complète de gestion financière construite avec Next.js 15, React 18, Prisma ORM et MySQL.
 
-## 📋 Table des Matières
+## Table des Matières
 
 - [Vue d'ensemble](#vue-densemble)
 - [Fonctionnalités](#fonctionnalités)
@@ -18,14 +18,14 @@ Une application web complète de gestion financière construite avec Next.js 15,
 
 ---
 
-## 🎯 Vue d'ensemble
+## Vue d'ensemble
 
 **MoneyMirror** est une application de gestion financière personnelle moderne avec **impact social** qui permet aux utilisateurs de :
 
 - Créer un compte et s'authentifier de manière sécurisée
 - Gérer leurs transactions financières (revenus et dépenses)
 - Visualiser leurs finances via des graphiques interactifs
-- **Créer des tirelires pour atteindre leurs objectifs d'épargne** 🐷
+- **Créer des tirelires pour atteindre leurs objectifs d'épargne** 
 - **Bénéficier d'aide pour vaincre les addictions** (avec stratégie voyage)
 - **Soutenir le projet** via donations avec transparence totale
 - Recevoir des messages motivationnels à effet Barnum
@@ -33,140 +33,140 @@ Une application web complète de gestion financière construite avec Next.js 15,
 
 ---
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
-### 🔐 Authentification
-- ✅ Inscription avec validation complète
-- ✅ **Connexion automatique après inscription**
-- ✅ Connexion sécurisée avec NextAuth.js (JWT)
-- ✅ Hachage des mots de passe avec bcryptjs
-- ✅ **Page d'accueil intelligente** : redirection automatique selon l'état de connexion
+### Authentification
+- Inscription avec validation complète
+- Connexion automatique après inscription
+- Connexion sécurisée avec NextAuth.js (JWT)
+- Hachage des mots de passe avec bcryptjs
+- Page d'accueil intelligente : redirection automatique selon l'état de connexion
 
-### 💳 Gestion des Transactions
-- ✅ **CRUD complet** : Créer, Lire, Modifier, Supprimer
-- ✅ Types : Revenus / Dépenses
-- ✅ Support multi-devises (EUR, USD, GBP, CHF, JPY, CAD, AUD)
-- ✅ Support cryptomonnaies (BTC, ETH, USDT, BNB, SOL, XRP, ADA, DOGE)
-- ✅ **Messages motivationnels contextuels** après chaque transaction :
-  - 💰 **Revenus** : Messages de félicitations encourageants
-  - ⚠️ **Dépenses** : Messages de prudence et conseils financiers
-  - 🎨 Modal premium avec overlay, animations, auto-close 10s
-  - 🎯 15 messages uniques par type (effet Barnum)
+### Gestion des Transactions
+- CRUD complet : Créer, Lire, Modifier, Supprimer
+- Types : Revenus / Dépenses
+- Support multi-devises (EUR, USD, GBP, CHF, JPY, CAD, AUD)
+- Support cryptomonnaies (BTC, ETH, USDT, BNB, SOL, XRP, ADA, DOGE)
+- Messages motivationnels contextuels après chaque transaction :
+  - Revenus : Messages de félicitations encourageants
+  - Dépenses : Messages de prudence et conseils financiers
+  - Modal premium avec overlay, animations, auto-close 10s
+  - 15 messages uniques par type (effet Barnum)
 
-### 🐷 Système de Tirelires Innovant
-- ✅ **Création de tirelires illimitées** avec objectifs d'épargne
-- ✅ **9 catégories prédéfinies** avec émojis :
-  - 🌴 Voyage
-  - 🌱 **Se libérer d'une addiction** (catégorie phare)
-  - 🎮 Console/Gaming
-  - 🚗 Voiture
-  - 🏠 Logement
-  - 💍 Mariage
-  - 📚 Formation/Études
-  - 💰 Fonds d'urgence
-  - 🎁 Cadeau spécial
-  - ✨ Autre
+### Système de Tirelires Innovant
+- Création de tirelires illimitées avec objectifs d'épargne
+- 9 catégories prédéfinies avec émojis :
+  - Voyage
+  - **Se libérer d'une addiction** (catégorie phare)
+  - Console/Gaming
+  - Voiture
+  - Logement
+  - Mariage
+  - Formation/Études
+  - Fonds d'urgence
+  - Cadeau spécial
+  - Autre
 
-- ✅ **Messages motivationnels à 5 niveaux** selon progression :
+- **Messages motivationnels à 5 niveaux** selon progression :
   - 0-25% : Messages d'encouragement pour débuter
   - 25-50% : Messages de persévérance
   - 50-75% : Messages de félicitations
   - 75-100% : Messages de dernière ligne droite
-  - 100% : Message de victoire avec confettis 🎉
+  - 100% : Message de victoire avec confettis 
 
-- ✅ **Système de récompense psychologique** 🎁
+- **Système de récompense psychologique** 
   - Messages personnalisés par catégorie encourageant à se récompenser
   - S'affiche automatiquement quand l'objectif est atteint (≥100%)
   - Exemples concrets de récompenses adaptées à chaque objectif
   - Renforce la motivation pour le prochain objectif
   - Prévient le burnout financier
 
-- ✅ **Innovation unique : Liaison Addiction → Voyage** 🌱→🌴
+- **Innovation unique : Liaison Addiction → Voyage** 
   - Quand un utilisateur crée une tirelire "Se libérer d'une addiction"
   - Le système propose automatiquement de créer une tirelire voyage liée
   - Stratégie psychologique : **Changer d'environnement pour briser le cycle**
   - Message inspirant sur le karma et le nouveau départ
   - Aide concrète pour les personnes en sevrage
 
-- ✅ **Deux modes d'alimentation** :
+- **Deux modes d'alimentation** :
   - **Manuel** : Ajout d'argent à la demande
   - **Automatique** : Pourcentage des revenus versé automatiquement
 
-- ✅ **Barre de progression visuelle** avec pourcentage
-- ✅ **Interface magnifique** avec cochon 🐷 et émojis de catégories
-- ✅ **Modals interactifs** pour création et ajout d'argent
-- ✅ **Navigation unique** : Onglet "Piggy Bank 🐷" (en anglais pour effet curiosité)
+- **Barre de progression visuelle** avec pourcentage
+- **Interface magnifique** avec cochon et émojis de catégories
+- **Modals interactifs** pour création et ajout d'argent
+- **Navigation unique** : Onglet "Piggy Bank " (en anglais pour effet curiosité)
 
-### 📊 Dashboard Interactif
-- ✅ **4 cartes de statistiques** :
+### Dashboard Interactif
+- **4 cartes de statistiques** :
   - Total Transactions (cliquable)
   - Catégories Actives
   - Solde Net (revenus - dépenses)
   - Croissance (% vs période précédente)
 
-- ✅ **3 types de graphiques** :
+- **3 types de graphiques** :
   - **Ligne** : Évolution dans le temps
   - **Camembert** : Répartition par catégories (legend verticale optimisée)
   - **Barres** : Comparaison revenus vs dépenses
 
-- ✅ **Filtres avancés** :
+- **Filtres avancés** :
   - Temporels : Semaine / Mois / Année
   - Recherche par nom
   - Filtre par catégorie
 
-- ✅ **Export PNG** : Dashboard complet ou graphique individuel
-- ✅ **Section Dernières Transactions** avec actions rapides
+- **Export PNG** : Dashboard complet ou graphique individuel
+- **Section Dernières Transactions** avec actions rapides
 
-### 💙 Page Donation & Impact Social
-- ✅ **Storytelling émotionnel** du créateur (Vithushan)
-- ✅ **3 types de dons** :
+### Page Donation & Impact Social
+- **Storytelling émotionnel** du créateur (Vithushan)
+- **3 types de dons** :
   - **Unique** : 5€, 10€, 25€, 50€ ou personnalisé
   - **Mensuel** : 2€/mois, 5€/mois, 10€/mois (badge "Populaire")
   - **Annuel** : 20€/an, 50€/an, 100€/an (économie de 2 mois, badge "Meilleur choix")
 
-- ✅ **Psychologie des prix appliquée** :
+- **Psychologie des prix appliquée** :
   - Économies visibles sur dons annuels (-17%)
   - Badges "Populaire" / "Meilleur choix"
   - Comparaison "Au lieu de X€"
 
-- ✅ **Déduction fiscale** 💰 :
+- **Déduction fiscale** :
   - **66% de déduction d'impôts** (France, article 200 du CGI)
   - Exemple concret : Don 100€ → Déduction 66€ → Coût réel 34€
   - Reçu fiscal automatique par email
   - Design professionnel avec calcul visuel
 
-- ✅ **Message sur le karma** :
+- **Message sur le karma** :
   - *"Le karma n'oublie jamais les bonnes actions. Chaque don est une graine de bonté..."*
   - Dimension spirituelle et humaine
 
-- ✅ **Transparence totale** :
+- **Transparence totale** :
   - **15% des dons reversés aux associations** (orphelinats, maisons de retraite)
   - Exemples de versements avec dates et reçus
   - Rapport mensuel envoyé aux donateurs
   - Engagement de publication trimestrielle
 
-- ✅ **Email de remerciement personnalisé** après chaque don
-- ✅ **11 moyens de paiement** : PayPal, Carte Bancaire, USDT, Bitcoin, Ethereum, Wise, Virement, Paysafecard, PCS Mastercard, Western Union, Revolut
+- **Email de remerciement personnalisé** après chaque don
+- **11 moyens de paiement** : PayPal, Carte Bancaire, USDT, Bitcoin, Ethereum, Wise, Virement, Paysafecard, PCS Mastercard, Western Union, Revolut
 
-### 🎨 Interface Utilisateur
-- ✅ Design moderne et responsive (mobile, tablette, desktop)
-- ✅ Tailwind CSS avec animations personnalisées
-- ✅ Composants UI shadcn/ui
-- ✅ Navbar avec navigation fluide
-- ✅ Footer avec messages motivationnels généraux
-- ✅ Messages de succès/erreur
-- ✅ États de chargement
-- ✅ Modales pour confirmations
+### Interface Utilisateur
+- Design moderne et responsive (mobile, tablette, desktop)
+- Tailwind CSS avec animations personnalisées
+- Composants UI shadcn/ui
+- Navbar avec navigation fluide
+- Footer avec messages motivationnels généraux
+- Messages de succès/erreur
+- États de chargement
+- Modales pour confirmations
 
-### ⚡ Performance
-- ✅ **Coverage tests: 82-83%** (133 tests)
-- ✅ Optimisations React (useMemo, useCallback)
-- ✅ Lazy loading Recharts
-- ✅ Code splitting automatique
+### Performance
+- **Coverage tests: 82-83%** (133 tests)
+- Optimisations React (useMemo, useCallback)
+- Lazy loading Recharts
+- Code splitting automatique
 
 ---
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 | Technologie | Version | Utilisation |
 |------------|---------|-------------|
@@ -183,7 +183,7 @@ Une application web complète de gestion financière construite avec Next.js 15,
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 
@@ -216,7 +216,7 @@ NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="votre-cle-secrete-super-longue-et-aleatoire"
 ```
 
-⚠️ **Important** : Générez une vraie clé secrète avec :
+**Important** : Générez une vraie clé secrète avec :
 ```bash
 openssl rand -base64 32
 ```
@@ -272,7 +272,7 @@ npx prisma studio    # Interface graphique Prisma
 
 ---
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```
 holbertonschool-moneyMirror/
@@ -289,14 +289,14 @@ holbertonschool-moneyMirror/
 │   │   │   ├── transactions/
 │   │   │   │   ├── route.js                  # API POST/GET
 │   │   │   │   └── [id]/route.js             # API GET/PUT/DELETE
-│   │   │   └── piggybanks/                   # 🐷 NEW
+│   │   │   └── piggybanks/                   # NEW
 │   │   │       ├── route.js                  # API POST/GET tirelires
 │   │   │       └── [id]/route.js             # API PUT/DELETE tirelire
 │   │   ├── dashboard/page.js                 # Dashboard
 │   │   ├── login/page.js                     # Login
 │   │   ├── register/page.js                  # Register
-│   │   ├── donation/page.js                  # 💙 Page Donation (refonte)
-│   │   ├── piggybanks/page.js                # 🐷 Page Tirelires (NEW)
+│   │   ├── donation/page.js                  # Page Donation (refonte)
+│   │   ├── piggybanks/page.js                # Page Tirelires (NEW)
 │   │   ├── transactions/
 │   │   │   ├── page.js                       # Liste transactions
 │   │   │   ├── add/page.js                   # Ajout
@@ -304,14 +304,14 @@ holbertonschool-moneyMirror/
 │   │   ├── layout.js                         # Layout principal
 │   │   └── page.js                           # Homepage intelligente
 │   ├── components/
-│   │   ├── Navbar.js                         # Navigation (+ Tirelires 🐷)
+│   │   ├── Navbar.js                         # Navigation (+ Tirelires )
 │   │   ├── Footer.js                         # Footer
 │   │   ├── MotivationalMessage.js            # Messages Barnum
 │   │   ├── MotivationalModal.js              # Modal messages
 │   │   └── ui/                               # shadcn/ui
 │   ├── data/
 │   │   ├── motivationalMessages.json         # Messages transactions
-│   │   └── piggybankMessages.json            # 🐷 Messages tirelires (NEW)
+│   │   └── piggybankMessages.json            # Messages tirelires (NEW)
 │   └── lib/
 │       ├── prisma.js                         # Instance Prisma
 │       └── utils.js                          # Utilitaires
@@ -325,9 +325,9 @@ holbertonschool-moneyMirror/
 
 ---
 
-## 🔌 API Documentation
+## API Documentation
 
-### Tirelires (Piggybanks) 🐷
+### Tirelires (Piggybanks) 
 
 #### POST `/api/piggybanks`
 
@@ -433,13 +433,13 @@ Supprimer une tirelire.
 
 ---
 
-## ❤️ Impact Social
+## Impact Social
 
-### 🌱 Aide aux Addictions
+### Aide aux Addictions
 
 MoneyMirror propose une **approche innovante** pour aider les personnes souffrant d'addictions :
 
-**Concept** : **Sevrage par changement d'environnement** 🌱→🌴
+**Concept** : **Sevrage par changement d'environnement** 
 
 1. L'utilisateur crée une tirelire **"Se libérer d'une addiction"**
 2. Le système propose automatiquement de créer une tirelire **"Voyage - Nouveau Départ"** liée
@@ -453,7 +453,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Dernière ligne droite
 - Message de victoire final
 
-**Système de récompense psychologique** 🎁 :
+**Système de récompense psychologique** :
 - À 100% de l'objectif, un message de récompense personnalisé s'affiche
 - Encourage l'utilisateur à célébrer sa victoire (spa, resto, activité)
 - Prévient le burnout et maintient la motivation
@@ -463,11 +463,11 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 - Drogues Info Service : 0 800 23 13 13
 - Tabac Info Service : 39 89
 
-### 💙 Transparence des Donations
+### Transparence des Donations
 
 **15% de chaque don** est reversé à des associations caritatives :
-- 🏠 Orphelinats et aide à l'enfance
-- 👴 Maisons de retraite et personnes âgées
+- Orphelinats et aide à l'enfance
+- Maisons de retraite et personnes âgées
 
 **Engagement de transparence** :
 - Rapport mensuel envoyé à tous les donateurs
@@ -479,7 +479,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-## 🔒 Sécurité
+## Sécurité
 
 ### Mesures de Sécurité Implémentées
 
@@ -513,7 +513,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-## 🚀 Déploiement
+## Déploiement
 
 ### Vercel (Recommandé)
 
@@ -531,55 +531,70 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-## 📜 Notes de Version
+## Notes de Version
 
-### v2.1.0 (2025-10-26) - Gamification & Fiscalité 🎁💰
+### v2.1.1 (2025-10-31) - Corrections Build & Favicon ✨
 
-**🎁 Système de Récompense Psychologique :**
-- ✅ Messages de récompense personnalisés par catégorie
-- ✅ Affichage automatique à 100% de l'objectif
-- ✅ 9 messages uniques encourageant à se récompenser
-- ✅ Prévention du burnout financier
-- ✅ Design spécial avec box jaune/orange
+**Corrections Techniques :**
+- Correction erreur build : séparation layout serveur/client
+- Création composant ClientProviders pour SessionProvider
+- Génération automatique favicon.ico depuis SVG
+- Ajout favicons multi-tailles (16px, 32px, 512px)
+- Apple touch icon pour iOS
+- Logo SVG nettoyé (suppression duplications)
 
-**💰 Déduction Fiscale :**
-- ✅ Section déduction fiscale 66% (article 200 CGI)
-- ✅ Calcul visuel : Don 100€ → Coût réel 34€
-- ✅ Mention reçu fiscal automatique
-- ✅ Design professionnel avec dégradé vert
+**Build & Performance :**
+- Build production validé (0 erreurs)
+- 18 routes générées correctement
+- Optimisations Next.js 15.5.4 appliquées
 
-**💙 Mise à Jour Donation :**
-- ✅ Passage de 5% à 15% reversés aux associations
-- ✅ Ajout PCS Mastercard (11 moyens de paiement)
-- ✅ Distinction Paysafecard vs PCS Mastercard
+### v2.1.0 (2025-10-26) - Gamification & Fiscalité 💰
 
-**🐷 Navigation Unique :**
-- ✅ Onglet "Piggy Bank 🐷" (en anglais pour effet curiosité)
+**Système de Récompense Psychologique :**
+- Messages de récompense personnalisés par catégorie
+- Affichage automatique à 100% de l'objectif
+- 9 messages uniques encourageant à se récompenser
+- Prévention du burnout financier
+- Design spécial avec box jaune/orange
 
-### v2.0.0 (2025-10-23) - Tirelires & Impact Social 🐷💙
+**Déduction Fiscale :**
+- Section déduction fiscale 66% (article 200 CGI)
+- Calcul visuel : Don 100€ → Coût réel 34€
+- Mention reçu fiscal automatique
+- Design professionnel avec dégradé vert
 
-**🐷 Système de Tirelires Complet :**
-- ✅ Base de données Prisma avec modèle Piggybank
-- ✅ Routes API complètes (POST, GET, PUT, DELETE)
-- ✅ Page frontend magnifique avec modals
-- ✅ 9 catégories avec émojis et logos de cochon
-- ✅ 50+ messages motivationnels à effet Barnum (5 niveaux par catégorie)
-- ✅ **Innovation : Liaison addiction → voyage** (changement d'environnement)
-- ✅ Mode manuel ET automatique (% des revenus)
-- ✅ Barre de progression, animations, confettis
-- ✅ Lien dans la Navbar
+**Mise à Jour Donation :**
+- Passage de 5% à 15% reversés aux associations
+- Ajout PCS Mastercard (11 moyens de paiement)
+- Distinction Paysafecard vs PCS Mastercard
 
-**💙 Page Donation Refonte Complète :**
-- ✅ 3 types de dons (Unique / Mensuel / Annuel)
-- ✅ Onglets interactifs avec badges
-- ✅ Psychologie des prix (économies visibles -17%)
-- ✅ Section transparence avec reçus mockup
-- ✅ Message sur le karma et bonnes actions
-- ✅ Email de remerciement personnalisé mentionné
-- ✅ 9 moyens de paiement initiaux
-- ✅ Storytelling Vithushan préservé
+**Navigation Unique :**
+- Onglet "Piggy Bank " (en anglais pour effet curiosité)
 
-**🎯 Impact :**
+### v2.0.0 (2025-10-23) - Tirelires & Impact Social 💙
+
+**Système de Tirelires Complet :**
+- Base de données Prisma avec modèle Piggybank
+- Routes API complètes (POST, GET, PUT, DELETE)
+- Page frontend magnifique avec modals
+- 9 catégories avec émojis et logos de cochon
+- 50+ messages motivationnels à effet Barnum (5 niveaux par catégorie)
+- **Innovation : Liaison addiction → voyage** (changement d'environnement)
+- Mode manuel ET automatique (% des revenus)
+- Barre de progression, animations, confettis
+- Lien dans la Navbar
+
+**Page Donation Refonte Complète :**
+- 3 types de dons (Unique / Mensuel / Annuel)
+- Onglets interactifs avec badges
+- Psychologie des prix (économies visibles -17%)
+- Section transparence avec reçus mockup
+- Message sur le karma et bonnes actions
+- Email de remerciement personnalisé mentionné
+- 9 moyens de paiement initiaux
+- Storytelling Vithushan préservé
+
+**Impact :**
 - Aide concrète pour vaincre les addictions (stratégie voyage)
 - Modèle de donation éthique et transparent
 - Gamification de l'épargne
@@ -587,42 +602,42 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-### v1.2.0 (2025-10-22) - UX Améliorée & Messages Motivationnels 🎉
+### v1.2.0 (2025-10-22) - UX Améliorée & Messages Motivationnels 
 
 **Expérience Utilisateur :**
-- ✅ Page d'accueil intelligente avec redirection automatique
-- ✅ Connexion automatique après inscription
-- ✅ Messages motivationnels contextuels (revenus vs dépenses)
-- ✅ MotivationalModal avec overlay et animations
-- ✅ Effet Barnum pour engagement maximal
+- Page d'accueil intelligente avec redirection automatique
+- Connexion automatique après inscription
+- Messages motivationnels contextuels (revenus vs dépenses)
+- MotivationalModal avec overlay et animations
+- Effet Barnum pour engagement maximal
 
 ---
 
-### v1.1.0 (2025-10-21) - Tests & Optimisations ⚡
+### v1.1.0 (2025-10-21) - Tests & Optimisations 
 
 **Tests :**
-- ✅ Coverage 82-83% (133 tests)
-- ✅ Tests E2E avec Playwright
+- Coverage 82-83% (133 tests)
+- Tests E2E avec Playwright
 
 **Performance :**
-- ✅ useMemo, useCallback
-- ✅ Lazy loading Recharts
-- ✅ Réduction bundle ~50-70KB
+- useMemo, useCallback
+- Lazy loading Recharts
+- Réduction bundle ~50-70KB
 
 ---
 
-### v1.0.0 (2025-10-20) - Release Initiale 🚀
+### v1.0.0 (2025-10-20) - Release Initiale 
 
 **Fonctionnalités initiales :**
-- ✅ Authentification complète
-- ✅ CRUD transactions
-- ✅ Dashboard avec 3 graphiques
-- ✅ Export PNG
-- ✅ Support multi-devises
+- Authentification complète
+- CRUD transactions
+- Dashboard avec 3 graphiques
+- Export PNG
+- Support multi-devises
 
 ---
 
-## 👤 Auteur
+## Auteur
 
 **Vithushan Satkunanathan**
 - GitHub: [@Vitushan](https://github.com/Vitushan)
@@ -631,7 +646,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-## 🙏 Remerciements
+## Remerciements
 
 - **Holberton School** pour le cadre pédagogique
 - **Next.js Team** pour le framework incroyable
@@ -641,18 +656,18 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ---
 
-## 📝 Prochaines Étapes
+## Prochaines Étapes
 
-- 🔔 Notifications push
-- 📧 Système d'emails (réinitialisation mot de passe)
-- 💾 Export CSV/PDF des transactions
-- 📱 Progressive Web App (PWA)
-- 📈 Rapports mensuels automatiques
-- 🔄 Import de fichiers bancaires (CSV)
-- 🌐 Multi-langue (EN/FR)
+- Notifications push
+- Système d'emails (réinitialisation mot de passe)
+- Export CSV/PDF des transactions
+- Progressive Web App (PWA)
+- Rapports mensuels automatiques
+- Import de fichiers bancaires (CSV)
+- Multi-langue (EN/FR)
 
 ---
 
-**🎉 Merci d'utiliser MoneyMirror !**
+**Merci d'utiliser MoneyMirror !**
 
-*Une application de gestion financière avec impact social* 💙🐷
+*Une application de gestion financière avec impact social* 💙
