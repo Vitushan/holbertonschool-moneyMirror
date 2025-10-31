@@ -1,4 +1,5 @@
 # Rapport Final - MoneyMirror
+
 ## Projet de Gestion des Finances Personnelles
 
 **Nom :** Vitushan Satkunanathan
@@ -18,6 +19,7 @@ J'ai voulu créer quelque chose d'utile au quotidien, pas juste un projet d'éco
 ## 2. Technologies utilisées
 
 **Frontend :**
+
 - React 18 pour l'interface utilisateur
 - Next.js 15 pour le framework
 - Tailwind CSS pour le design
@@ -29,9 +31,11 @@ J'ai voulu créer quelque chose d'utile au quotidien, pas juste un projet d'éco
 - NextAuth.js pour l'authentification
 
 **Base de données :**
+
 - MySQL 8
 
 **Tests :**
+
 - Jest pour les tests unitaires
 - Playwright pour les tests end-to-end
 
@@ -42,17 +46,20 @@ J'ai choisi ces technologies parce qu'elles sont modernes et très utilisées da
 ## 3. Fonctionnalités principales
 
 ### Authentification sécurisée
+
 - Inscription avec validation de l'email
 - Connexion avec token JWT
 - Mots de passe hachés avec bcrypt
 
 ### Gestion des transactions
+
 - Ajouter des revenus et dépenses
 - Modifier ou supprimer des transactions
 - Support de plusieurs devises (EUR, USD, cryptomonnaies)
 - Chaque transaction a une date, une catégorie et une description
 
 ### Dashboard avec visualisations
+
 - 4 cartes de statistiques (nombre de transactions, catégories, solde, croissance)
 - Graphique en ligne pour l'évolution du solde
 - Graphique camembert pour les dépenses par catégorie
@@ -122,11 +129,13 @@ Les tests m'ont vraiment aidé. Quand je modifiais quelque chose, je savais tout
 Au début, l'application était un peu lente. J'ai donc travaillé sur les performances :
 
 **Ce que j'ai fait :**
+
 - Utilisé `useMemo` pour éviter de recalculer des choses inutilement
 - Utilisé `useCallback` pour éviter de recréer des fonctions à chaque render
 - Implémenté le lazy loading pour charger Recharts seulement quand nécessaire
 
 **Résultats :**
+
 - Bundle réduit de 800KB à 730KB (-70KB)
 - Temps de chargement réduit de 3.5s à 2.9s (-17%)
 
@@ -137,12 +146,15 @@ C'est pas énorme, mais l'application est maintenant plus fluide.
 ## 9. Problèmes rencontrés
 
 ### Tests qui échouaient
+
 Au début, mes tests pour le dashboard ne marchaient pas. Le problème venait de l'import de NextAuth qui avait changé dans Next.js 15. J'ai mis du temps à comprendre, mais une fois que j'ai trouvé, j'ai pu corriger tous les tests.
 
 ### Logo dupliqué
+
 Le logo apparaissait deux fois sur certaines pages. C'était parce que je l'avais mis à deux endroits différents dans mon code. J'ai nettoyé ça.
 
 ### Configuration Git
+
 À un moment, Git refusait de push mes commits. C'était un problème de configuration. J'ai cherché sur Stack Overflow et j'ai trouvé la commande pour corriger.
 
 Ces problèmes m'ont appris à être patient et méthodique quand je debug. Souvent la solution est simple, mais il faut prendre le temps de bien lire les messages d'erreur.
@@ -154,6 +166,7 @@ Ces problèmes m'ont appris à être patient et méthodique quand je debug. Souv
 Ce projet m'a vraiment fait progresser. J'ai appris :
 
 **Techniquement :**
+
 - À créer une API REST propre
 - À gérer l'authentification de manière sécurisée
 - À structurer une base de données relationnelle
@@ -161,12 +174,14 @@ Ce projet m'a vraiment fait progresser. J'ai appris :
 - À optimiser les performances d'une application React
 
 **Méthode de travail :**
+
 - À décomposer un gros projet en petites tâches
 - À débugger de manière méthodique
 - À lire et utiliser la documentation
 - À persévérer quand ça ne marche pas
 
 **Soft skills :**
+
 - À prendre des décisions techniques (quelle librairie utiliser ?)
 - À gérer mon temps sur un projet long
 - À documenter mon travail pour les autres
@@ -193,15 +208,18 @@ L'application fait ce que je voulais qu'elle fasse : aider quelqu'un à mieux co
 Si je continue à travailler sur MoneyMirror, voici ce que je ferais :
 
 **Immédiat :**
+
 - Déployer sur Vercel pour que n'importe qui puisse l'utiliser
 - Ajouter l'export CSV des transactions
 
 **Futur proche :**
+
 - Implémenter des budgets mensuels avec des alertes
 - Ajouter un mode sombre
 - Permettre aux utilisateurs de créer leurs propres catégories
 
 **Futur lointain :**
+
 - Créer une application mobile
 - Se connecter aux comptes bancaires pour importer les transactions automatiquement
 - Utiliser du machine learning pour prédire les dépenses
@@ -220,10 +238,7 @@ Ce projet m'a montré que je suis capable de créer une application full-stack d
 
 ---
 
-**Vitushan Satkunanathan**
-Holberton School - Janvier 2025
+**Author:
 
-**Contact :**
-- Email : vitushansatkunanathan@gmail.com
-- GitHub : github.com/Vitushan
+- Vitushan Satkunanathan
 - Projet : github.com/Vitushan/holbertonschool-moneyMirror
