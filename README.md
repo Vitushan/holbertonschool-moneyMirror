@@ -1,9 +1,96 @@
 # MoneyMirror - Application de Gestion Financière Personnelle
 
+![Cover image](./assets/cover.png)
+
+> Un miroir clair de vos finances — visualisez, comprenez et décidez.
+
 Une application web complète de gestion financière construite avec Next.js 15, React 18, Prisma ORM et MySQL.
+
+🔗 [Voir l'application déployée](https://holbertonschool-money-mirror.vercel.app)
+
+---
+
+## 📸 Aperçu des Fonctionnalités
+
+### Connexion sécurisée
+
+![Connexion](./assets/connexion.png)
+
+**Authentification** - Connectez-vous en toute sécurité à votre compte MoneyMirror. Vos données financières sont protégées et accessibles uniquement par vous.
+
+---
+
+### Tableau de bord clair
+
+![Dashboard](./assets/dashBoard3.png)
+
+**Tableau de bord central** - Un tableau de bord synthétique qui affiche vos soldes, tendances et alertes importantes en un coup d'œil. Idéal pour prendre des décisions rapides.
+
+---
+
+### Visualisations graphiques
+
+![Graphique en ligne](./assets/ligne.png)
+
+**Évolution dans le temps** - Suivez l'évolution de vos finances avec un graphique en ligne interactif. Visualisez les tendances de votre solde sur plusieurs mois pour mieux anticiper.
+
+---
+
+![Graphique en barres](./assets/courbe_graphique.png)
+
+**Revenus vs Dépenses** - Comparez vos revenus et dépenses période par période avec un graphique en barres clair. Identifiez rapidement les périodes où vous dépensez plus que vous ne gagnez.
+
+---
+
+![Diagramme en camembert](./assets/cammembert.png)
+
+**Répartition par catégorie** - Visualisez la répartition de vos dépenses par catégorie avec un diagramme en camembert coloré. Découvrez où va réellement votre argent.
+
+---
+
+### Ajout de transactions
+
+![Ajout Transaction](./assets/Add3.png)
+
+**Ajouter une transaction** - Ajoutez facilement vos revenus et dépenses en quelques clics. Interface intuitive pour enregistrer toutes vos transactions financières rapidement.
+
+---
+
+### Piggy Banks (Tirelires)
+
+![Feature 2](./assets/feature2.png)
+
+**Piggy Banks** - Créez plusieurs « tirelires » virtuelles pour vos objectifs (vacances, imprévus, cadeaux). Affectez des montants récurrents ou ponctuels, définissez des priorités et suivez la progression.
+
+---
+
+### Liste des transactions
+
+![Liste des Transactions](./assets/liste_transactions.png)
+
+**Liste des Transactions** - Consultez toutes vos transactions (revenus et dépenses) dans un tableau clair et organisé. Modifiez ou supprimez vos entrées, et visualisez en temps réel vos totaux de revenus, dépenses et solde net.
+
+---
+
+### Message de récompense
+
+![Message de Récompense](./assets/message_revenu.png)
+
+**Félicitations pour vos revenus** - Lorsque vous ajoutez un revenu, MoneyMirror vous félicite et vous encourage ! Un message positif pour célébrer chaque entrée d'argent et vous motiver à continuer sur cette lancée.
+
+---
+
+### Message de prudence
+
+![Message de Prudence](./assets/messagePrudence.png)
+
+**Alertes intelligentes** - MoneyMirror vous avertit quand vos dépenses dépassent vos revenus ou quand des comportements financiers risqués sont détectés. Restez informé pour mieux contrôler votre budget.
+
+---
 
 ## Table des Matières
 
+- [📸 Aperçu des Fonctionnalités](#-aperçu-des-fonctionnalités)
 - [Vue d'ensemble](#vue-densemble)
 - [Fonctionnalités](#fonctionnalités)
 - [Technologies Utilisées](#technologies-utilisées)
