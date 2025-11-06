@@ -768,7 +768,7 @@ MoneyMirror propose une **approche innovante** pour aider les personnes souffran
 
 ## Remerciements
 
-- **Holberton School** pour le cadre pédagogique
+- **Vithushan** pour le développement
 - **Next.js Team** pour le framework incroyable
 - **Prisma Team** pour l'ORM moderne
 - **Recharts** pour les graphiques interactifs

@@ -38,7 +38,7 @@ export default function Footer() {
               © {currentYear} MoneyMirror. Tous droits réservés.
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Réalisé par Holberton School
+              Réalisé par Vithushan
             </p>
           </div>
         </div>
