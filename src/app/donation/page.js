@@ -562,7 +562,7 @@ export default function DonationPage() {
                 💌 Vous avez des questions ou des suggestions ?
               </p>
               <p className="text-blue-600 font-semibold">
-                9880@holbertonschool.com
+                vitushan@outlook.fr
               </p>
               <p className="text-sm text-gray-500 mt-2">
                 Je réponds personnellement à chaque message !
